@@ -9,24 +9,27 @@ import Profil from "./pages/Profil";
 import Galeri from "./pages/Galeri";
 import Kontak from "./pages/Kontak";
 import WhatsAppIcon from "./components/WhatsApp";
-import "./index.css"
+import ScrollTop from "./components/ScrollTop";
+import "./index.css";
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Homepage title="Homepage" />} />
-        <Route path="/Layanan" element={<Layanan title="Services" />} />
-        <Route path="/Metode" element={<Metode title="Login Page" description="Methods" />} />
-        <Route path="/Artikel" element={<Artikel title="Artikel" description="Article" />} />
-        <Route path="/Profil" element={<Profil title="Profile" />} />
-        <Route path="/Galeri" element={<Galeri title="Galery" />} />
-        <Route path="/Kontak" element={<Kontak title="Contact" />} />
-      </Routes>
-      <Footer />
-      <WhatsAppIcon/>
-    </Router>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Homepage title="Homepage" />} />
+            <Route path="/Layanan" element={<Layanan title="Services" />} />
+            <Route path="/Metode" element={<Metode title="Login Page" description="Methods" />} />
+            <Route path="/Artikel" element={<Artikel title="Artikel" description="Article" />} />
+            <Route path="/Profil" element={<Profil title="Profile" />} />
+            <Route path="/Galeri" element={<Galeri title="Galery" />} />
+            <Route path="/Kontak" element={<Kontak title="Contact" />} />
+          </Routes>
+          <WhatsAppIcon />
+          <ScrollTop/>
+          <Footer/>
+        </Router>
+     
   );
 }
 

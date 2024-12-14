@@ -1,132 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* html {
-    height: 100%;
-} */
+html {
+  scroll-behavior: smooth;
+}
 
 body {
-  background-color: #f1f1f1;
-  font-family: sans-serif;
+  min-height: 100vh;
+  /* background: radial-gradient(100% 50% at 50% 0%, rgba(0, 163, 255, 0.13) 0%, rgba(0, 163, 255, 0) 50%, rgba(0, 163, 255, 0) 100%);
+  background-color: white; */
+  font-family: "Manrope", sans-serif;
   padding-left: 2.5rem;
   padding-right: 2.5rem;
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-}
-
-.navbar {
-  @apply flex justify-between items-center w-full max-w-screen-2xl mx-auto mt-5;
-}
-
-.navbar-logo {
-  @apply text-2xl font-bold text-black;
-}
-
-.navbar-menu {
-  @apply hidden md:flex space-x-5 lg:space-x-10 ml-auto;
-  @apply bg-white p-2 px-5 lg:p-3 lg:px-10 rounded-full shadow-transparent;
-}
-
-.navbar-menu-item {
-  @apply text-custom-black hover:text-custom-green transition duration-300 text-xl lg:text-2xl;
-}
-
-.navbar-toggle {
-  @apply md:hidden text-gray-800 focus:outline-none;
-}
-
-.navbar-toggle-icon {
-  @apply w-6 h-6;
-}
-
-.mobile-menu {
-  @apply absolute top-10 left-0 w-full bg-white grid grid-cols-3 md:grid-cols-3 gap-3 rounded-lg shadow-md p-3;
-  display: none;
-}
-
-.mobile-menu.open {
-  display: grid; /* Menampilkan menu ketika toggle aktif */
-}
-
-/* Footer container */
-.footer {
-  @apply absolute flex top-full bg-white w-max  mx-6;
-}
-
-/* Footer content */
-.container {
-  @apply px-16;
-}
-
-.social-button {
-  @apply bg-sky-50 text-blue-600 shadow-lg h-10 w-10 flex items-center justify-center rounded-full outline-none focus:outline-none mr-2;
-}
-
-.social-button.whatsapp {
-  @apply bg-green-50 text-green-500;
-}
-
-.social-button.instagram {
-  @apply bg-pink-50 text-pink-600;
-}
-
-.map-container {
-  @apply w-full md:w-6/12 px-4; /* Pastikan ada padding untuk responsivitas */
-}
-
-.map-container iframe {
-  @apply w-full h-44; /* Set lebar penuh dan tinggi peta */
-}
-
-.separator {
-  @apply my-6 border-black;
-}
-
-/* Footer Bottom */
-.footer-bottom {
-  @apply flex flex-wrap items-center justify-center md:justify-between;
-}
-
-.footer-bottom-text {
-  @apply w-full md:w-4/12 px-4 text-center mx-auto;
-}
-
-.footer-bottom-text span {
-  @apply text-sm text-black font-semibold py-1;
-}
-
-.hero {
-  @apply flex flex-col justify-center items-center min-h-screen;
-}
-
-.hero-section {
-  @apply relative w-full h-[35rem] mt-5;
-}
-
-.hero-background {
-  @apply absolute inset-0 transition-all duration-1000 ease-in-out rounded-custom-br;
-}
-
-.profile-avatar-wrapper {
-  @apply float-right items-center w-[380px] h-[507px] overflow-hidden rounded-custom-br shadow-lg transition-transform duration-500 ease-in-out hover:scale-105;
-}
-
-@keyframes pulseGlow {
-  0% {
-    box-shadow: 0 0 5px rgba(160, 255, 37, 0.5), 0 0 10px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 10px rgb(74, 250, 20), 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
-  }
-  100% {
-    box-shadow: 0 0 5px rgba(255, 0, 191, 0.5), 0 0 10px rgba(255, 255, 255, 0.5), 0 0 15px rgba(255, 255, 255, 0.5);
-  }
-}
-
-@layer utilities {
-  .animate-pulse-glow {
-    animation: pulseGlow 2s infinite;
-  }
+  /* display: flex;       
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;  */
 }

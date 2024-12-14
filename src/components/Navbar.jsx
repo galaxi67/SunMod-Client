@@ -1,40 +1,86 @@
 import React, { useState } from "react";
+import Logo from "../assets/logo-sumot.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <header className="header">
-      <nav className="navbar">
-        <div className="navbar-logo">
-          <a href="/">SunMod</a>
+      <nav className="navbar flex justify-between items-center w-full max-w-screen-2xl mx-auto mt-5">
+        <div className="navbar-logo text-lg font-bold text-black ml-5">
+          <a href="/">
+            <img src={Logo} alt="SunMod Logo" className="h-16 w-auto text-[2rem]" />
+          </a>
         </div>
 
-        <div className={`navbar-menu ${isOpen ? "block" : "hidden"}`}>
-          <a href="/" className="navbar-menu-item">
+        <div
+          className={`navbar-menu p-2 px-2 md:px-5 lg:p-3 lg:px-10 rounded-full shadow-transparent hidden space-x-2 md:space-x-4 lg:space-x-6 xl:space-x-9 font-normal ${
+            isOpen ? "block" : "hidden"
+          } md:flex`}
+        >
+          <a
+            href="/"
+            className={`navbar-menu-item text-custom-black hover:text-custom-blue transition duration-300 text-base md:text-lg lg:text-2xl ${
+              window.location.pathname === "/" ? "text-custom-blue" : "text-custom-black"
+            }`}
+          >
             Home
           </a>
-          <a href="/Layanan" className="navbar-menu-item">
+          <a
+            href="/Layanan"
+            className={`navbar-menu-item text-custom-black hover:text-custom-blue transition duration-300 text-base md:text-lg lg:text-2xl ${
+              window.location.pathname === "/Layanan" ? "text-custom-blue" : "text-custom-black"
+            }`}
+          >
             Layanan
           </a>
-          <a href="/Metode" className="navbar-menu-item">
+          <a
+            href="/Metode"
+            className={`navbar-menu-item text-custom-black hover:text-custom-blue transition duration-300 text-base md:text-lg lg:text-2xl ${
+              window.location.pathname === "/Metode" ? "text-custom-blue" : "text-custom-black"
+            }`}
+          >
             Metode
           </a>
-          <a href="/Profil" className="navbar-menu-item">
+          <a
+            href="/Profil"
+            className={`navbar-menu-item text-custom-black hover:text-custom-blue transition duration-300 text-base md:text-lg lg:text-2xl ${
+              window.location.pathname === "/Profil" ? "text-custom-blue" : "text-custom-black"
+            }`}
+          >
             Profil
           </a>
-          <a href="/Artikel" className="navbar-menu-item">
+          <a
+            href="/Artikel"
+            className={`navbar-menu-item text-custom-black hover:text-custom-blue transition duration-300 text-base md:text-lg lg:text-2xl ${
+              window.location.pathname === "/Artikel" ? "text-custom-blue" : "text-custom-black"
+            }`}
+          >
             Artikel
           </a>
-          <a href="/Galeri" className="navbar-menu-item">
+          <a
+            href="/Galeri"
+            className={`navbar-menu-item text-custom-black hover:text-custom-blue transition duration-300 text-base md:text-lg lg:text-2xl ${
+              window.location.pathname === "/Galeri" ? "text-custom-blue" : "text-custom-black"
+            }`}
+          >
             Galeri
           </a>
-          <a href="/Kontak" className="navbar-menu-item">
+          <a
+            href="/Kontak"
+            className={`navbar-menu-item text-custom-black hover:text-custom-blue transition duration-300 text-base md:text-lg lg:text-2xl ${
+              window.location.pathname === "/Kontak" ? "text-custom-blue" : "text-custom-black"
+            }`}
+          >
             Kontak
           </a>
         </div>
 
-        <button onClick={() => setIsOpen(!isOpen)} className="navbar-toggle" title="Open menu">
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="navbar-toggle md:hidden text-gray-800 focus:outline-none"
+          title="Open menu"
+        >
           {isOpen ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"

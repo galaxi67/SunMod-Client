@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import Profil from "./Profil";
-import Layanan from "./Layanan"
-import Galeri from "./Galeri";
 import image1 from "../assets/homapage.jpg";
 import image2 from "../assets/hero1.jpg";
 
@@ -19,17 +16,15 @@ const Homepage = () => {
   }, [images.length]);
 
   return (
-    <div className="space-y-4">
-      <section className="hero-section">
-        <div
-          className={`hero-background bg-cover bg-center`}
-          style={{ backgroundImage: `url(${images[currentImage]})` }}
-        ></div>
-      </section>
-      <Profil className="profil-content-home" />
-      <Layanan className="metode-content-home grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"/>
-      <Galeri className="metode-content-home grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"/>
-    </div>
+      <div className="space-y-4">
+        <section className="hero-section relative w-full h-[15rem] sm:h-[15rem] md:h-[25rem] lg:h-[35rem] xl:h-[35rem] mt-5">
+          <div
+            className={`hero-background bg-cover bg-center absolute inset-0 transition-all duration-1000 ease-in-out rounded-custom-br`}
+            style={{ backgroundImage: `url(${images[currentImage]})` }}
+          ></div>
+        </section>
+        
+      </div>
   );
 };
 

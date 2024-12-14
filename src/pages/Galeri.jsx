@@ -1,18 +1,11 @@
 import React from "react";
+import InstagramFeed from "../components/InstagramFeed";
 
 const Galeri = () => {
   return (
-    <div className="Instagram py-10 px-5 space-y-8">
-      <div className="bg-white shadow-lg rounded-lg overflow-hidden">
-        <iframe
-          src="https://snapwidget.com/embed/1084047"
-          className="snapwidget-widget w-full h-96"
-          allowTransparency="true"
-          frameBorder="0"
-          scrolling="no"
-          title="Posts from Instagram"
-        />
-      </div>
+    <div className="container mx-auto py-10">
+      <h1 className="text-2xl font-bold text-center mb-8">sumod.sunatmodern</h1>
+      <InstagramFeed />
     </div>
   );
 };

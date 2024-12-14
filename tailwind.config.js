@@ -5,16 +5,17 @@ module.exports = {
   ],
   theme: {
     extend: {
-      spacing: {
-        17: "4.25rem",
+      fontFamily: {
+        title: ["Manrope", "sans-serif"],
       },
       colors: {
-        "custom-slate": "#F1F1F1",
-        "custom-black": "#272727",
-        "custom-green": "#7DA875",
+        "custom-slate": "#898995",
+        "custom-black": "#343434",
+        "custom-blue": "#003C97",
+        "custom-yellow": "#ff9f1c",
       },
       borderRadius: {
-        "custom-br": "18px",
+        "custom-br": "8px",
       },
       boxShadow: {
         custom: "0 4px 6px rgba(0, 0, 0, 0.1)",
