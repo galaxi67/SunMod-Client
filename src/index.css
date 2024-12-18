@@ -9,13 +9,10 @@ html {
 
 body {
   min-height: 100vh;
-  /* background: radial-gradient(100% 50% at 50% 0%, rgba(0, 163, 255, 0.13) 0%, rgba(0, 163, 255, 0) 50%, rgba(0, 163, 255, 0) 100%);
-  background-color: white; */
   font-family: "Manrope", sans-serif;
+}
+
+.public-layout {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
-  /* display: flex;       
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center;  */
 }
