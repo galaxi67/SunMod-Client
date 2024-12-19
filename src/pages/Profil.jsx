@@ -9,7 +9,7 @@ import Char4 from "../assets/karakter4.png";
 const Profil = () => {
   return (
     <div>
-      <div className="rounded-custom-br relative overflow-hidden mt-3 sm:mt-5 lg:mt-15">
+      <div className="rounded-custom-br relative overflow-hidden mt-3 md:mt-5 lg:mt-15">
         <div className="max-w-full mx-auto h-80 w-auto flex flex-col items-center justify-center">
           <div className="title-content py-20 space-y-2 text-center text-white relative z-10">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-widest mx-auto">SUNAT MODERN</h1>
