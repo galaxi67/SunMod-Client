@@ -69,7 +69,7 @@ const Profil = () => {
         <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-custom-black -tracking-wide flex justify-center mt-16">
           Kenapa harus di SuMod?
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:p-14 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-14 mt-8">
           <div className="bg-emerald-100 text-custom-black flex flex-col items-center justify-center rounded-lg shadow-lg p-6">
             <img src={Char1} alt="Benefit Icon" className="h-40 w-auto mb-4" />
             <div className="p-0 2xl:px-20">
@@ -126,14 +126,15 @@ const Profil = () => {
           <div className="bg-violet-100 text-custom-black flex flex-col items-center justify-center rounded-lg shadow-lg p-6">
             <img src={Char4} alt="Benefit Icon" className="h-40 w-auto mb-4" />
             <div className="p-0 2xl:px-20">
-              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest text-center mb-4">
-                Dukungan Teknologi
-              </h1>
-              <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
-                Tempat yang tepat dilengkapi teknologi terkini untuk mempercepat proses dan meningkatkan akurasi
-                prosedur.
-              </h2>
+              
             </div>
+            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest text-center mb-4">
+              Dukungan Teknologi
+            </h1>
+            <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
+              Tempat yang tepat dilengkapi teknologi terkini untuk mempercepat proses dan meningkatkan akurasi
+              prosedur.
+            </h2>
           </div>
         </div>
       </div>
