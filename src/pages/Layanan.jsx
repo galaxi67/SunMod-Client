@@ -28,7 +28,7 @@ const Layanan = () => {
       <h1 className="mt-20 text-3xl md:text-5xl text-center font-extrabold tracking-wide flex flex-col items-center justify-center text-custom-black">
         PILIHAN PAKET SUNAT
       </h1>
-      <h2 className="text-3xl md:text-2xl font-medium tracking-wide flex flex-col items-center justify-center text-custom-slate">
+      <h2 className="text-center text-3xl md:text-2xl font-medium tracking-wide flex flex-col items-center justify-center text-custom-slate">
         untuk semua usia
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-5 sm:p-14 mt-8">
@@ -212,11 +212,11 @@ const Layanan = () => {
               <img src={Char} alt="Profile" className="w-auto h-full object-contain" />
           </div>
           <div className="title-content space-y-4 mx-auto">
-            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-wide text-center">SUNAT KHUSUS</h1>
+            <h1 className="text-2xl sm:text-4xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold tracking-wide text-center">SUNAT KHUSUS</h1>
             <h2 className="font-light text-xs sm:text-xl lg:text-2xl leading-2 text-justify">
               Melayani sunat dengan kondisi kesehatan tertentu
             </h2>
-            <ol className="list-disc list-inside text-xs sm:text-xl lg:text-2xl leading-relaxed text-justify indent-5">
+            <ol className="list-disc list-inside text-xs sm:text-xl md:text-lg lg:text-2xl leading-relaxed text-justify indent-5">
               <li className="mb-2">Sunat Bayi</li>
               <li className="mb-2">Sunat Gemuk atau Obesitas</li>
               <li className="mb-2">Sunat Kulup Lengket</li>
