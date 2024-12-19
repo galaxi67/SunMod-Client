@@ -2,14 +2,14 @@ import React from "react";
 
 const Kontak = () => {
   return (
-    <div>
+    <div className="container mx-auto">
       <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-wide flex justify-center mt-16">
         Hubungi Kami
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 mt-8 mx-auto">
-        <div className="text-custom-black flex flex-col justify-center rounded-lg p-24">
-          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest">Kontak Kami</h1>
-          <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 mx-auto">
+        <div className="text-custom-black flex flex-col justify-center rounded-lg lg:mx-auto p-10">
+          <h1 className="text-xl sm:text-2xl font-bold tracking-widest mb-5">Kontak Kami</h1>
+          <h2 className="font-normal text-base sm:text-lg lg:text-xl tracking-widest">
             Hubungi kami untuk mendapatkan informasi lebih lanjut, bantuan, atau dukungan. Tim kami siap melayani Anda
             dengan cepat dan ramah
           </h2>
@@ -34,8 +34,9 @@ const Kontak = () => {
             </li>
           </ol>
         </div>
-        <div className="bg-gradient-to-t from-blue-100 via-blue-300 to-blue-500 text-white flex flex-col items-center justify-center rounded-lg shadow-lg mt-28 p-6 w-[350px] h-[350px] ml-32">
-          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold flex tracking-widest">Tanyakan Pada Kami</h1>
+        <div className="flex flex-col items-center justify-center">
+          <div className="bg-gradient-to-t from-blue-100 via-blue-300 to-blue-500 text-white  rounded-lg shadow-lg p-6 w-full sm:w-[350px] h-[350px] mx-auto xl:ml-32">
+          <h1 className="text-xl sm:text-2xl font-bold flex tracking-widest">Tanyakan Pada Kami</h1>
           <form className="w-full mt-4 space-y-4">
             <div className="flex flex-col space-y-2">
               <input
@@ -44,10 +45,9 @@ const Kontak = () => {
                 className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
-              <input
-                type="text"
+              <textarea
                 placeholder="Keluhan"
-                className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 max-h-[150px] resize-y"
                 required
               />
             </div>
@@ -64,6 +64,7 @@ const Kontak = () => {
               </button>
             </a>
           </form>
+          </div>
         </div>
       </div>
       <div className="w-full h-96 rounded-md overflow-hidden p-12">

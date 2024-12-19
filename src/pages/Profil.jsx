@@ -8,7 +8,7 @@ import Char4 from "../assets/karakter4.png";
 
 const Profil = () => {
   return (
-    <div>
+    <div className="container mx-auto">
       <div className="rounded-custom-br relative overflow-hidden mt-3 md:mt-5 lg:mt-15">
         <div className="max-w-full mx-auto h-80 w-auto flex flex-col items-center justify-center">
           <div className="title-content py-20 space-y-2 text-center text-white relative z-10">
@@ -27,7 +27,7 @@ const Profil = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4 h-screen mt-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 h-screen mt-6">
         <div
           className="col-span-1 row-span-2 flex items-center justify-center text-xl font-bold rounded-custom-br overflow-hidden"
           style={{ backgroundImage: `url(${Profil2})`, backgroundSize: "cover", backgroundPosition: "center" }}
@@ -69,59 +69,71 @@ const Profil = () => {
         <p className="text-3xl sm:text-4xl lg:text-5xl font-bold text-custom-black -tracking-wide flex justify-center mt-16">
           Kenapa harus di SuMod?
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-14 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:p-14 mt-8">
           <div className="bg-emerald-100 text-custom-black flex flex-col items-center justify-center rounded-lg shadow-lg p-6">
-            <img src={Char1} alt="Benefit Icon" className="w-40 h-auto mb-4" />
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest">Keamanan dan Sterilisasi</h1>
-            <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
-              Tempat yang tepat akan memastikan alat dan fasilitas digunakan sesuai standar medis untuk menghindari hal
-              yang tidak diinginkan.
-            </h2>
+            <img src={Char1} alt="Benefit Icon" className="h-40 w-auto mb-4" />
+            <div className="p-0 2xl:px-20">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest text-center mb-4">Keamanan dan Sterilisasi</h1>
+              <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
+                Tempat yang tepat akan memastikan alat dan fasilitas digunakan sesuai standar medis untuk menghindari hal
+                yang tidak diinginkan.
+              </h2>
+            </div>
           </div>
           <div className="bg-orange-100 text-custom-black flex flex-col items-center justify-center rounded-lg shadow-lg p-6">
-            <img src={Char2} alt="Benefit Icon" className="w-40 h-auto mb-4" />
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest">Profesionalisme Tenaga Medis</h1>
-            <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
-              Prosedur dilakukan oleh tenaga medis berpengalaman oleh dokter yang terlatih dalam metode sunat modern.
-            </h2>
+            <img src={Char2} alt="Benefit Icon" className="h-40 w-auto mb-4" />
+            <div className="p-0 2xl:px-20">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest text-center mb-4">Profesionalisme Tenaga Medis</h1>
+              <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
+                Prosedur dilakukan oleh tenaga medis berpengalaman oleh dokter yang terlatih dalam metode sunat modern.
+              </h2>
+            </div>
           </div>
           <div className="bg-red-100 text-custom-black flex flex-col items-center justify-center rounded-lg shadow-lg p-6">
-            <img src={Char3} alt="Benefit Icon" className="w-40 h-auto mb-4" />
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest">Metode yang Tepat</h1>
-            <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
-              Tempat yang terpercaya menawarkan berbagai metode modern seperti klamp, stapler, atau laser, yang lebih
-              cepat, aman, dan minim rasa sakit dibandingkan metode konvensional.
-            </h2>
+            <img src={Char3} alt="Benefit Icon" className="h-40 w-auto mb-4" />
+            <div className="p-0 2xl:px-20">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest text-center mb-4">Metode yang Tepat</h1>
+              <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
+                Tempat yang terpercaya menawarkan berbagai metode modern seperti klamp, stapler, atau laser, yang lebih
+                cepat, aman, dan minim rasa sakit dibandingkan metode konvensional.
+              </h2>
+            </div>
           </div>
           <div className="bg-violet-100 text-custom-black flex flex-col items-center justify-center rounded-lg shadow-lg p-6">
-            <img src={Char4} alt="Benefit Icon" className="w-36 h-auto mb-4" />
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest text-center">
-              Edukasi dan Perawatan Pasca Sunat
-            </h1>
-            <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
-              Penyedia layanan yang baik akan memberikan edukasi tentang perawatan luka, langkah-langkah kebersihan, dan
-              pemulihan pasca prosedur.
-            </h2>
+            <img src={Char4} alt="Benefit Icon" className="h-40 w-auto mb-4" />
+            <div className="p-0 2xl:px-20">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest text-center mb-4">
+                Edukasi dan Perawatan Pasca Sunat
+              </h1>
+              <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
+                Penyedia layanan yang baik akan memberikan edukasi tentang perawatan luka, langkah-langkah kebersihan, dan
+                pemulihan pasca prosedur.
+              </h2>
+            </div>
           </div>
           <div className="bg-violet-100 text-custom-black flex flex-col items-center justify-center rounded-lg shadow-lg p-6">
-            <img src={Char4} alt="Benefit Icon" className="w-36 h-auto mb-4" />
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest text-center">
-              Lingkungan Ramah Anak
-            </h1>
-            <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
-              Fasilitas di tempat yang tepat dirancang untuk mengurangi rasa takut pada anak, seperti
-              menyediakan ruang yang nyaman dan ramah anak.
-            </h2>
+            <img src={Char4} alt="Benefit Icon" className="h-40 w-auto mb-4" />
+            <div className="p-0 2xl:px-20">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest text-center mb-4">
+                Lingkungan Ramah Anak
+              </h1>
+              <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
+                Fasilitas di tempat yang tepat dirancang untuk mengurangi rasa takut pada anak, seperti
+                menyediakan ruang yang nyaman dan ramah anak.
+              </h2>
+            </div>
           </div>
           <div className="bg-violet-100 text-custom-black flex flex-col items-center justify-center rounded-lg shadow-lg p-6">
-            <img src={Char4} alt="Benefit Icon" className="w-36 h-auto mb-4" />
-            <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest text-center">
-              Dukungan Teknologi
-            </h1>
-            <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
-              Tempat yang tepat dilengkapi teknologi terkini untuk mempercepat proses dan meningkatkan akurasi
-              prosedur.
-            </h2>
+            <img src={Char4} alt="Benefit Icon" className="h-40 w-auto mb-4" />
+            <div className="p-0 2xl:px-20">
+              <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-widest text-center mb-4">
+                Dukungan Teknologi
+              </h1>
+              <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
+                Tempat yang tepat dilengkapi teknologi terkini untuk mempercepat proses dan meningkatkan akurasi
+                prosedur.
+              </h2>
+            </div>
           </div>
         </div>
       </div>
