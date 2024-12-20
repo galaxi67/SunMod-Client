@@ -7,7 +7,7 @@ import ScrollTop from '../components/ScrollTop'
 
 const PublicLayout = () => {
   return (
-    <div className=''>
+    <div className='public-layout'>
       <Navbar />
       <main>
         <Outlet />

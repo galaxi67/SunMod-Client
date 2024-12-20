@@ -10,7 +10,7 @@ import Char from "../assets/karakter4.png";
 const Layanan = () => {
   return (
     <div className="container mx-auto">
-      <div className="py-10 bg-gradient-to-l from-blue-50 via-blue-400 to-custom-blue mt-3 sm:mt-5 lg:mt-15 rounded-custom-br mx-5 lg:mx-1">
+      <div className="py-10 bg-gradient-to-l from-blue-50 via-blue-400 to-custom-blue mt-3 sm:mt-5 lg:mt-15 rounded-custom-br">
         <div className="max-w-full mx-auto px-4 sm:px-8 md:px-10 lg:px-20 grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="title-content space-y-4 my-auto text-white">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-widest">LAYANAN SUMOD</h1>
