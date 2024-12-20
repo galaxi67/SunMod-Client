@@ -5,8 +5,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="header">
-      <nav className="navbar flex justify-between items-center w-full max-w-screen-2xl mx-auto mt-5">
+    <header className="header pb-3 shadow-md">
+      <nav className="navbar flex justify-between items-center w-full max-w-screen-2xl mx-auto mt-5 px-2 md:px-4 lg:px-2">
         <div className="navbar-logo text-lg font-bold text-black ml-5">
           <a href="/">
             <img src={Logo} alt="SunMod Logo" className="h-10 md:h-16 w-auto text-[2rem]" />
@@ -78,7 +78,7 @@ const Navbar = () => {
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="navbar-toggle md:hidden text-gray-800"
+          className="navbar-toggle md:hidden text-gray-800 mr-3"
         >
           {isOpen ? (
             <svg
