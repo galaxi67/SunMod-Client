@@ -1,22 +1,22 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import React from 'react'
+import { Outlet } from 'react-router-dom'
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import Whatsapp from '../components/WhatsApp'
 import ScrollTop from '../components/ScrollTop'
 
 const PublicLayout = () => {
   return (
-    <div className='public-layout'>
+    <div className=''>
       <Navbar />
       <main>
         <Outlet />
       </main>
-      <Whatsapp/>
-      <ScrollTop/>
+      <Whatsapp />
+      <ScrollTop />
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default PublicLayout;
+export default PublicLayout
