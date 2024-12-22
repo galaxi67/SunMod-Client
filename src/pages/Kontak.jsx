@@ -2,7 +2,7 @@ import React from "react";
 
 const Kontak = () => {
   return (
-    <div className="container mx-auto">
+    <div className="container max-w-full">
       <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-wide flex justify-center mt-16">
         Hubungi Kami
       </h1>

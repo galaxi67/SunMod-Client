@@ -13,7 +13,10 @@ module.exports = {
         "custom-black": "#343434",
         "custom-blue": "#003C97",
         "custom-yellow": "#ff9f1c",
-        "sidebar": "#1C2434"
+        sidebar: "#1C2434",
+        "sumod-wt": "#F6F6F6",
+        "sumod-bl": "#1B4A82",
+        "sumod-bl2": "#E8EFF9",
       },
       borderRadius: {
         "custom-br": "8px",

@@ -9,29 +9,29 @@ import Char from "../assets/karakter4.png";
 
 const Layanan = () => {
   return (
-    <div className="container mx-auto">
-      <div className="py-10 bg-gradient-to-l from-blue-50 via-blue-400 to-custom-blue mt-3 sm:mt-5 lg:mt-15 rounded-custom-br mx-5 lg:mx-1">
+    <div className="container max-w-full">
+      <div className="py-10 h-[200px] md:h-[280px] lg:h-[400px] flex lg:justify-center lg:items-center bg-gradient-to-l from-blue-50 via-blue-400 to-custom-blue mt-3 sm:mt-5 lg:mt-15 rounded-custom-br lg:mx-1">
         <div className="max-w-full mx-auto px-4 sm:px-8 md:px-10 lg:px-20 grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="title-content space-y-4 my-auto text-white">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-widest">LAYANAN SUMOD</h1>
-            <h2 className="font-normal text-xs sm:text-xl lg:text-2xl leading-3 tracking-widest">
+            <h2 className="font-normal text-xs sm:text-xl md:text-lg lg:text-2xl leading-3 tracking-widest">
               Layanan Sunat yang Aman dan Ramah di Sunat Modern yang Dikerjakan Oleh Dokter Professional
             </h2>
           </div>
           <div className="flex justify-end">
-            <div className="overflow-hidden">
+            <div className="overflow-hidden md:block hidden">
               <img src={LayananImage} alt="Profile" className="w-1/2 h-auto object-cover mx-auto" />
             </div>
           </div>
         </div>
       </div>
-      <h1 className="mt-20 text-3xl md:text-5xl text-center font-extrabold tracking-wide flex flex-col items-center justify-center text-custom-black">
+      <h1 className="mt-5 md:mt-10 lg:mt-20 text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center font-extrabold tracking-wide flex flex-col items-center justify-center text-custom-black">
         PILIHAN PAKET SUNAT
       </h1>
-      <h2 className="text-center text-3xl md:text-2xl font-medium tracking-wide flex flex-col items-center justify-center text-custom-slate">
+      <h2 className="mt-1 lg:mt-3 text-lg sm:text-xl md:text-2xl lg:text-3xl text-center font-medium tracking-wide flex flex-col items-center justify-center text-custom-slate">
         untuk semua usia
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-5 sm:p-14 mt-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-5 sm:p-14 mt-3 lg:mt-8">
         <div
           className="col-span-1 row-span-2 flex items-center justify-center text-xl font-bold rounded-custom-br overflow-hidden"
           style={{ backgroundImage: `url(${Img4})`, backgroundSize: "cover", backgroundPosition: "center" }}
@@ -209,10 +209,12 @@ const Layanan = () => {
       <div className="p-6">
         <div className="-mt-8 rounded-custom-br max-w-full mx-auto sm:px-8 md:px-10 lg:px-20 grid grid-cols-1 md:grid-cols-2 bg-red-100 p-10 mb-6 shadow-lg">
           <div className="flex justify-center mx-auto w-full h-[300px] sm:w-[300px] lg:w-[300px] rounded-custom-br mr-auto overflow-hidden mb-5">
-              <img src={Char} alt="Profile" className="w-auto h-full object-contain" />
+            <img src={Char} alt="Profile" className="w-auto h-full object-contain" />
           </div>
           <div className="title-content space-y-4 mx-auto">
-            <h1 className="text-2xl sm:text-4xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold tracking-wide text-center">SUNAT KHUSUS</h1>
+            <h1 className="text-2xl sm:text-4xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold tracking-wide text-center">
+              SUNAT KHUSUS
+            </h1>
             <h2 className="font-light text-xs sm:text-xl lg:text-2xl leading-2 text-justify">
               Melayani sunat dengan kondisi kesehatan tertentu
             </h2>

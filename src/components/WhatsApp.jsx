@@ -15,8 +15,8 @@ const WhatsAppIcon = () => {
   >
     <div className="relative">
       <div className="absolute inset-0 bg-emerald-200 rounded-full animate-ping"></div>
-      <div className="relative py-3 px-4 bg-green-600 text-white rounded-full shadow-lg flex justify-center items-center hover:bg-green-700 hover:scale-125 transition duration-300">
-        <i className="fab fa-whatsapp text-3xl"></i>
+      <div className="relative py-1 px-2.5 lg:py-3 lg:px-4 bg-green-600 text-white rounded-full shadow-lg flex justify-center items-center hover:bg-green-700 hover:scale-125 transition duration-300">
+        <i className="fab fa-whatsapp text-2xl lg:text-3xl"></i>
       </div>
     </div>
   </a>

@@ -1,17 +1,17 @@
-import React from "react";
 import { Outlet } from "react-router-dom";
-
 import Sidebar from "../admin/Sidebar";
 
-const AdminLayout = () => {
-  return (
-    <div className="flex-none lg:flex">
+
+const AdminLayout = () => (
+  <div className="grid grid-cols-1 lg:grid-cols-[300px_auto] min-h-screen">
+    <aside>
       <Sidebar />
-      <main className="p-6">
-        <Outlet />
-      </main>
-    </div>
-  );
-};
+    </aside>
+
+    <main className="flex justify-center items-center">
+      <Outlet />
+    </main>
+  </div>
+);
 
 export default AdminLayout;
