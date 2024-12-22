@@ -8,23 +8,23 @@ import {
   CogIcon,
   IdentificationIcon,
   NewspaperIcon,
+  ClipboardDocumentIcon
 } from "@heroicons/react/24/outline";
 
 const Sidebar = ({ brandName }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const routes = [
-    { path: "/admin", name: "Home", icon: <HomeIcon className="h-5 w-5" /> },
-    { path: "/admin/layanan", name: "Layanan", icon: <BriefcaseIcon className="h-5 w-5" /> },
-    { path: "/admin/metode", name: "Metode", icon: <CogIcon className="h-5 w-5" /> },
-    { path: "/admin/profil", name: "Profil", icon: <IdentificationIcon className="h-5 w-5" /> },
-    { path: "/admin/artikel", name: "Artikel", icon: <NewspaperIcon className="h-5 w-5" /> },
-    { path: "/admin/sighin", name: "Sigh In", icon: <null /> },
-    { path: "/admin/sighup", name: "Sigh Up", icon: <null /> },
+    { path: "/admin", name: "Dashboard", icon: <HomeIcon className="h-5 w-5" /> },
+    { path: "layanan", name: "Layanan", icon: <BriefcaseIcon className="h-5 w-5" /> },
+    { path: "metode", name: "Metode", icon: <ClipboardDocumentIcon className="h-5 w-5" /> },
+    { path: "profil", name: "Profil", icon: <IdentificationIcon className="h-5 w-5" /> },
+    { path: "artikel", name: "Artikel", icon: <NewspaperIcon className="h-5 w-5" /> },
+    { path: "setting", name: "Setelan Akun", icon: <CogIcon className="h-5 w-5 opacity-50" /> },
   ];
 
   return (
-    <div className="bg-sidebar lg:h-screen">
+    <div className="bg-sidebar lg:h-screen lg:fixed">
       <aside
         className={`fixed inset-y-0 left-0 z-50 w-64 lg:w-80 bg-sidebar text-white transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "-translate-x-64"
@@ -36,35 +36,28 @@ const Sidebar = ({ brandName }) => {
             <XMarkIcon className="h-6 w-6 text-white" />
           </button>
         </div>
-        <nav className="p-4 mt-10 font-semibold">
+        <nav className="p-4 mt-10 font-light lg:text-xl tracking-widest">
           <ul className="space-y-2">
-            {routes.map(({ path, name, icon }, index) => (
-              <div key={name}>
-                {name === "Sigh In" && <div className="mt-6"></div>}
-                <li>
-                  <NavLink
-                    to={path}
-                    className={({ isActive }) =>
-                      `flex items-center gap-4 p-2 rounded-lg transition-colors ${
-                        isActive && path !== "/admin"
-                          ? "bg-orange-400 text-white"
-                          : name === "Sigh In" || name === "Sigh Up"
-                          ? "text-gray-400 hover:text-gray-100"
-                          : "hover:bg-gray-700 text-white hover:text-white"
-                      }`
-                    }
-                  >
-                    {icon && icon}
-                    <span>{name}</span>
-                  </NavLink>
-                </li>
-              </div>
+            {routes.map(({ path, name, icon }) => (
+              <li key={name}>
+                <NavLink
+                  to={path}
+                  className={({ isActive }) =>
+                    `flex items-center gap-4 p-2 rounded-lg transition-colors ${
+                      isActive && path !== "/admin" && name !== "Setelan Akun"? "bg-orange-400 text-white" : "hover:bg-gray-700 text-white"
+                    } ${name === "Setelan Akun" ? "opacity-50" : ""}`
+                  }
+                >
+                  {icon}
+                  <span>{name}</span>
+                </NavLink>
+              </li>
             ))}
           </ul>
         </nav>
       </aside>
       <div className="flex-1">
-        <header className="flex items-center justify-between bg-sidebar text-white p-4 shadow-md lg:hidden">
+        <header className="flex items-center justify-between bg-sidebar text-white p-4 lg:hidden">
           <h1 className="text-lg font-bold">{brandName}</h1>
           <button onClick={() => setIsOpen(true)}>
             <Bars3Icon className="h-6 w-6" />

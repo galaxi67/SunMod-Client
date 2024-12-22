@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./admin/auth/ProtectedRoute";
 
 import PublicLayout from "./layouts/PublicLayout";
 import AdminLayout from "./layouts/AdminLayout";
@@ -17,15 +18,15 @@ import AdminArtikel from "./admin/pages/AdminArtikel";
 import AdminLayanan from "./admin/pages/AdminLayanan";
 import AdminMetode from "./admin/pages/AdminMetode";
 import AdminProfil from "./admin/pages/AdminProfil";
+import Setting from "./admin/pages/settings"
 import SignIn from "./admin/auth/SignIn";
-import SignUp from "./admin/auth/SignUp";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<PublicLayout />}>
-          <Route path="/" element={<Homepage />} />
+          <Route index element={<Homepage />} />
           <Route path="layanan" element={<Layanan />} />
           <Route path="metode" element={<Metode />} />
           <Route path="artikel" element={<Artikel />} />
@@ -34,15 +35,19 @@ function App() {
           <Route path="kontak" element={<Kontak />} />
         </Route>
 
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route path="/admin" element={<Dashboard />} />
-          <Route path="/admin/artikel" element={<AdminArtikel />} />
-          <Route path="/admin/layanan" element={<AdminLayanan />} />
-          <Route path="/admin/metode" element={<AdminMetode />} />
-          <Route path="/admin/profil" element={<AdminProfil />} />
-          <Route path="/admin/sighup" element={<SignUp />} />
-          <Route path="/admin/sighin" element={<SignIn />} />
+        <Route path="/signin" element={<SignIn />} />
+
+        <Route path="/admin" element={<ProtectedRoute />}>
+          <Route path="/admin/" element={<AdminLayout />}>
+            <Route index element={<Dashboard />} />
+            <Route path="profil" element={<AdminProfil />} />
+            <Route path="artikel" element={<AdminArtikel />} />
+            <Route path="layanan" element={<AdminLayanan />} />
+            <Route path="metode" element={<AdminMetode />} />
+            <Route path="setting" element={<Setting />} />
+          </Route>
         </Route>
+
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

@@ -1,15 +1,15 @@
+
 import React, { useState } from "react";
-import Logo from "../assets/logo-sumot.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="header pb-3 shadow-md">
-      <nav className="navbar flex justify-between items-center w-full max-w-screen-2xl mx-auto mt-5 px-2 md:px-4 lg:px-2">
+    <header className="header lg:mt-4 lg:mb-8">
+      <nav className="navbar flex justify-between items-center w-full max-w-screen-2xl mx-auto mt-5">
         <div className="navbar-logo text-lg font-bold text-black ml-5">
           <a href="/">
-            <img src={Logo} alt="SunMod Logo" className="h-10 md:h-16 w-auto text-[2rem]" />
+            <img src="https://res.cloudinary.com/dtpxp4yjv/image/upload/v1734639559/products/jg5remlsiqixehj38tp0.png" alt="SunMod Logo" className="h-10 md:h-16 w-auto text-[2rem]" />
           </a>
         </div>
 
@@ -78,7 +78,7 @@ const Navbar = () => {
 
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="navbar-toggle md:hidden text-gray-800 mr-3"
+          className="navbar-toggle md:hidden text-gray-800"
         >
           {isOpen ? (
             <svg

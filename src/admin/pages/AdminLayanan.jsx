@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 function AdminLayanan() {
-  return (
-    <div>AdminLayanan</div>
-  )
+  return <div></div>;
 }
 
-export default AdminLayanan
+export default AdminLayanan;
