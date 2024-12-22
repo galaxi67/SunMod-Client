@@ -1,5 +1,5 @@
 import React from "react";
-import BlogList from "../components/Blog"
+import BlogList from "../components/Blog";
 
 const Artikel = () => {
   const posts = [
@@ -48,11 +48,13 @@ const Artikel = () => {
   ];
 
   return (
-    <div>
-      <main className="max-w-6xl max-w-full px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Artikel SuMod</h1>
-        <BlogList posts={posts} />
-      </main>
+    <div className="container mx-auto">
+      <div className="max-w-full">
+        <main className="px-4 sm:px-6 lg:px-8 py-8">
+          <h1 className="text-3xl font-bold text-gray-800 mb-6">Artikel SuMod</h1>
+          <BlogList posts={posts} />
+        </main>
+      </div>
     </div>
   );
 };
