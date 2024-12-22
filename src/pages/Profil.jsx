@@ -8,23 +8,22 @@ import Char4 from "../assets/karakter4.png";
 
 const Profil = () => {
   return (
-    <div className="container mx-auto">
-      <div className="max-w-full">
-        <div className="py-10 h-[200px] md:h-[280px] lg:h-[400px] flex lg:justify-center lg:items-center bg-gradient-to-l from-blue-50 via-blue-400 to-custom-blue mt-3 sm:mt-5 lg:mt-15 rounded-custom-br lg:mx-1">
-          <div className="max-w-full mx-auto px-4 sm:px-8 md:px-10 lg:px-20 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="title-content space-y-4 my-auto text-white">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-widest">SUNAT MODERN</h1>
-              <h2 className="font-normal text-xs sm:text-xl lg:text-2xl leading-3 tracking-widest">
-                Layanan Terbaik dengan Metode Modern
-              </h2>
-            </div>
-            <div className="flex justify-center md:justify-end">
-              <div className="overflow-hidden md:block hidden">
-                <img src={ProfilImage} alt="Profile" className="w-1/2 h-auto object-cover mx-auto" />
-              </div>
+    <div className="container max-w-full">
+      <div className="py-10 h-[200px] md:h-[280px] lg:h-[400px] flex lg:justify-center lg:items-center bg-gradient-to-l from-blue-50 via-blue-400 to-custom-blue mt-3 sm:mt-5 lg:mt-15 rounded-custom-br lg:mx-1">
+        <div className="max-w-full mx-auto px-4 sm:px-8 md:px-10 lg:px-20 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="title-content space-y-4 my-auto text-white">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-widest">SUNAT MODERN</h1>
+            <h2 className="font-normal text-xs sm:text-xl lg:text-2xl leading-3 tracking-widest">
+              Layanan Terbaik dengan Metode Modern
+            </h2>
+          </div>
+          <div className="flex justify-center md:justify-end">
+            <div className="overflow-hidden md:block hidden">
+              <img src={ProfilImage} alt="Profile" className="w-1/2 h-auto object-cover mx-auto" />
             </div>
           </div>
         </div>
+      </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-auto mb-10 lg:mb-15 xl:mb-20 mt-6">
           <div
@@ -176,24 +175,22 @@ const Profil = () => {
               </h2>
             </div>
 
-            <div className="bg-sumod-bl2 text-custom-black flex flex-col shadow-md rounded-lg p-6">
-              <div className="flex flex-row xl:p-8 items-center mb-2 lg:mb-3">
-                <h1 className="text-base sm:text-2xl lg:text-3xl xl:text-4xl text-sumod-bl font-bold tracking-wide text-start mb-4 flex-grow">
-                  Dukungan Teknologi
-                </h1>
-                <div className="bg-white p-1 lg:p-2 xl:p-3 rounded-custom-br flex-shrink-0 items-center ">
-                  <img
-                    src={Char1}
-                    alt="Benefit Icon"
-                    className="h-14 w-14 lg:h-20 lg:w-28 xl:h-28 xl:w-28 object-contain"
-                  />
-                </div>
+          <div className="bg-sumod-bl2 text-custom-black flex flex-col shadow-md rounded-lg p-6">
+            <div className="flex flex-row xl:p-8 items-center mb-2 lg:mb-3">
+              <h1 className="text-base sm:text-2xl lg:text-3xl xl:text-4xl text-sumod-bl font-bold tracking-wide text-start mb-4 flex-grow">
+                Dukungan Teknologi
+              </h1>
+              <div className="bg-white p-1 lg:p-2 xl:p-3 rounded-custom-br flex-shrink-0 items-center ">
+                <img
+                  src={Char1}
+                  alt="Benefit Icon"
+                  className="h-14 w-14 lg:h-20 lg:w-28 xl:h-28 xl:w-28 object-contain"
+                />
               </div>
-              <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
-                Tempat yang tepat dilengkapi teknologi terkini untuk mempercepat proses dan meningkatkan akurasi
-                prosedur.
-              </h2>
             </div>
+            <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-justify">
+              Tempat yang tepat dilengkapi teknologi terkini untuk mempercepat proses dan meningkatkan akurasi prosedur.
+            </h2>
           </div>
         </div>
       </div>
