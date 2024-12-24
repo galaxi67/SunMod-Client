@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function AdminMetode() {
   return (
-    <div>AdminMetode</div>
-  )
+    <div className="flex justify-center items-center p-2 min-h-screen">
+      <div className="">AdminMetode</div>
+    </div>
+  );
 }
 
-export default AdminMetode
+export default AdminMetode;

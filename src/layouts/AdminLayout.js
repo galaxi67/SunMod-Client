@@ -3,12 +3,12 @@ import Sidebar from "../admin/Sidebar";
 
 
 const AdminLayout = () => (
-  <div className="grid grid-cols-1 lg:grid-cols-[300px_auto] min-h-screen">
+  <div className="grid grid-cols-1 lg:grid-cols-[320px_auto]">
     <aside>
       <Sidebar />
     </aside>
 
-    <main className="flex justify-center items-center">
+    <main className="">
       <Outlet />
     </main>
   </div>
