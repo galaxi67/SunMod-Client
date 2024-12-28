@@ -64,11 +64,7 @@ const AdminProfil = () => {
                 key={product.id}
                 className="p-4 rounded-custom-br overflow-hidden bg-slate-50 shadow-lg w-[250px] h-auto"
               >
-                <img
-                  src={product.picture}
-                  alt={product.name}
-                  className="rounded-custom-br object-cover mb-2 mx-auto"
-                />
+                <img src={product.picture} alt={product.name} className="rounded-custom-br object-cover mb-2 mx-auto" />
                 <div>
                   <h2 className="text-xl font-semibold text-center">{product.name}</h2>
                   <p className="text-gray-700 text-center">{product.description}</p>
@@ -98,8 +94,8 @@ const AdminProfil = () => {
       </div>
 
       <h1 className="text-4xl font-bold mb-6">Kenapa harus di Sumod?</h1>
-      <div className="flex justify-center md:justify-normal lg:justify-normal xl:justify-normal">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mb-8">
+      <div className="flex justify-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
           {Array.isArray(products) &&
             products
               .filter((product) => product.id !== 1)
@@ -107,14 +103,12 @@ const AdminProfil = () => {
                 <div
                   key={product.id}
                   className={`p-4 rounded-custom-br overflow-hidden shadow-lg w-[250px] h-auto ${
-                    product.id >= 2 && product.id <= 7 ? "bg-slate-50" : "bg-red-200"
+                    product.id >= 2 && product.id <= 7 ? "bg-white" : "bg-red-200"
                   }`}
                 >
-                  <img
-                    src={product.picture}
-                    alt={product.name}
-                    className="object-cover p-2 rounded-custom-br bg-slate-100 mb-2 mx-auto"
-                  />
+                  <div className="flex justify-center items-center h-[200px] p-4 bg-slate-100 rounded-custom-br mb-2">
+                    <img src={product.picture} alt={product.name} className="object-contain max-w-full max-h-full" />
+                  </div>
                   <div>
                     <h2 className="text-xl font-semibold text-center">{product.name}</h2>
                     <p className="text-gray-700 text-center">{product.description}</p>
