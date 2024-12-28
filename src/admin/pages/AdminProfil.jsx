@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { fetchProducts, updateProduct } from "../api";
+import { fetchData, updateData } from "../api";
 
 const AdminProfil = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [newData, setNewData] = useState({ name: "", description: "", picture: null });
 
   const loadProducts = async () => {
     setLoading(true);
     try {
-      const response = await fetchProducts();
-      setProducts(response.data);
+      const response = await fetchData("product");
+      console.log(response);
+      setProducts(response);
       setLoading(false);
     } catch (err) {
       setError(err.message);
@@ -35,9 +35,10 @@ const AdminProfil = () => {
         formData.append("picture", newData.picture);
       }
 
-      const updatedProduct = await updateProduct(id, formData);
+      const updatedProduct = await updateData("product", id, formData);
       alert(`Profil ${updatedProduct.name} berhasil diupdate!`);
       setSelectedProduct(null);
+      setNewData({ name: "", description: "", picture: null });
       loadProducts();
     } catch (err) {
       alert("Gagal mengupdate profil: " + (err.response?.data?.message || err.message));
@@ -54,16 +55,20 @@ const AdminProfil = () => {
   return (
     <div className="mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Profil Sumod</h1>
-      <div className="flex md:justify-start lg:justify-start xl:justify-start justify-center">
+      <div className="flex justify-center md:justify-start lg:justify-start xl:justify-start">
         {Array.isArray(products) &&
           products
-            .filter((product) => product.id === 2)
+            .filter((product) => product.id === 1)
             .map((product) => (
               <div
                 key={product.id}
                 className="p-4 rounded-custom-br overflow-hidden bg-slate-50 shadow-lg w-[250px] h-auto"
               >
-                <img src={product.picture} alt={product.name} className="rounded-custom-br object-cover mb-2 mx-auto" />
+                <img
+                  src={product.picture}
+                  alt={product.name}
+                  className="rounded-custom-br object-cover mb-2 mx-auto"
+                />
                 <div>
                   <h2 className="text-xl font-semibold text-center">{product.name}</h2>
                   <p className="text-gray-700 text-center">{product.description}</p>
@@ -92,17 +97,17 @@ const AdminProfil = () => {
         <div className="border-t-2 border-black mt-2"></div>
       </div>
 
-      <h1 className="text-4xl font-bold mb-6">Kenapa harus di sumod?</h1>
+      <h1 className="text-4xl font-bold mb-6">Kenapa harus di Sumod?</h1>
       <div className="flex justify-center md:justify-normal lg:justify-normal xl:justify-normal">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mb-8">
           {Array.isArray(products) &&
             products
-              .filter((product) => product.id !== 2)
+              .filter((product) => product.id !== 1)
               .map((product) => (
                 <div
                   key={product.id}
                   className={`p-4 rounded-custom-br overflow-hidden shadow-lg w-[250px] h-auto ${
-                    product.id >= 3 && product.id <= 6 ? "bg-slate-50" : "bg-red-200"
+                    product.id >= 2 && product.id <= 7 ? "bg-slate-50" : "bg-red-200"
                   }`}
                 >
                   <img
