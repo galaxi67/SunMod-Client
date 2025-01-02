@@ -1,29 +1,31 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ProtectedRoute from "./admin/auth/ProtectedRoute";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import ProtectedRoute from "./admin/auth/ProtectedRoute"
 
-import PublicLayout from "./layouts/PublicLayout";
-import AdminLayout from "./layouts/AdminLayout";
+import PublicLayout from "./layouts/PublicLayout"
+import AdminLayout from "./layouts/AdminLayout"
 
-import Homepage from "./pages/Homepage";
-import Layanan from "./pages/Layanan";
-import Metode from "./pages/Metode";
-import Artikel from "./pages/Artikel";
-import Profil from "./pages/Profil";
-import Galeri from "./pages/Galeri";
-import Kontak from "./pages/Kontak";
-import NotFound from "./components/NotFound";
+import Homepage from "./pages/Homepage"
+import Layanan from "./pages/Layanan"
+import Metode from "./pages/Metode"
+import Artikel from "./pages/Artikel"
+import Profil from "./pages/Profil"
+import Galeri from "./pages/Galeri"
+import Kontak from "./pages/Kontak"
+import NotFound from "./components/NotFound"
 
-import Dashboard from "./admin/Dashboard";
-import AdminArtikel from "./admin/pages/AdminArtikel";
-import AdminLayanan from "./admin/pages/AdminLayanan";
-import AdminMetode from "./admin/pages/AdminMetode";
-import AdminProfil from "./admin/pages/AdminProfil";
+import Dashboard from "./admin/Dashboard"
+import AdminArtikel from "./admin/pages/AdminArtikel"
+import AdminLayanan from "./admin/pages/AdminLayanan"
+import AdminMetode from "./admin/pages/AdminMetode"
+import AdminProfil from "./admin/pages/AdminProfil"
 import Setting from "./admin/pages/settings"
-import SignIn from "./admin/auth/SignIn";
+import SignIn from "./admin/auth/SignIn"
+import { ToastContainer } from 'react-toastify'
 
 function App() {
   return (
     <Router>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<PublicLayout />}>
           <Route index element={<Homepage />} />
@@ -51,7 +53,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

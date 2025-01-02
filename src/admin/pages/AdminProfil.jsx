@@ -1,19 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { fetchData, updateData } from "../api";
 import { ListBulletIcon, PencilIcon } from "@heroicons/react/24/outline";
+import { toast } from 'react-toastify'; 
+import { BallTriangle  } from 'react-loading-icons'
 
 const AdminProfil = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [btnLoading, setBtnLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [newData, setNewData] = useState({ name: "", description: "", picture: null });
+  const [newData, setNewData] = useState( { name: "", description: "", picture: null } );
+  const [nameError, setNameError] = useState("");
+  const [descError, setDescError] = useState("");
+  const [pictError, setPictError] = useState("");
 
   const loadProducts = async () => {
     setLoading(true);
     try {
       const response = await fetchData("product");
-      setProducts(response);
+      setProducts(response.map(product => ({
+      ...product,
+      description: product.description || "", // Default to empty string
+    })));
       setLoading(false);
     } catch (err) {
       setError(err.message);
@@ -21,29 +30,63 @@ const AdminProfil = () => {
     }
   };
 
-  const handleUpdate = async (id) => {
-    if (!newData.name.trim() || !newData.description.trim()) {
-      alert("Nama dan deskripsi tidak boleh kosong.");
-      return;
+  const handleUpdate = async ( id ) => {
+    let isValid = true;
+    setNameError("");
+    setDescError("");
+    setPictError("");
+    if (!newData.name.trim()) {
+      setNameError("Nama tidak boleh kosong.");
+      isValid = false;
     }
 
-    try {
+    if (!newData.description.trim()) {
+      setDescError("Deskripsi tidak boleh kosong.");
+      isValid = false;
+    }
+
+    if (!newData.picture) {
+      setPictError("Gambar tidak boleh kosong.");
+      isValid = false;
+    }
+    if (!isValid) return;
+
+
+    try{
       const formData = new FormData();
       formData.append("name", newData.name);
       formData.append("description", newData.description);
       if (newData.picture) {
         formData.append("picture", newData.picture);
       }
-
-      const updatedProduct = await updateData("product", id, formData);
-      alert(`Profil ${updatedProduct.name} berhasil diupdate!`);
+      setBtnLoading(true);
+      const updatedProduct = await updateData( "product", id, formData );
+      toast.dismiss();
+      toast.success(`Profil ${updatedProduct.name} berhasil diupdate!`);
       setSelectedProduct(null);
-      setNewData({ name: "", description: "", picture: null });
+      setNewData( { name: "", description: "", picture: null } );
       loadProducts();
-    } catch (err) {
-      alert("Gagal mengupdate profil: " + (err.response?.data?.message || err.message));
+      setBtnLoading(false);
+    } catch ( err )
+    {
+      toast.dismiss();
+      toast.error("Gagal mengupdate profil: " + (err.response?.data?.message || err.message));
+      setBtnLoading(false);
     }
   };
+
+  const handleFileChange = ( e ) => {
+    const file = e.target.files[0];
+    if (file && file.size > 5 * 1024 * 1024) {
+      e.target.value = ""; 
+      setPictError("Ukuran file maksimal 5MB.");
+      return;
+    }
+    if (file) {
+      setPictError("");
+      setNewData({ ...newData, picture: file });
+    }
+};
 
   const handleBulletPoint = () => {
     const selectedText = window.getSelection().toString();
@@ -73,6 +116,8 @@ const AdminProfil = () => {
   };
 
   const renderFormattedDescription = (description) => {
+    if (!description) return { __html: "" }; // Return an empty string if description is null or undefined
+
     let formattedText = description.replace(/\n/g, "<span class='block mb-2'></span>");
 
     formattedText = formattedText.replace(
@@ -83,6 +128,18 @@ const AdminProfil = () => {
     formattedText = formattedText.replace(/•/g, '<span class="font-bold">•</span>');
 
     return { __html: formattedText };
+  };
+    
+  const resetForm = () => {
+    setNewData({
+      name: "",
+      description: "",
+      picture: null,
+    } );
+    setNameError("")
+    setDescError("")
+    setPictError("")
+    setSelectedProduct(null);
   };
 
   useEffect(() => {
@@ -176,24 +233,42 @@ const AdminProfil = () => {
       {selectedProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 m-2 md:m-0">
           <div className="flex flex-col lg:flex-row gap-2">
+
             <div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-lg shadow-lg w-full max-w-md">
+
               <h2 className="font-semibold mb-4">Update Profil: "{selectedProduct.name}"</h2>
               <p className="text-custom-black/40 font-bold">Judul</p>
               <input
                 type="text"
                 placeholder="Judul Baru"
                 value={newData.name}
-                onChange={(e) => setNewData({ ...newData, name: e.target.value })}
+                onChange={(e) => {
+                  setNewData({ ...newData, name: e.target.value });
+                  if (nameError) setNameError("");
+                }}
                 className="border p-2 w-full"
               />
+              {nameError && (
+                <div className="text-red-500 font-semibold text-sm mb-4">
+                  {nameError}
+                </div>
+              )}
               <p className="text-custom-black/40 font-bold mt-2">Deskripsi</p>
               <textarea
                 id="description"
                 placeholder="Deskripsi Baru (tambahkan keunggulan di sini)"
                 value={newData.description}
-                onChange={(e) => setNewData({ ...newData, description: e.target.value })}
+                onChange={(e) => {
+                  setNewData({ ...newData, description: e.target.value });
+                  if (descError) setDescError("");
+                }}
                 className="border p-2 w-full h-40"
               ></textarea>
+              {descError && (
+                <div className="text-red-500 font-semibold text-sm mb-4">
+                  {descError}
+                </div>
+              )}
               <div className="mb-3 flex justify-center">
                 <button onClick={handleBulletPoint} className="border border-gray-300 p-2 rounded mr-2">
                   <ListBulletIcon className="h-5 w-5 text-custom-black" />
@@ -206,25 +281,20 @@ const AdminProfil = () => {
               <input
                 type="file"
                 accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (file && file.size <= 5 * 1024 * 1024) {
-                    setNewData({ ...newData, picture: file });
-                  } else {
-                    alert("Ukuran file maksimal 5MB.");
-                  }
-                }}
+                onChange={handleFileChange}
                 className="border p-2 w-full mt-2"
               />
+              {pictError && <div className="text-red-500 font-semibold text-sm mb-4">{pictError}</div>}
               <div className="flex justify-end space-x-2 mt-4">
                 <button
                   className="bg-sidebar text-white px-4 py-2 rounded"
                   onClick={() => handleUpdate(selectedProduct.id)}
+                  disabled={btnLoading} // Menonaktifkan tombol saat loading
                 >
-                  Simpan Perubahan
+                  {btnLoading ? <BallTriangle  className="h-7 w-7" /> : "Simpan Perubahan"}
                 </button>
 
-                <button className="bg-red-400 text-white px-4 py-2 rounded" onClick={() => setSelectedProduct(null)}>
+                <button className="bg-red-400 text-white px-4 py-2 rounded" onClick={resetForm}>
                   Batal
                 </button>
               </div>
