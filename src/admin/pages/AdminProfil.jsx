@@ -53,20 +53,20 @@ const AdminProfil = () => {
 
 
     try {
-        const formData = new FormData();
-        formData.append("name", newData.name);
-        formData.append("description", newData.description);
-        if (newData.picture) {
-          formData.append("picture", newData.picture);
-        }
-        setBtnLoading(true);
-        const updatedProduct = await updateData( "product", id, formData );
-        toast.dismiss();
-        toast.success(`Profil ${updatedProduct.name} berhasil diupdate!`);
-        setSelectedProduct(null);
-        setNewData( { name: "", description: "", picture: null } );
-        loadProducts();
-        setBtnLoading(false);
+      const formData = new FormData();
+      formData.append("name", newData.name);
+      formData.append("description", newData.description);
+      if (newData.picture) {
+        formData.append("picture", newData.picture);
+      }
+      setBtnLoading(true);
+      const updatedProduct = await updateData( "product", id, formData );
+      toast.dismiss();
+      toast.success(`Profil ${updatedProduct.name} berhasil diupdate!`);
+      setSelectedProduct(null);
+      setNewData( { name: "", description: "", picture: null } );
+      loadProducts();
+      setBtnLoading(false);
     } catch ( err ) {
       toast.dismiss();
       toast.error("Gagal mengupdate profil: " + (err.response?.data?.message || err.message));
@@ -115,7 +115,7 @@ const AdminProfil = () => {
   };
 
   const renderFormattedDescription = (description) => {
-    if (!description) return { __html: "" }; // Return an empty string if description is null or undefined
+    if (!description) return { __html: "" };
 
     let formattedText = description.replace(/\n/g, "<span class='block mb-2'></span>");
 
