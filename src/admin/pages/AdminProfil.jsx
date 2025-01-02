@@ -52,23 +52,22 @@ const AdminProfil = () => {
     if (!isValid) return;
 
 
-    try{
-      const formData = new FormData();
-      formData.append("name", newData.name);
-      formData.append("description", newData.description);
-      if (newData.picture) {
-        formData.append("picture", newData.picture);
-      }
-      setBtnLoading(true);
-      const updatedProduct = await updateData( "product", id, formData );
-      toast.dismiss();
-      toast.success(`Profil ${updatedProduct.name} berhasil diupdate!`);
-      setSelectedProduct(null);
-      setNewData( { name: "", description: "", picture: null } );
-      loadProducts();
-      setBtnLoading(false);
-    } catch ( err )
-    {
+    try {
+        const formData = new FormData();
+        formData.append("name", newData.name);
+        formData.append("description", newData.description);
+        if (newData.picture) {
+          formData.append("picture", newData.picture);
+        }
+        setBtnLoading(true);
+        const updatedProduct = await updateData( "product", id, formData );
+        toast.dismiss();
+        toast.success(`Profil ${updatedProduct.name} berhasil diupdate!`);
+        setSelectedProduct(null);
+        setNewData( { name: "", description: "", picture: null } );
+        loadProducts();
+        setBtnLoading(false);
+    } catch ( err ) {
       toast.dismiss();
       toast.error("Gagal mengupdate profil: " + (err.response?.data?.message || err.message));
       setBtnLoading(false);
