@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify"
 
 function Settings() {
   const [user, setUser] = useState({ name: "N/A", email: "N/A" });
@@ -8,27 +9,83 @@ function Settings() {
 
   useEffect(() => {
     const fetchUserData = async () => {
+      const accessToken = localStorage.getItem("accessToken");
+      const refreshToken = localStorage.getItem("refreshToken");
+
+      if (!accessToken) {
+        navigate("/signin", { replace: true });
+        return;
+      }
+
       try {
-        const response = await axios.get("http://localhost:5000/api/auth/users");
-        if (response.data && response.data.length > 0) {
-          setUser(response.data[0]);
-        } else {
+        const response = await axios.get("http://localhost:5000/api/auth/profile", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        if (!response.data.data) {
           setUser({ name: "N/A", email: "N/A" });
+        } else {
+          setUser(response.data.data);
         }
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        if (error.response?.data?.message === "Access token expired") {
+
+          try {
+            const refreshResponse = await axios.post("http://localhost:5000/api/auth/refresh-token", {
+              refreshToken,
+            });
+
+            const { accessToken: newAccessToken } = refreshResponse.data;
+            localStorage.setItem("accessToken", newAccessToken);
+            const retryResponse = await axios.get("http://localhost:5000/api/auth/profile", {
+              headers: {
+                Authorization: `Bearer ${newAccessToken}`,
+              },
+            });
+
+            if (retryResponse.data) {
+              setUser(retryResponse.data);
+            } else {
+              setUser({ name: "N/A", email: "N/A" });
+            }
+          } catch (refreshError) {
+            localStorage.removeItem("refreshToken");
+            localStorage.removeItem("accessToken");
+            navigate("/signin", { replace: true });
+          }
+        } else {
+          navigate("/signin", { replace: true });
+        }
       }
     };
 
     fetchUserData();
-  }, []);
+  }, [navigate]);
 
   const handleLogout = async () => {
+    const refreshToken = localStorage.getItem("refreshToken");
+
+    if (!refreshToken) {
+      navigate("/signin", { replace: true });
+      return;
+    }
+
     try {
-      await axios.post("http://localhost:5000/api/auth/logout");
+      await axios.post("http://localhost:5000/api/auth/logout", { refreshToken });
+
+      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("accessToken");
       navigate("/signin");
     } catch (error) {
-      console.error("Error logging out:", error);
+      toast.dismiss();
+      toast.error("Error : ", error)
+      if (error.response?.data?.message === "No refresh token found for this user") {
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("accessToken");
+        navigate("/signin", { replace: true });
+      }
     }
   };
 
