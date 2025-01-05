@@ -1,6 +1,6 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom"
 import ProtectedRoute from "./admin/auth/ProtectedRoute"
-
+import React, { useEffect } from "react"
 import PublicLayout from "./layouts/PublicLayout"
 import AdminLayout from "./layouts/AdminLayout"
 
@@ -20,40 +20,55 @@ import AdminMetode from "./admin/pages/AdminMetode"
 import AdminProfil from "./admin/pages/AdminProfil"
 import Setting from "./admin/pages/settings"
 import SignIn from "./admin/auth/SignIn"
-import { ToastContainer } from 'react-toastify'
+import { ToastContainer } from "react-toastify"
+import { setupAxiosInterceptors } from "./admin/api/axiosInstance"
+
+const AppWrapper = () => {
+    const navigate = useNavigate()
+
+    useEffect( () => {
+        setupAxiosInterceptors( navigate )
+    }, [navigate] )
+
+    return (
+        <>
+            <ToastContainer />
+            <Routes>
+                <Route path="/" element={<PublicLayout />}>
+                    <Route index element={<Homepage />} />
+                    <Route path="layanan" element={<Layanan />} />
+                    <Route path="metode" element={<Metode />} />
+                    <Route path="artikel" element={<Artikel />} />
+                    <Route path="profil" element={<Profil />} />
+                    <Route path="galeri" element={<Galeri />} />
+                    <Route path="kontak" element={<Kontak />} />
+                </Route>
+
+                <Route path="/signin" element={<SignIn />} />
+
+                <Route path="/admin" element={<ProtectedRoute />}>
+                    <Route path="/admin/" element={<AdminLayout />}>
+                        <Route index element={<Dashboard />} />
+                        <Route path="profil" element={<AdminProfil />} />
+                        <Route path="artikel" element={<AdminArtikel />} />
+                        <Route path="layanan" element={<AdminLayanan />} />
+                        <Route path="metode" element={<AdminMetode />} />
+                        <Route path="setting" element={<Setting />} />
+                    </Route>
+                </Route>
+
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+        </>
+    )
+}
 
 function App() {
-  return (
-    <Router>
-      <ToastContainer />
-      <Routes>
-        <Route path="/" element={<PublicLayout />}>
-          <Route index element={<Homepage />} />
-          <Route path="layanan" element={<Layanan />} />
-          <Route path="metode" element={<Metode />} />
-          <Route path="artikel" element={<Artikel />} />
-          <Route path="profil" element={<Profil />} />
-          <Route path="galeri" element={<Galeri />} />
-          <Route path="kontak" element={<Kontak />} />
-        </Route>
-
-        <Route path="/signin" element={<SignIn />} />
-
-        <Route path="/admin" element={<ProtectedRoute />}>
-          <Route path="/admin/" element={<AdminLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="profil" element={<AdminProfil />} />
-            <Route path="artikel" element={<AdminArtikel />} />
-            <Route path="layanan" element={<AdminLayanan />} />
-            <Route path="metode" element={<AdminMetode />} />
-            <Route path="setting" element={<Setting />} />
-          </Route>
-        </Route>
-
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
-  )
+    return (
+        <Router>
+            <AppWrapper />
+        </Router>
+    )
 }
 
 export default App
