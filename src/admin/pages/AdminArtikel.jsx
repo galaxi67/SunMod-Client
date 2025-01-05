@@ -2,13 +2,13 @@ import React from "react";
 
 function AdminArtikel() {
   return (
-    <div className="flex items-center">
-      <div className=" bg-blue-500 h-screen w-[450px]">
-        <p className="text-4xl">Tex</p>
+    <div className="container mx-auto">
+      <div className="flex items-center mt-10 justify-center ">
+        <div className="relative inline-block text-6xl font-extrabold group">
+          <span className="relative">Paket</span>
+          <span className="absolute bg-green-500 group-hover:bg-red-400 transition-colors duration-300 rounded-full w-10 h-10 -top-1 left-8 transform -translate-x-1/2 -z-10"></span>
+        </div>
       </div>
-      <p className="text-4xl -ml-4">Tex</p>
-
-      <div className=" bg-red-500"></div>
     </div>
   );
 }

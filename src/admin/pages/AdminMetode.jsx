@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { fetchData, updateData } from "../api";
 import { ListBulletIcon, PencilIcon } from "@heroicons/react/24/outline";
+import { toast } from "react-toastify";
+import { BallTriangle } from "react-loading-icons";
 
 const AdminMetode = () => {
   const [assets, setAssets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [btnLoading, setBtnLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [newData, setNewData] = useState({ name: "", description: "", picture: null });
+  const [nameError, setNameError] = useState("");
+  const [descError, setDescError] = useState("");
+  const [pictError, setPictError] = useState("");
 
   const loadAssets = async () => {
     setLoading(true);
@@ -22,10 +28,20 @@ const AdminMetode = () => {
   };
 
   const handleUpdate = async (id) => {
+    let isValid = true;
+    setNameError("");
+    setDescError("");
+    setPictError("");
+    if (!newData.name.trim()) {
+      setNameError("Nama tidak boleh kosong.");
+      isValid = false;
+    }
+
     if (!newData.name.trim() || !newData.description.trim()) {
       alert("Nama dan deskripsi tidak boleh kosong.");
       return;
     }
+    if (!isValid) return;
 
     try {
       const formData = new FormData();
@@ -34,14 +50,31 @@ const AdminMetode = () => {
       if (newData.picture) {
         formData.append("picture", newData.picture);
       }
-
+      setBtnLoading(true);
       const updatedAsset = await updateData("method", id, formData);
-      alert(`Metode ${updatedAsset.name} berhasil diupdate!`);
+      toast.dismiss();
+      toast.success(`Metode ${updatedAsset.name} berhasil diupdate!`);
       setSelectedAsset(null);
       setNewData({ name: "", description: "", picture: null });
       loadAssets();
+      setBtnLoading(false);
     } catch (err) {
-      alert("Gagal mengupdate metode: " + (err.response?.data?.message || err.message));
+      toast.dismiss();
+      toast.error("Gagal mengupdate metode: " + (err.response?.data?.message || err.message));
+      setBtnLoading(false);
+    }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.size > 5 * 1024 * 1024) {
+      e.target.value = "";
+      setPictError("Ukuran file maksimal 5MB.");
+      return;
+    }
+    if (file) {
+      setPictError("");
+      setNewData({ ...newData, picture: file });
     }
   };
 
@@ -83,6 +116,18 @@ const AdminMetode = () => {
     formattedText = formattedText.replace(/•/g, '<span class="font-bold">•</span>');
 
     return { __html: formattedText };
+  };
+
+  const resetForm = () => {
+    setNewData({
+      name: "",
+      description: "",
+      picture: null,
+    } );
+    setNameError("")
+    setDescError("")
+    setPictError("")
+    setSelectedAsset(null);
   };
 
   useEffect(() => {
@@ -133,23 +178,34 @@ const AdminMetode = () => {
 
       {selectedAsset && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 m-2 md:m-0">
-          <div className="flex flex-col lg:flex-row gap-2">
-            <div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-lg shadow-lg w-full max-w-md">
-              <h2 className="font-semibold mb-4">Update Metode: "{selectedAsset.name}"</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-screen overflow-y-auto rounded-custom-br">
+            <div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-lg shadow-lg w-full max-w-md overflow-y-auto">
+            <h2 className="font-semibold mb-4">Update Profil: "{selectedAsset.name}"</h2>
               <p className="text-custom-black/40 font-bold">Judul</p>
               <input
                 type="text"
                 placeholder="Judul Baru"
                 value={newData.name}
-                onChange={(e) => setNewData({ ...newData, name: e.target.value })}
+                onChange={(e) => {
+                  setNewData({ ...newData, name: e.target.value });
+                  if (nameError) setNameError("");
+                }}
                 className="border p-2 w-full"
               />
+              {nameError && (
+                <div className="text-red-500 font-semibold text-sm mb-4">
+                  {nameError}
+                </div>
+              )}
               <p className="text-custom-black/40 font-bold mt-2">Deskripsi</p>
               <textarea
                 id="description"
                 placeholder="Deskripsi Baru (tambahkan keunggulan di sini)"
                 value={newData.description}
-                onChange={(e) => setNewData({ ...newData, description: e.target.value })}
+                onChange={(e) => {
+                  setNewData({ ...newData, description: e.target.value });
+                  if (descError) setDescError("");
+                }}
                 className="border p-2 w-full h-40"
               ></textarea>
               <div className="mb-3 flex justify-center">
@@ -161,28 +217,18 @@ const AdminMetode = () => {
                   <PencilIcon className="h-5 w-5 text-emerald-600" />
                 </button>
               </div>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={(e) => {
-                  const file = e.target.files[0];
-                  if (file && file.size <= 5 * 1024 * 1024) {
-                    setNewData({ ...newData, picture: file });
-                  } else {
-                    alert("Ukuran file maksimal 5MB.");
-                  }
-                }}
-                className="border p-2 w-full mt-2"
-              />
+              <input type="file" accept="image/*" onChange={handleFileChange} className="border p-2 w-full mt-2" />
+              {pictError && <div className="text-red-500 font-semibold text-sm mb-4">{pictError}</div>}
               <div className="flex justify-end space-x-2 mt-4">
                 <button
                   className="bg-sidebar text-white px-4 py-2 rounded"
                   onClick={() => handleUpdate(selectedAsset.id)}
+                  disabled={btnLoading}
                 >
-                  Simpan Perubahan
+                  {btnLoading ? <BallTriangle className="h-7 w-7" /> : "Simpan Perubahan"}
                 </button>
 
-                <button className="bg-red-400 text-white px-4 py-2 rounded" onClick={() => setSelectedAsset(null)}>
+                <button className="bg-red-400 text-white px-4 py-2 rounded" onClick={resetForm}>
                   Batal
                 </button>
               </div>

@@ -11,7 +11,7 @@ import {
   ClipboardDocumentIcon
 } from "@heroicons/react/24/outline";
 
-const Sidebar = ({ brandName }) => {
+const Sidebar = ({ brandName = "Sunat Modern" }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const routes = [
@@ -68,8 +68,5 @@ const Sidebar = ({ brandName }) => {
   );
 };
 
-Sidebar.defaultProps = {
-  brandName: "Sunat Modern",
-};
 
 export default Sidebar;

@@ -231,9 +231,8 @@ const AdminProfil = () => {
 
       {selectedProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 m-2 md:m-0">
-          <div className="flex flex-col lg:flex-row gap-2">
-
-            <div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-lg shadow-lg w-full max-w-md">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-screen overflow-y-auto rounded-custom-br">
+            <div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-lg shadow-lg w-full max-w-md overflow-y-auto">
 
               <h2 className="font-semibold mb-4">Update Profil: "{selectedProduct.name}"</h2>
               <p className="text-custom-black/40 font-bold">Judul</p>
