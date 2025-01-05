@@ -172,6 +172,10 @@ const AdminLayanan = () => {
                     dangerouslySetInnerHTML={renderFormattedDescription(service.description)}
                   ></p>
 
+                  <div className="gap-16 flex justify-center p-2 whitespace-pre-wrap">
+                    <p className="font-bold text-justify whitespace-pre-wrap">Fasilitas</p>
+                    <p className="font-bold text-justify whitespace-pre-wrap">Keunggulan</p>
+                  </div>
                   <div className="gap-4 flex justify-between p-2 whitespace-pre-wrap">
                     <p className="font-light text-justify mb-4 whitespace-pre-wrap">{service.fasilitas}</p>
                     <p className="font-light text-justify mb-4 whitespace-pre-wrap">{service.keunggulan}</p>

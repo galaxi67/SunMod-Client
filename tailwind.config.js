@@ -17,6 +17,7 @@ module.exports = {
         "sumod-wt": "#F6F6F6",
         "sumod-bl": "#1B4A82",
         "sumod-bl2": "#E8EFF9",
+        "sumod-bl3": "#1C2674",
       },
       borderRadius: {
         "custom-br": "8px",
