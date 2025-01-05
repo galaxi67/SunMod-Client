@@ -40,7 +40,7 @@ export default function VisionMisionForm() {
 
 	return (
 		<div>
-			<h1 className="text-2xl font-bold mb-4">Visi Misi</h1>
+			<h1 className="text-4xl font-bold mb-4">Visi Misi</h1>
 			<div className="my-10 px-5">
 				<div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-lg shadow-lg w-full">
 					<p className="text-custom-black/40 font-bold">Visi</p>
