@@ -1,24 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from "../admin/api";
+import { fetchVisionMission } from "../admin/api/apiService";
 
 const Profil = () => {
   const [content, setContent] = useState([]);
+  const [vision, setVision] = useState("");
+  const [mission, setMission] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const loadContent = async () => {
-    setLoading(true);
-    try {
-      const response = await fetchData("product");
-      setContent(response);
-      setLoading(false);
-    } catch (err) {
-      setError(err.message);
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const loadContent = async () => {
+      setLoading(true);
+      try {
+        const response = await fetchData("product");
+        const { vision, mission } = await fetchVisionMission("vision-mission");
+        // console.log(vision);
+        // console.log(mission);
+        setContent(response);
+        setVision(vision);
+        setMission(mission);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+
     loadContent();
   }, []);
 
@@ -74,7 +82,7 @@ const Profil = () => {
         <div className="py-10 h-[200px] md:h-[280px] lg:h-[400px] flex lg:justify-center lg:items-center bg-gradient-to-l from-blue-50 via-blue-400 to-custom-blue mt-3 sm:mt-5 lg:mt-15 rounded-custom-br lg:mx-1">
           <div className="max-w-full mx-auto px-4 sm:px-8 md:px-10 lg:px-20 grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="title-content space-y-4 my-auto text-white">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-widest">SUNAT MODERN</h1>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-widest">PROFIL SUNAT MODERN</h1>
               <h2 className="font-normal text-xs sm:text-xl lg:text-2xl leading-3 tracking-widest">
                 Layanan Terbaik dengan Metode Modern
               </h2>
@@ -82,7 +90,7 @@ const Profil = () => {
             <div className="flex justify-center md:justify-end">
               <div className="overflow-hidden md:block hidden">
                 <img
-                  src="https://res.cloudinary.com/dwaopoeya/image/upload/v1735427940/boards/ut0kl8egzuhvlsxibkjo.png"
+                  src="https://res.cloudinary.com/dwaopoeya/image/upload/v1736190548/assets/m1ds0vsclcwlaomud8ak.png"
                   alt="Profile"
                   className="w-1/2 h-auto object-cover mx-auto"
                 />
@@ -91,45 +99,46 @@ const Profil = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-auto mb-10 lg:mb-15 xl:mb-20 mt-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-auto mt-6">
           {getContentByIds([1]).map(renderContent)}
 
           <div className="border-8 border-sumod-bl2 h-auto text-custom-black flex flex-col items-center justify-center text-lg font-medium rounded-custom-br p-6">
             <h1 className="text-xl md:text-2xl lg:text-3xl font-bold tracking-widest">Visi</h1>
             <h2 className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-center mt-4">
-              "Menjadi pusat layanan sunat modern terbaik yang mengutamakan kenyamanan, keamanan, dan kepuasan pelanggan
-              melalui teknologi terkini dan pelayanan profesional."
+              {vision || "Data visi tidak tersedia"}
             </h2>
           </div>
 
           <div className="sm:col-span-1 md:col-span-2 lg:col-span-2 xl:col-span-1 border-8 border-sumod-bl2 text-custom-black flex flex-col items-center justify-center text-lg font-medium rounded-custom-br p-6">
             <h1 className="text-xl md:text-2xl lg:text-3xl font-bold tracking-widest">Misi</h1>
-            <div className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-center mt-4 space-y-2 lg:space-y-4">
-              <p>
-                1. Memberikan Pelayanan Profesional: Menghadirkan tim medis yang terlatih dan berpengalaman untuk
-                memberikan prosedur sunat yang aman dan nyaman.
-              </p>
-              <p>
-                2. Menggunakan Teknologi Modern: Mengaplikasikan metode sunat terkini seperti klamp, stapler, atau laser
-                untuk mempercepat proses penyembuhan.
-              </p>
-              <p>
-                3. Mengutamakan Kebersihan dan Sterilisasi: Memastikan setiap alat dan fasilitas sesuai dengan standar
-                kesehatan internasional.
-              </p>
-              <p>
-                4. Edukasi dan Sosialisasi: Memberikan informasi yang akurat kepada orang tua dan anak tentang proses,
-                manfaat, dan perawatan pasca sunat.
-              </p>
-              <p>
-                5. Fokus pada Kepuasan Pelanggan: Menyediakan layanan ramah anak, seperti fasilitas hiburan, untuk
-                mengurangi rasa takut dan cemas.
-              </p>
+            <div className="font-normal text-xs sm:text-base lg:text-xl tracking-widest text-center mt-4 space-y-2 lg:space-y-4" style={{ whiteSpace: 'pre-wrap' }}>
+              {mission || "Data misi tidak tersedia"}
             </div>
           </div>
         </div>
 
-        <div className="bg-sumod-wt mb-5 lg:mb-8 xl:mb-10 rounded-custom-br p-6">
+        <div className="grid grid-row-2 mt-4 lg:mt-6 xl:mt-8 bg-slate-100 rounded-custom-br shadow-md p-4 lg:p-6">
+          <div className="flex justify-center">
+            <p className="text-slate-600 border-y-2 border-slate-300 text-center py-2 px-4 tracking-wider text-sm md:text-2xl lg:text-3xl xl:text-4xl font-extrabold mb-6">
+              KEMITRAAN KAMI
+            </p>
+          </div>
+
+          <div className="flex flex-row gap-6 justify-center items-center">
+            <img
+              src="https://res.cloudinary.com/dwaopoeya/image/upload/v1736190488/assets/n2jrykja50vssz463s5o.png"
+              alt="Logo OSI"
+              className="w-[80px] md:w-[150px] lg:w-[180px] xl:w-[250px] h-auto mx-auto"
+            />
+            <img
+              src="https://res.cloudinary.com/dwaopoeya/image/upload/v1736193440/assets/elbj6oojznoybz0hon9n.png"
+              alt="Logo ASDOKI"
+              className="w-[120px] md:w-[250px] lg:w-[300px] xl:w-[400px] h-auto mx-auto"
+            />
+          </div>
+        </div>
+
+        <div className="bg-sumod-wt mb-2 xl:mb-4 rounded-custom-br p-4 lg:p-6 mt-4 lg:mt-6 xl:mt-8">
           <p className="text-3xl sm:text-4xl lg:text-6xl font-extrabold text-sumod-bl tracking-wide flex justify-center ">
             KENAPA HARUS DI SUMOD?
           </p>

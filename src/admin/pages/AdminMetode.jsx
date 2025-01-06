@@ -37,9 +37,9 @@ const AdminMetode = () => {
       isValid = false;
     }
 
-    if (!newData.name.trim() || !newData.description.trim()) {
-      alert("Nama dan deskripsi tidak boleh kosong.");
-      return;
+    if (!newData.description.trim()) {
+      setDescError("Deskripsi tidak boleh kosong.");
+      isValid = false;
     }
     if (!isValid) return;
 
@@ -123,10 +123,10 @@ const AdminMetode = () => {
       name: "",
       description: "",
       picture: null,
-    } );
-    setNameError("")
-    setDescError("")
-    setPictError("")
+    });
+    setNameError("");
+    setDescError("");
+    setPictError("");
     setSelectedAsset(null);
   };
 
@@ -180,7 +180,7 @@ const AdminMetode = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 m-2 md:m-0">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-screen overflow-y-auto rounded-custom-br">
             <div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-lg shadow-lg w-full max-w-md overflow-y-auto">
-            <h2 className="font-semibold mb-4">Update Profil: "{selectedAsset.name}"</h2>
+              <h2 className="font-semibold mb-4">Update Profil: "{selectedAsset.name}"</h2>
               <p className="text-custom-black/40 font-bold">Judul</p>
               <input
                 type="text"
@@ -192,11 +192,7 @@ const AdminMetode = () => {
                 }}
                 className="border p-2 w-full"
               />
-              {nameError && (
-                <div className="text-red-500 font-semibold text-sm mb-4">
-                  {nameError}
-                </div>
-              )}
+              {nameError && <div className="text-red-500 font-semibold text-sm mb-4">{nameError}</div>}
               <p className="text-custom-black/40 font-bold mt-2">Deskripsi</p>
               <textarea
                 id="description"
@@ -208,6 +204,7 @@ const AdminMetode = () => {
                 }}
                 className="border p-2 w-full h-40"
               ></textarea>
+              {descError && <div className="text-red-500 font-semibold text-sm mb-4">{descError}</div>}
               <div className="mb-3 flex justify-center">
                 <button onClick={handleBulletPoint} className="border border-gray-300 p-2 rounded mr-2">
                   <ListBulletIcon className="h-5 w-5 text-custom-black" />
