@@ -12,10 +12,12 @@ export const fetchVisionMission = async () => {
   }
 }
 
-export const updateVisionMission = async ( vision, mission ) => {
+export const updateVisionMission = async ( formData  ) => {
   try
   {
-    const response = await axiosInstance.put( '/vision-mission', { vision, mission } )
+    const response = await axiosInstance.put( '/vision-mission', formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
     return response.data
   } catch ( error )
   {
