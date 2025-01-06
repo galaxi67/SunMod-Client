@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
-import { fetchData, updateData } from "../api"
-import { toast } from 'react-toastify'
-import TabProfile from "../components/TabProfile"
-import PopupUpdate from "../components/PopupUpdate"
+import React, { useEffect, useState } from "react";
+import { fetchData, updateData } from "../api";
+import { toast } from "react-toastify";
+import TabProfile from "../components/TabProfile";
+import PopupUpdate from "../components/PopupUpdate";
 
 const AdminProfil = () => {
   const [products, setProducts] = useState([]);
@@ -47,10 +47,6 @@ const AdminProfil = () => {
       isValid = false;
     }
 
-    if (!newData.picture) {
-      setPictError("Gambar tidak boleh kosong.");
-      isValid = false;
-    }
     if (!isValid) return;
 
     try {
@@ -149,34 +145,34 @@ const AdminProfil = () => {
   if (loading) return <p className="flex justify-center items-center">Loading...</p>;
   if (error) return <p className="flex justify-center items-center">Error: {error}</p>;
 
-    return (
-        <div className="mx-auto p-4">
-            <TabProfile
-                products={products}
-                renderFormattedDescription={renderFormattedDescription}
-                setSelectedProduct={setSelectedProduct}
-                setNewData={setNewData}
-            />
+  return (
+    <div className="mx-auto p-4">
+      <TabProfile
+        products={products}
+        renderFormattedDescription={renderFormattedDescription}
+        setSelectedProduct={setSelectedProduct}
+        setNewData={setNewData}
+      />
 
-            <PopupUpdate
-                selectedProduct={selectedProduct}
-                newData={newData}
-                setNewData={setNewData}
-                nameError={nameError}
-                setNameError={setNameError}
-                descError={descError}
-                setDescError={setDescError}
-                pictError={pictError}
-                handleBulletPoint={handleBulletPoint}
-                handleHighlight={handleHighlight}
-                handleFileChange={handleFileChange}
-                handleUpdate={handleUpdate}
-                btnLoading={btnLoading}
-                resetForm={resetForm}
-                renderFormattedDescription={renderFormattedDescription}
-            />
-        </div>
-    )
-}
+      <PopupUpdate
+        selectedProduct={selectedProduct}
+        newData={newData}
+        setNewData={setNewData}
+        nameError={nameError}
+        setNameError={setNameError}
+        descError={descError}
+        setDescError={setDescError}
+        pictError={pictError}
+        handleBulletPoint={handleBulletPoint}
+        handleHighlight={handleHighlight}
+        handleFileChange={handleFileChange}
+        handleUpdate={handleUpdate}
+        btnLoading={btnLoading}
+        resetForm={resetForm}
+        renderFormattedDescription={renderFormattedDescription}
+      />
+    </div>
+  );
+};
 
 export default AdminProfil;

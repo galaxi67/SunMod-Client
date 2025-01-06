@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from "../admin/api";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
+
 import LayananImage from "../assets/karakter1.png";
 import Banner from "../assets/SUMOD BANNER.png";
 import Char from "../assets/karakter4.png";
 
 const Layanan = () => {
   const [services, setServices] = useState([]);
+  const [methods, setMethods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -13,11 +16,13 @@ const Layanan = () => {
     const loadServices = async () => {
       setLoading(true);
       try {
-        const response = await fetchData("service");
-        setServices(response);
-        setLoading(false);
+        const [response1, response2] = await Promise.all([fetchData("service"), fetchData("method")]);
+
+        setServices(response1);
+        setMethods(response2);
       } catch (err) {
         setError(err.message);
+      } finally {
         setLoading(false);
       }
     };
@@ -52,38 +57,50 @@ const Layanan = () => {
           </div>
         </div>
 
-        <div className=" mt-2 md:mt-5 lg:mt-5 mb-5 md:mb-10 lg:mb-15 p-2 rounded-custom-br">
+        <div className="mt-6 sm:mt-10 md:mt-12 lg:mt-16 mb-5 md:mb-10 lg:mb-15 p-2 rounded-custom-br">
           <h1 className=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center font-black tracking-wide flex flex-col items-center justify-center text-sumod-bl rounded-custom-br">
             PAKET LAYANAN SUNAT MODERN
           </h1>
-          <p className="text-center font-semibold text-gray-400 text-xl mb-5">pilih layanan sesuai kebutuhan anda</p>
+          <p className="text-center font-semibold text-gray-400 text-xs md:text-lg lg:text-xl mb-5">
+            pilih layanan sesuai kebutuhan anda
+          </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-2 mb-5">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-2 mb-5">
             {Array.isArray(services) &&
               services.map((service, index) => (
                 <div
                   key={index}
-                  className="grid grid-cols-1 sm:grid-cols-3 gap-2 bg-white border-2 shadow-custom hover:shadow-none hover:border-sumod-bl3 duration-500 rounded-xl overflow-hidden"
+                  className="grid grid-cols-1 sm:grid-cols-3 gap-0 md:gap-3 xl:gap-4 p-3 lg:p-3 xl:p-5 bg-white border-2 shadow-custom hover:shadow-none hover:border-sumod-bl3 duration-500 rounded-xl overflow-hidden"
                 >
                   {service.picture && (
-                    <div className="col-span-1 flex flex-col items-center gap-1 ml-6">
-                      <img src={service.picture} alt={service.name} className="w-full h-full object-contain " />
-                      <h1 className="text-black/80 font-normal italic p-3 -mt-16 mb-8 text-sm">*dapatkan merchandise spesial sebagai apresiasi!</h1>
+                    <div className="col-span-1 flex flex-col gap-2 w-full">
+                      <img
+                        src={service.picture}
+                        alt={service.name}
+                        className="w-full h-full object-contain max-w-[200px] mx-auto hidden sm:block"
+                      />
+                      <h1 className="text-black/50 font-bold italic p-3 mt-0 md:-mt-14 lg:-mt-10 xl:-mt-16 mb-0 lg:mb-8 text-xs hidden sm:block">
+                        *dapatkan merchandise spesial sebagai apresiasi!
+                      </h1>
                     </div>
                   )}
 
-                  <div className="col-span-2 flex flex-col justify-center p-6 text-gray-800">
-                    <h1 className="text-2xl font-extrabold text-custom-black tracking-wide mb-2">{service.name}</h1>
-                    <h2 className="text-base text-gray-500 font-semibold leading-relaxed mb-4">{service.description}</h2>
+                  <div className="col-span-2 flex flex-col justify-center text-gray-800">
+                    <h1 className="text-2xl font-extrabold text-custom-black tracking-wide mb-2 text-center md:text-start">
+                      {service.name}
+                    </h1>
+                    <h2 className="text-base text-gray-500 font-semibold leading-relaxed mb-4 text-justify lg:text-start">
+                      {service.description}
+                    </h2>
 
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-lg font-bold text-sumod-bl3">Fasilitas</p>
-                        <p className="text-base text-gray-600 mt-2 whitespace-pre-wrap">{service.fasilitas}</p>
-                      </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <p className="text-lg font-bold text-sumod-bl3">Keunggulan</p>
                         <p className="text-base text-gray-600 mt-2 whitespace-pre-wrap">{service.keunggulan}</p>
+                      </div>
+                      <div>
+                        <p className="text-lg font-bold text-sumod-bl3">Fasilitas</p>
+                        <p className="text-base text-gray-600 mt-2 whitespace-pre-wrap">{service.fasilitas}</p>
                       </div>
                     </div>
 
@@ -104,6 +121,46 @@ const Layanan = () => {
                   </div>
                 </div>
               ))}
+          </div>
+
+          <h1 className=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center font-black tracking-wide flex flex-col items-center justify-center text-custom-black rounded-custom-br">
+            METODE YANG KAMI GUNAKAN
+          </h1>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="justify-center flex items-center">
+              <div className="flex flex-col p-4 space-y-4">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-black tracking-wide text-custom-black rounded-custom-br">
+                  METODE <span className="text-custom-blue">SUMOD</span>
+                </h1>
+                <h2 className="font-semibold text-gray-400 text-xs md:text-lg lg:text-lg">
+                  Metode kami dirancang dengan teknologi terkini, mengutamakan kenyamanan, dan hasil terbaik untuk
+                  memenuhi kebutuhan pasien dengan penuh perhatian
+                </h2>
+                <h3 className="font-medium text-sumod-bl3 text-xs md:text-lg lg:text-xl flex items-center">
+                  Lihat metode yang kami gunakan
+                  <button
+                    onClick={() => (window.location.href = "/metode")}
+                    className="ml-4 flex items-center justify-center text-custom-yellow hover:text-sumod-bl3 transition"
+                    aria-label="Go to methods"
+                  >
+                    <ArrowRightIcon className="w-7 h-7 animate-pulse" />
+                  </button>
+                </h3>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-4 p-4 justify-center items-center">
+              {methods.map((method, index) => (
+                <a
+                  key={index}
+                  href="/metode"
+                  className="bg-slate-50 rounded-custom-br overflow-hidden aspect-square p-4 w-[200px] h-auto shadow-md hover:border-custom-yellow hover:border-2 hover:shadow-none duration-500 transition ease-in-out"
+                >
+                  <img src={method.picture} alt={method.name} className="w-full h-full object-contain cursor-pointer" />
+                </a>
+              ))}
+            </div>
           </div>
 
           <div className="p-6">
