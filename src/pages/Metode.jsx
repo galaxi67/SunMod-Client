@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from "../admin/api";
 
-import MetodeImage from "../assets/karakter5.png";
-
 const ImageCard = ({ src, alt }) => (
   <div className="p-4 w-[130px] h-[130px] sm:w-[140px] sm:h-[140px] md:w-[150px] md:h-[150px] lg:w-[200px] lg:h-[200px] bg-blue-50 rounded-custom-br">
     <div className="overflow-hidden aspect-square flex items-center justify-center">
@@ -66,13 +64,13 @@ const Metode = () => {
             </div>
             <div className="flex justify-center md:justify-end">
               <div className="overflow-hidden md:block hidden">
-                <img src={MetodeImage} alt="Profile" className="w-1/2 h-auto object-cover mx-auto" />
+                <img src="https://res.cloudinary.com/dwaopoeya/image/upload/v1736190549/assets/aef6jwslgklxeijpapuy.png" alt="Profile" className="w-1/2 h-auto object-cover mx-auto" />
               </div>
             </div>
           </div>
         </div>
 
-        <div className="flex justify-center items-center mt-6 sm:mt-10 md:mt-12 lg:mt-16">
+        <div className="flex justify-center items-center mt-2 sm:mt-3 md:mt-4 lg:mt-6">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 place-content-center">
             {methods.map((method, index) => (
               <ImageCard key={index} src={method.picture} alt={method.name} />

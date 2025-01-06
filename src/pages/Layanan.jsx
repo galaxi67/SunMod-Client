@@ -2,10 +2,6 @@ import React, { useState, useEffect } from "react";
 import { fetchData } from "../admin/api";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 
-import LayananImage from "../assets/karakter1.png";
-import Banner from "../assets/SUMOD BANNER.png";
-import Char from "../assets/karakter4.png";
-
 const Layanan = () => {
   const [services, setServices] = useState([]);
   const [methods, setMethods] = useState([]);
@@ -51,13 +47,13 @@ const Layanan = () => {
             </div>
             <div className="flex justify-end">
               <div className="overflow-hidden md:block hidden">
-                <img src={LayananImage} alt="Profile" className="w-1/2 h-auto object-cover mx-auto" />
+                <img src="https://res.cloudinary.com/dwaopoeya/image/upload/v1736190547/assets/dipkgjv5ltjmalqdn85v.png" alt="Profile" className="w-1/2 h-auto object-cover mx-auto" />
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-6 sm:mt-10 md:mt-12 lg:mt-16 mb-5 md:mb-10 lg:mb-15 p-2 rounded-custom-br">
+        <div className="mt-2 sm:mt-3 md:mt-4 lg:mt-6 mb-5 md:mb-10 lg:mb-15 p-2 rounded-custom-br">
           <h1 className=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center font-black tracking-wide flex flex-col items-center justify-center text-sumod-bl rounded-custom-br">
             PAKET LAYANAN SUNAT MODERN
           </h1>
@@ -163,31 +159,6 @@ const Layanan = () => {
             </div>
           </div>
 
-          <div className="p-6">
-            <div className="-mt-8 rounded-custom-br max-w-full mx-auto sm:px-8 md:px-10 lg:px-20 grid grid-cols-1 md:grid-cols-2 bg-red-100 p-10 mb-6 shadow-lg">
-              <div className="flex justify-center mx-auto w-full h-[300px] sm:w-[300px] lg:w-[300px] rounded-custom-br mr-auto overflow-hidden mb-5">
-                <img src={Char} alt="Profile" className="w-auto h-full object-contain" />
-              </div>
-              <div className="title-content space-y-4 mx-auto">
-                <h1 className="text-2xl sm:text-4xl md:text-3xl lg:text-4xl xl:text-5xl font-extrabold tracking-wide text-center">
-                  SUNAT KHUSUS
-                </h1>
-                <h2 className="font-light text-xs sm:text-xl lg:text-2xl leading-2 text-justify">
-                  Melayani sunat dengan kondisi kesehatan tertentu
-                </h2>
-                <ol className="list-disc list-inside text-xs sm:text-xl md:text-lg lg:text-2xl leading-relaxed text-justify indent-5">
-                  <li className="mb-2">Sunat Bayi</li>
-                  <li className="mb-2">Sunat Gemuk atau Obesitas</li>
-                  <li className="mb-2">Sunat Kulup Lengket</li>
-                  <li className="mb-2">Sunat Perbaikan</li>
-                  <li className="mb-2">Sunat Fimosis</li>
-                </ol>
-              </div>
-            </div>
-          </div>
-          <div className="p-4 ">
-            <img src={Banner} alt="Profile" className="w-full h-auto rounded-custom-br" />
-          </div>
         </div>
       </div>
     </div>
