@@ -16,15 +16,16 @@ const Homepage = () => {
   }, [images.length]);
 
   return (
-      <div className="space-y-4 container mx-auto">
+    <div className="space-y-4 container mx-auto">
+      <div className="max-w-full">
         <section className="hero-section relative w-full h-[15rem] sm:h-[15rem] md:h-[25rem] lg:h-[35rem] xl:h-[35rem] mt-5">
           <div
             className={`hero-background bg-cover bg-center absolute inset-0 transition-all duration-1000 ease-in-out rounded-custom-br`}
             style={{ backgroundImage: `url(${images[currentImage]})` }}
           ></div>
         </section>
-        
       </div>
+    </div>
   );
 };
 

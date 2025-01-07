@@ -1,52 +1,74 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom"
+import ProtectedRoute from "./admin/auth/ProtectedRoute"
+import React, { useEffect } from "react"
+import PublicLayout from "./layouts/PublicLayout"
+import AdminLayout from "./layouts/AdminLayout"
 
-import PublicLayout from "./layouts/PublicLayout";
-import AdminLayout from "./layouts/AdminLayout";
+import Homepage from "./pages/Homepage"
+import Layanan from "./pages/Layanan"
+import Metode from "./pages/Metode"
+import Artikel from "./pages/Artikel"
+import Profil from "./pages/Profil"
+import Galeri from "./pages/Galeri"
+import Kontak from "./pages/Kontak"
+import NotFound from "./components/NotFound"
 
-import Homepage from "./pages/Homepage";
-import Layanan from "./pages/Layanan";
-import Metode from "./pages/Metode";
-import Artikel from "./pages/Artikel";
-import Profil from "./pages/Profil";
-import Galeri from "./pages/Galeri";
-import Kontak from "./pages/Kontak";
-import NotFound from "./components/NotFound";
+import Dashboard from "./admin/Dashboard"
+import AdminArtikel from "./admin/pages/AdminArtikel"
+import AdminLayanan from "./admin/pages/AdminLayanan"
+import AdminMetode from "./admin/pages/AdminMetode"
+import AdminProfil from "./admin/pages/AdminProfil"
+import Setting from "./admin/pages/settings"
+import SignIn from "./admin/auth/SignIn"
+import { ToastContainer } from "react-toastify"
+import { setupAxiosInterceptors } from "./admin/api/axiosInstance"
 
-import Dashboard from "./admin/Dashboard";
-import AdminArtikel from "./admin/pages/AdminArtikel";
-import AdminLayanan from "./admin/pages/AdminLayanan";
-import AdminMetode from "./admin/pages/AdminMetode";
-import AdminProfil from "./admin/pages/AdminProfil";
-import SignIn from "./admin/auth/SignIn";
-import SignUp from "./admin/auth/SignUp";
+const AppWrapper = () => {
+    const navigate = useNavigate()
 
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<PublicLayout />}>
-          <Route path="/" element={<Homepage />} />
-          <Route path="layanan" element={<Layanan />} />
-          <Route path="metode" element={<Metode />} />
-          <Route path="artikel" element={<Artikel />} />
-          <Route path="profil" element={<Profil />} />
-          <Route path="galeri" element={<Galeri />} />
-          <Route path="kontak" element={<Kontak />} />
-        </Route>
+    useEffect( () => {
+        setupAxiosInterceptors( navigate )
+    }, [navigate] )
 
-        <Route path="/admin" element={<AdminLayout />}>
-          <Route path="/admin" element={<Dashboard />} />
-          <Route path="/admin/artikel" element={<AdminArtikel />} />
-          <Route path="/admin/layanan" element={<AdminLayanan />} />
-          <Route path="/admin/metode" element={<AdminMetode />} />
-          <Route path="/admin/profil" element={<AdminProfil />} />
-          <Route path="/admin/sighup" element={<SignUp />} />
-          <Route path="/admin/sighin" element={<SignIn />} />
-        </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
-  );
+    return (
+        <>
+            <ToastContainer />
+            <Routes>
+                <Route path="/" element={<PublicLayout />}>
+                    <Route index element={<Homepage />} />
+                    <Route path="layanan" element={<Layanan />} />
+                    <Route path="metode" element={<Metode />} />
+                    <Route path="artikel" element={<Artikel />} />
+                    <Route path="profil" element={<Profil />} />
+                    <Route path="galeri" element={<Galeri />} />
+                    <Route path="kontak" element={<Kontak />} />
+                </Route>
+
+                <Route path="/signin" element={<SignIn />} />
+
+                <Route path="/admin" element={<ProtectedRoute />}>
+                    <Route path="/admin/" element={<AdminLayout />}>
+                        <Route index element={<Dashboard />} />
+                        <Route path="profil" element={<AdminProfil />} />
+                        <Route path="artikel" element={<AdminArtikel />} />
+                        <Route path="layanan" element={<AdminLayanan />} />
+                        <Route path="metode" element={<AdminMetode />} />
+                        <Route path="setting" element={<Setting />} />
+                    </Route>
+                </Route>
+
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+        </>
+    )
 }
 
-export default App;
+function App() {
+    return (
+        <Router>
+            <AppWrapper />
+        </Router>
+    )
+}
+
+export default App

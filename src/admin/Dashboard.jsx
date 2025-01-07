@@ -1,13 +1,165 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { fetchData, updateData } from "./api";
+import { toast } from "react-toastify";
+import { BallTriangle } from "react-loading-icons";
 
 const Dashboard = () => {
+  const [boards, setBoards] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [btnLoading, setBtnLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [selectedBoard, setSelectedBoard] = useState(null);
+  const [newData, setNewData] = useState({ name: "", picture: null });
+  const [pictError, setPictError] = useState("");
+  const [activeTab, setActiveTab] = useState(0); // State untuk tab aktif
+
+  const loadBoards = async () => {
+    setLoading(true);
+    try {
+      const response = await fetchData("banner");
+      setBoards(response);
+      setLoading(false);
+    } catch (err) {
+      setError(err.message);
+      setLoading(false);
+    }
+  };
+
+  const handleUpdate = async (id) => {
+    let isValid = true;
+    setPictError("");
+
+    if (!newData.picture) {
+      setPictError("Banner tidak boleh kosong.");
+      isValid = false;
+    }
+    if (!isValid) return;
+
+    try {
+      const formData = new FormData();
+      formData.append("picture", newData.picture);
+
+      setBtnLoading(true);
+      const updatedBoard = await updateData("banner", id, formData);
+      toast.dismiss();
+      toast.success(`Banner ${updatedBoard.name} berhasil diupdate!`);
+      resetForm();
+      loadBoards();
+      setBtnLoading(false);
+    } catch (err) {
+      toast.dismiss();
+      toast.error("Gagal mengupdate banner: " + (err.response?.data?.message || err.message));
+      setBtnLoading(false);
+    }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file && file.size > 5 * 1024 * 1024) {
+      e.target.value = "";
+      setPictError("Ukuran file maksimal 5MB.");
+      return;
+    }
+    if (file) {
+      setPictError("");
+      setNewData({ ...newData, picture: file });
+    }
+  };
+
+  const resetForm = () => {
+    setNewData({ picture: null });
+    setPictError("");
+    setSelectedBoard(null);
+  };
+
+  useEffect(() => {
+    loadBoards();
+  }, []);
+
+  const filteredBoards = boards.filter((_, index) => {
+    if (activeTab === 0) return index >= 2 && index <= 6;
+    if (activeTab === 1) return index >= 0 && index <= 1;
+    if (activeTab === 2) return index >= 10;
+    if (activeTab === 3) return index >= 7;
+    return [];
+  });
+
+  if (loading) return <p className="flex justify-center items-center">Loading...</p>;
+  if (error) return <p className="flex justify-center items-center">Error: {error}</p>;
+
   return (
-    <div className="admin-page">
-      {/* Konten halaman admin */}
-      <h1>Admin Dashboard</h1>
-      <p>.....?</p>
-      {/* Konten lainnya */}
+    <div className="mx-auto p-4 mt-5">
+      <div className="flex justify-center space-x-4 mb-6">
+        {["Homepage", "Layanan", "Metode", "profil"].map((tab, index) => (
+          <button
+            key={index}
+            className={`px-6 py-2 rounded-full font-bold ${
+              activeTab === index ? "bg-sumod-bl3 text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            }`}
+            onClick={() => setActiveTab(index)}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
+      <div className="flex flex-col items-center w-full space-y-5">
+        {Array.isArray(filteredBoards) &&
+          filteredBoards.map((board) => (
+            <div
+              key={board.id}
+              className="p-4 rounded-custom-br overflow-hidden bg-white border border-sumod-bl shadow-sm w-full"
+            >
+              <h2 className="text-3xl font-extrabold text-gray-600 text-center mb-3">{board.name.toUpperCase()}</h2>
+              <img
+                src={board.picture}
+                alt={board.name}
+                className="rounded-custom-br object-cover mb-2 mx-auto w-full h-full"
+              />
+              <div className="text-center mt-4">
+                <button
+                  className="bg-sumod-bl3 hover:bg-sumod-bl transition text-sumod-wt text-bold px-4 py-2 rounded-custom-br w-full tracking-wider"
+                  onClick={() => {
+                    setSelectedBoard(board);
+                    setNewData({
+                      name: board.name,
+                      description: board.description,
+                      picture: null,
+                    });
+                  }}
+                >
+                  Ganti banner baru
+                </button>
+              </div>
+            </div>
+          ))}
+      </div>
+
+      {selectedBoard && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 m-2 md:m-0">
+          <div className="bg-white border p-4 md:p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h2 className="font-semibold mb-4 text-center">Update Banner: "{selectedBoard.name}"</h2>
+
+            <input type="file" accept="image/*" onChange={handleFileChange} className="border p-2 w-full mt-2" />
+            {pictError && <div className="text-red-500 font-semibold text-sm mb-4">{pictError}</div>}
+            <div className="flex justify-end space-x-2 mt-4">
+              <button
+                className="bg-sidebar text-white px-4 py-2 rounded"
+                onClick={() => handleUpdate(selectedBoard.id)}
+                disabled={btnLoading}
+              >
+                {btnLoading ? <BallTriangle className="h-7 w-7" /> : "Simpan Perubahan"}
+              </button>
+
+              <button className="bg-red-400 text-white px-4 py-2 rounded" onClick={resetForm}>
+                Batal
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
+
 export default Dashboard;
