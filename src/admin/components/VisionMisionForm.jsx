@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { Upload, message, Button, Modal } from 'antd'
 import { fetchVisionMission, updateVisionMission } from '../api/apiService'
-import { AreaChartOutlined, EditOutlined } from '@ant-design/icons'
+import { AreaChartOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 
 const VisionMisionForm = () => {
@@ -16,7 +16,7 @@ const VisionMisionForm = () => {
 	const [previewOpen, setPreviewOpen] = useState( false )
 	const [previewImage, setPreviewImage] = useState( '' )
 	const [file, setFile] = useState( null )
-	const [loading, setLoading] = useState( false ) // Add loading state
+	const [loading, setLoading] = useState( false )
 	const navigate = useNavigate()
 
 	useEffect( () => {
@@ -62,7 +62,7 @@ const VisionMisionForm = () => {
 
 		try
 		{
-			setLoading( true ) // Start loading
+			setLoading( true )
 			await updateVisionMission( formData )
 			toast.success( 'Visi dan Misi berhasil diperbarui' )
 			setTimeout( () => {
@@ -74,7 +74,7 @@ const VisionMisionForm = () => {
 			toast.error( 'Terjadi kesalahan saat menyimpan data' )
 		} finally
 		{
-			setLoading( false ) // Stop loading after the request is done
+			setLoading( false )
 		}
 	}
 
@@ -86,31 +86,19 @@ const VisionMisionForm = () => {
 	const handleChange = ( { fileList } ) => {
 		if ( fileList && fileList.length > 0 )
 		{
-			// Get the last file from the file list (the most recent one)
 			const newFile = fileList[fileList.length - 1]
-
-			// Check if the file is either uploading or already uploaded
 			if ( newFile.status === 'done' || newFile.status === 'uploading' )
 			{
-				// Create a preview URL if it doesn't exist
 				if ( !newFile.preview )
 				{
 					newFile.preview = URL.createObjectURL( newFile.originFileObj )
 				}
-
-				// Update the file state with the selected file
 				setFile( newFile.originFileObj )
-
-				// Set the preview image to the new file's preview
 				setPreviewImage( newFile.preview )
-
-				// Open the preview modal with the new image
 				setPreviewOpen( true )
-
-				// Update the picture in the form data
 				setNewData( ( prevData ) => ( {
 					...prevData,
-					picture: newFile.preview, // Set picture to preview URL
+					picture: newFile.preview,
 				} ) )
 			}
 		}
@@ -184,7 +172,6 @@ const VisionMisionForm = () => {
 						<div className="relative w-full h-full group">
 							{newData.picture ? (
 								<>
-									{/* When a file is uploaded */}
 									<img
 										src={newData.picture}
 										alt="avatar"
@@ -200,7 +187,6 @@ const VisionMisionForm = () => {
 								</>
 							) : (
 								<>
-									{/* When no file is uploaded */}
 									<div className="absolute top-0 left-0 w-full h-full bg-gray-100 flex items-center justify-center text-gray-500 text-sm font-medium transition-opacity duration-300 group-hover:text-gray-700">
 										<AreaChartOutlined />
 										Upload
@@ -209,19 +195,10 @@ const VisionMisionForm = () => {
 							)}
 						</div>
 					</Upload>
-
-
-
-
-
-
-
-
-
 					<Modal
-						visible={previewOpen}  // Modal visibility is controlled by previewOpen state
-						footer={null}  // No footer is needed for the preview
-						onCancel={() => setPreviewOpen( false )}  // Close modal when the user clicks 'Cancel'
+						visible={previewOpen}
+						footer={null}
+						onCancel={() => setPreviewOpen( false )}
 					>
 						<img
 							alt="preview"
@@ -229,7 +206,7 @@ const VisionMisionForm = () => {
 								height: '100%',
 								borderRadius: '8px',
 							}}
-							src={previewImage}  // Display the preview image from state
+							src={previewImage}
 						/>
 					</Modal>
 

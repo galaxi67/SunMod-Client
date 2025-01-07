@@ -1,8 +1,12 @@
-import React from "react";
-import BlogList from "../components/Blog";
+import React, { useState } from "react"
+import BlogList from "../components/Blog"
+import { useEffect } from "react"
+import LoadingIndicator from "../components/LoadingIndicator"
 
 const Artikel = () => {
-  const posts = [
+  const [ loading , setLoading ] = useState( true )
+  const [posts, setPosts] = useState( [] )
+  const postsContent = [
     {
       id: 1,
       title: "Getting Started with Next.js",
@@ -45,7 +49,27 @@ const Artikel = () => {
       image: "/images/blog2.jpg",
       date: "2024-11-25",
     },
-  ];
+  ]
+
+  useEffect( () => {
+    const fetchPosts = async () => {
+      setLoading( true );
+        try
+        {
+          setPosts( postsContent )
+          setLoading( false )
+        } catch ( error )
+        {
+          console.error( "Error fetching posts:", error )
+          setLoading( false )
+        }
+    }
+
+    fetchPosts()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [] )
+
+  if (loading) return <LoadingIndicator/>
 
   return (
     <div className="container mx-auto">
@@ -74,7 +98,7 @@ const Artikel = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Artikel;
+export default Artikel
