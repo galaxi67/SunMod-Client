@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from "../admin/api";
+import LoadingIndicator from "../components/LoadingIndicator"
 
 const ImageCard = ({ src, alt }) => (
   <div className="p-4 w-[130px] h-[130px] sm:w-[140px] sm:h-[140px] md:w-[150px] md:h-[150px] lg:w-[200px] lg:h-[200px] bg-blue-50 rounded-custom-br">
@@ -44,7 +45,7 @@ const Metode = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingIndicator/>;
   }
 
   if (error) {

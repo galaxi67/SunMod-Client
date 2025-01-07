@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from "../admin/api";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
+import LoadingIndicator from "../components/LoadingIndicator"
 
 const Layanan = () => {
   const [services, setServices] = useState([]);
@@ -27,7 +28,7 @@ const Layanan = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <LoadingIndicator/>;
   }
 
   if (error) {
