@@ -13,7 +13,7 @@ import Galeri from "./pages/Galeri"
 import Kontak from "./pages/Kontak"
 import NotFound from "./components/NotFound"
 
-import Dashboard from "./admin/Dashboard"
+import AdminDashboard from "./admin/pages/AdminDashboard"
 import AdminArtikel from "./admin/pages/AdminArtikel"
 import AdminLayanan from "./admin/pages/AdminLayanan"
 import AdminMetode from "./admin/pages/AdminMetode"
@@ -48,7 +48,7 @@ const AppWrapper = () => {
 
                 <Route path="/admin" element={<ProtectedRoute />}>
                     <Route path="/admin/" element={<AdminLayout />}>
-                        <Route index element={<Dashboard />} />
+                        <Route index element={<AdminDashboard />} />
                         <Route path="profil" element={<AdminProfil />} />
                         <Route path="artikel" element={<AdminArtikel />} />
                         <Route path="layanan" element={<AdminLayanan />} />

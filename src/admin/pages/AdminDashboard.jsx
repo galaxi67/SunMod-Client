@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchData, updateData } from "./api/apiService";
+import { fetchData, updateData } from "../api/apiService";
 import { toast } from "react-toastify";
 import { BallTriangle } from "react-loading-icons";
 
