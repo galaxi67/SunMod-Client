@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from "../admin/api";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
-import LoadingIndicator from "../components/LoadingIndicator"
+import LoadingIndicator from "../components/LoadingIndicator";
 
 const Layanan = () => {
   const [services, setServices] = useState([]);
   const [methods, setMethods] = useState([]);
+  const [boards, setBoards] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -13,10 +14,14 @@ const Layanan = () => {
     const loadServices = async () => {
       setLoading(true);
       try {
-        const [response1, response2] = await Promise.all([fetchData("service"), fetchData("method")]);
-
+        const [response1, response2, response3] = await Promise.all([
+          fetchData("service"),
+          fetchData("method"),
+          fetchData("banner"),
+        ]);
         setServices(response1);
         setMethods(response2);
+        setBoards(response3);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -28,7 +33,7 @@ const Layanan = () => {
   }, []);
 
   if (loading) {
-    return <LoadingIndicator/>;
+    return <LoadingIndicator />;
   }
 
   if (error) {
@@ -48,13 +53,17 @@ const Layanan = () => {
             </div>
             <div className="flex justify-end">
               <div className="overflow-hidden md:block hidden">
-                <img src="https://res.cloudinary.com/dwaopoeya/image/upload/v1736190547/assets/dipkgjv5ltjmalqdn85v.png" alt="Profile" className="w-1/2 h-auto object-cover mx-auto" />
+                <img
+                  src="https://res.cloudinary.com/dwaopoeya/image/upload/v1736190547/assets/dipkgjv5ltjmalqdn85v.png"
+                  alt="Profile"
+                  className="w-1/2 h-auto object-cover mx-auto"
+                />
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-2 sm:mt-3 md:mt-4 lg:mt-6 mb-5 md:mb-10 lg:mb-15 p-2 rounded-custom-br">
+        <div className="mt-2 sm:mt-3 md:mt-4 lg:mt-6 p-2 rounded-custom-br">
           <h1 className=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center font-black tracking-wide flex flex-col items-center justify-center text-sumod-bl rounded-custom-br">
             PAKET LAYANAN SUNAT MODERN
           </h1>
@@ -120,6 +129,48 @@ const Layanan = () => {
               ))}
           </div>
 
+          <div className="mt-5 md:mt-10 lg:mt-15 mb-5 md:mb-10 lg:mb-15 shadow-md rounded-custom-br border-t-2 p-2 md:p-3 xl:p-4">
+            <h1 className=" text-base md:text-4xl lg:text-5xl text-center font-black tracking-wide text-sumod-bl rounded-custom-br">
+              LAYANAN SUNAT KHUSUS
+            </h1>
+            <p className="hidden sm:block text-center font-semibold text-gray-400 text-xs md:text-lg lg:text-xl mb-5">
+              sunat dengan kondisi kesehatan tertentu
+            </p>
+            {boards
+              .filter((_, i) => i === 0)
+              .map((board) => (
+                <div className="">
+                  <img
+                    key={board.name}
+                    src={board.picture}
+                    alt={board.name}
+                    className="w-full h-full object-contain rounded-custom-br"
+                  />
+                </div>
+              ))}
+          </div>
+
+          <div className="mt-5 md:mt-10 lg:mt-15 mb-5 md:mb-10 lg:mb-15 shadow-md rounded-custom-br border-t-2 p-2 md:p-3 xl:p-4">
+            <h1 className=" text-base md:text-4xl lg:text-5xl text-center font-black tracking-wide text-sumod-bl rounded-custom-br">
+              LAYANAN SOSIAL
+            </h1>
+            <p className="hidden sm:block text-center font-semibold text-gray-400 text-xs md:text-lg lg:text-xl mb-5">
+              peduli sesama, berkah bersama
+            </p>
+            {boards
+              .filter((_, i) => i === 1)
+              .map((board) => (
+                <div className="">
+                  <img
+                    key={board.name}
+                    src={board.picture}
+                    alt={board.name}
+                    className="w-full h-full object-contain rounded-custom-br"
+                  />
+                </div>
+              ))}
+          </div>
+
           <h1 className=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center font-black tracking-wide flex flex-col items-center justify-center text-custom-black rounded-custom-br">
             METODE YANG KAMI GUNAKAN
           </h1>
@@ -147,19 +198,24 @@ const Layanan = () => {
               </div>
             </div>
 
-            <div className="flex flex-wrap gap-4 p-4 justify-center items-center">
-              {methods.map((method, index) => (
-                <a
-                  key={index}
-                  href="/metode"
-                  className="bg-slate-50 rounded-custom-br overflow-hidden aspect-square p-4 w-[200px] h-auto shadow-md hover:border-custom-yellow hover:border-2 hover:shadow-none duration-500 transition ease-in-out"
-                >
-                  <img src={method.picture} alt={method.name} className="w-full h-full object-contain cursor-pointer" />
-                </a>
-              ))}
+            <div className="flex justify-center">
+              <div className="grid grid-cols-2 gap-4 p-6 w-[400px] h-auto ">
+                {methods.map((method, index) => (
+                  <a
+                    key={index}
+                    href="/metode"
+                    className="bg-slate-50 rounded-custom-br overflow-hidden aspect-square p-4 h-auto shadow-md hover:border-custom-yellow hover:border-2 hover:shadow-none duration-500 transition ease-in-out"
+                  >
+                    <img
+                      src={method.picture}
+                      alt={method.name}
+                      className="w-full h-full object-contain cursor-pointer"
+                    />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
