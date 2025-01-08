@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import SumodNotFound from "../assets/karakter2.png";
 
 const NotFound = () => {
   return (
@@ -28,7 +27,7 @@ const NotFound = () => {
         </div>
       </div>
       <div className="w-full lg:w-1/2 flex justify-center">
-        <img src={SumodNotFound} alt="NotFound" className="w-1/2 h-auto object-contain" />
+        <img src="https://res.cloudinary.com/dwaopoeya/image/upload/v1736190548/assets/m1ds0vsclcwlaomud8ak.png" alt="NotFound" className="w-1/2 h-auto object-contain" />
       </div>
     </div>
   );
