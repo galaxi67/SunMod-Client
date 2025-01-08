@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchData } from "../admin/api";
+import { fetchData } from "../admin/api/apiService";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import LoadingIndicator from "../components/LoadingIndicator";
 

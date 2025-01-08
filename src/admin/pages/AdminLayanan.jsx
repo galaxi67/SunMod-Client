@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchData, updateData } from "../api";
+import { fetchData, updateData } from "../api/apiService";
 import { ListBulletIcon, PencilIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { BallTriangle } from "react-loading-icons";

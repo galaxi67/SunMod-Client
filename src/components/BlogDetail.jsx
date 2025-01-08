@@ -1,4 +1,3 @@
-// pages/blog/[id].jsx
 import { useRouter } from "next/router";
 
 export default function BlogDetail() {

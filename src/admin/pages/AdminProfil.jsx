@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchData, updateData } from "../api";
+import { fetchData, updateData } from "../api/apiService";
 import { toast } from "react-toastify";
 import TabProfile from "../components/TabProfile";
 import PopupUpdate from "../components/PopupUpdate";
@@ -22,7 +22,7 @@ const AdminProfil = () => {
       setProducts(
         response.map((product) => ({
           ...product,
-          description: product.description || "", // Default to empty string
+          description: product.description || "",
         }))
       );
       setLoading(false);
