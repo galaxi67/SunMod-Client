@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchData } from "../admin/api";
+import { fetchData } from "../admin/api/apiService";
 import LoadingIndicator from "../components/LoadingIndicator"
 
 const ImageCard = ({ src, alt }) => (

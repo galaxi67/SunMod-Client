@@ -38,14 +38,24 @@ export const getUserProfile = async () => {
   }
 }
 
-export const fetchUserData = async () => {
-  try
-  {
-    const userData = await getUserProfile()
-    return userData
-  } catch ( error )
-  {
-    console.error( 'Error fetching user data:', error )
-    throw error
+export const fetchData = async (tableName) => {
+  try {
+    const response = await axiosInstance.get(`${tableName}`);
+    return response.data.data;
+  } catch (error) {
+    console.error(`Error fetching data from ${tableName}:`, error.response || error.message);
+    throw error;
   }
-}
+};
+
+export const updateData = async (tableName, id, formData) => {
+  try {
+    const response = await axiosInstance.put(`${tableName}/${id}`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return response.data.data;
+  } catch (error) {
+    console.error(`Error updating data in ${tableName}:`, error.response || error.message);
+    throw error;
+  }
+};

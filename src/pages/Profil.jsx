@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchData } from "../admin/api";
+import { fetchData } from "../admin/api/apiService";
 import { fetchVisionMission } from "../admin/api/apiService";
 import LoadingIndicator from "../components/LoadingIndicator";
 
@@ -14,7 +14,7 @@ const Profil = () => {
       setLoading(true);
       try {
         const response = await fetchData("product");
-        const respVisionMission = await fetchVisionMission("vision-mission");
+        const respVisionMission = await fetchVisionMission();
         setListContent(response || []);
         setVisionMission(respVisionMission || { vision: "", mission: "" });
         setLoading(false);

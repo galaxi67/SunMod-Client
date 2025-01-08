@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchData, updateData } from "./api";
+import { fetchData, updateData } from "./api/apiService";
 import { toast } from "react-toastify";
 import { BallTriangle } from "react-loading-icons";
 
@@ -11,7 +11,7 @@ const Dashboard = () => {
   const [selectedBoard, setSelectedBoard] = useState(null);
   const [newData, setNewData] = useState({ name: "", picture: null });
   const [pictError, setPictError] = useState("");
-  const [activeTab, setActiveTab] = useState(0); // State untuk tab aktif
+  const [activeTab, setActiveTab] = useState(0);
 
   const loadBoards = async () => {
     setLoading(true);

@@ -1,4 +1,3 @@
-// KenapaSumod.jsx
 import React from "react"
 
 const KenapaSumod = ( { products, renderFormattedDescription, setSelectedProduct, setNewData } ) => {
