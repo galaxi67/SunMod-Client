@@ -1,32 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import { getUserProfile } from "../api/apiService";
+import React, { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import useAuth from "../hooks/useAuth"
+import { getUserProfile } from "../api/apiService"
+import { Button } from "antd"
+import { toast } from "react-toastify"
 
 function Settings() {
-  const { logoutUser } = useAuth(); 
-  const [user, setUser] = useState({ name: "N/A", email: "N/A" });
-  const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
+  const { logoutUser } = useAuth()
+  const [user, setUser] = useState( { name: "N/A", email: "N/A" } )
+  const [isLoading, setIsLoading] = useState( true )
+  const [loading, setLoading] = useState( false )
+  const navigate = useNavigate()
 
-  useEffect(() => {
+  useEffect( () => {
     const loadProfileData = async () => {
-      try {
-        const userData = await getUserProfile();
-          setUser(userData);
-        } catch (error) {
-        console.error("Error loading user data:", error);
-      } finally {
-        setIsLoading(false);
+      try
+      {
+          const userData = await getUserProfile()
+          setUser( userData )
+        } catch ( error )
+      {
+        console.error( "Error loading user data:", error )
+      } finally
+      {
+        setIsLoading( false )
       }
-    };
+    }
 
-    loadProfileData();
-  }, [navigate]);
+    loadProfileData()
+  }, [navigate] )
 
   const handleLogout = () => {
-    logoutUser();
-  };
+    setLoading( true )
+    logoutUser()
+    toast.success( "Berhasil keluar" )
+    setLoading( false )
+  }
 
   return (
     <div className="container mx-auto">
@@ -56,18 +65,20 @@ function Settings() {
             )}
           </div>
           <div className="text-center mt-4 mb-6">
-            <button
-              className="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button"
+            <Button
+              className="bg-red-500"
+              type="primary"
               onClick={handleLogout}
+              loading={loading}
+              disabled={loading}
             >
               Logout
-            </button>
+            </Button>
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Settings;
+export default Settings
