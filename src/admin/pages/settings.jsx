@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import { fetchUserData } from "../api/apiService";
+import { getUserProfile } from "../api/apiService";
 
 function Settings() {
   const { logoutUser } = useAuth(); 
@@ -12,7 +12,7 @@ function Settings() {
   useEffect(() => {
     const loadProfileData = async () => {
       try {
-        const userData = await fetchUserData();
+        const userData = await getUserProfile();
           setUser(userData);
         } catch (error) {
         console.error("Error loading user data:", error);
