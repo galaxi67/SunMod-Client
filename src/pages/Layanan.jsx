@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from "../admin/api/apiService";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import LoadingIndicator from "../components/LoadingIndicator";
-
-import Merchandise from "../components/Merchandise";
 
 const Layanan = () => {
   const [services, setServices] = useState([]);
@@ -131,19 +128,21 @@ const Layanan = () => {
               ))}
           </div>
 
-          <div className="mt-5 md:mt-10 lg:mt-15 mb-5 md:mb-10 lg:mb-15 shadow-md rounded-custom-br border-t-2 p-2 md:p-3 xl:p-4">
-            <h1 className=" text-base md:text-4xl lg:text-5xl text-center font-black tracking-wide text-sumod-bl rounded-custom-br">
-              LAYANAN SUNAT KHUSUS
-            </h1>
-            <p className="hidden sm:block text-center font-semibold text-gray-400 text-xs md:text-lg lg:text-xl mb-5">
-              sunat dengan kondisi kesehatan tertentu
-            </p>
+          <div className="mt-5 md:mt-10 lg:mt-15 mb-2 md:mb-6 lg:mb-10 shadow-md rounded-custom-br border-0 md:border-t-2 p-0 md:p-3 xl:p-4">
+            <div className="hidden sm:block">
+              <h1 className="text-base md:text-4xl lg:text-5xl text-center font-black tracking-wide text-sumod-bl rounded-custom-br">
+                LAYANAN SUNAT KHUSUS
+              </h1>
+              <p className="hidden sm:block text-center font-semibold text-gray-400 text-xs md:text-lg lg:text-xl mb-5">
+                sunat dengan kondisi kesehatan tertentu
+              </p>
+            </div>
             {boards
               .filter((_, i) => i === 0)
               .map((board) => (
-                <div className="">
+                <div key={board.name}>
+                  {" "}
                   <img
-                    key={board.name}
                     src={board.picture}
                     alt={board.name}
                     className="w-full h-full object-contain rounded-custom-br"
@@ -152,30 +151,21 @@ const Layanan = () => {
               ))}
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-gray-100 p-4 rounded-custom-br">
-            <div className="flex items-center ml-0 md:ml-5 lg:ml-8 xl:ml-10">
-              <div className="md:text-start text-center text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black leading-5 tracking-wide text-sumod-bl rounded-custom-br">
-                DAPATKAN HADIAH MENARIK DIHARI SPESIAL ANDA!
-              </div>
+          <div className="mt-2 md:mt-10 lg:mt-15 mb-5 md:mb-10 lg:mb-15 shadow-md rounded-custom-br border-0 md:border-t-2 p-0 md:p-3 xl:p-4">
+            <div className="hidden sm:block">
+              <h1 className="text-base md:text-4xl lg:text-5xl text-center font-black tracking-wide text-sumod-bl rounded-custom-br">
+                LAYANAN SOSIAL
+              </h1>
+              <p className="hidden sm:block text-center font-semibold text-gray-400 text-xs md:text-lg lg:text-xl mb-5">
+                peduli sesama, berkah bersama
+              </p>
             </div>
-            <div className="p-0 lg:p-2 xl:p-4">
-              <Merchandise />
-            </div>
-          </div>
-
-          <div className="mt-5 md:mt-10 lg:mt-15 mb-5 md:mb-10 lg:mb-15 shadow-md rounded-custom-br border-t-2 p-2 md:p-3 xl:p-4">
-            <h1 className=" text-base md:text-4xl lg:text-5xl text-center font-black tracking-wide text-sumod-bl rounded-custom-br">
-              LAYANAN SOSIAL
-            </h1>
-            <p className="hidden sm:block text-center font-semibold text-gray-400 text-xs md:text-lg lg:text-xl mb-5">
-              peduli sesama, berkah bersama
-            </p>
             {boards
               .filter((_, i) => i === 1)
               .map((board) => (
-                <div className="">
+                <div key={board.name}>
+                  {" "}
                   <img
-                    key={board.name}
                     src={board.picture}
                     alt={board.name}
                     className="w-full h-full object-contain rounded-custom-br"
@@ -184,50 +174,62 @@ const Layanan = () => {
               ))}
           </div>
 
-          <h1 className=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center font-black tracking-wide flex flex-col items-center justify-center text-custom-black rounded-custom-br">
-            METODE YANG KAMI GUNAKAN
-          </h1>
+          <div className="flex flex-wrap justify-center mt-5 md:mt-10 lg:mt-15">
+            <h1 className="font-custom text-center text-base sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl font-black leading-5 tracking-wide text-white bg-sumod-bl4 px-3 sm:px-4 md:px-5 p-3 rounded-custom-br">
+              DAPATKAN HADIAH MENARIK <br /> DIHARI SPESIAL ANDA!
+            </h1>
+            <img
+              src="https://res.cloudinary.com/dwaopoeya/image/upload/v1736455276/assets/mmmxdrmcnlkp8cw5ls5t.png"
+              alt="merchandise"
+              className="w-auto h-[150px] md:h-[400px] object-contain"
+            />
+          </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="justify-center flex items-center">
-              <div className="flex flex-col p-4 space-y-4">
-                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-black tracking-wide text-custom-black rounded-custom-br">
-                  METODE <span className="text-custom-blue">SUMOD</span>
-                </h1>
-                <h2 className="font-semibold text-gray-400 text-xs md:text-lg lg:text-lg">
-                  Metode kami dirancang dengan teknologi terkini, mengutamakan kenyamanan, dan hasil terbaik untuk
-                  memenuhi kebutuhan pasien dengan penuh perhatian
-                </h2>
-                <h3 className="font-medium text-sumod-bl3 text-xs md:text-lg lg:text-xl flex items-center">
-                  Lihat metode yang kami gunakan
-                  <button
-                    onClick={() => (window.location.href = "/metode")}
-                    className="ml-4 flex items-center justify-center text-custom-yellow hover:text-sumod-bl3 transition"
-                    aria-label="Go to methods"
-                  >
-                    <ArrowRightIcon className="w-7 h-7 animate-pulse" />
-                  </button>
-                </h3>
-              </div>
-            </div>
-
+          <div className="grid grid-row-2 mt-4 lg:mt-6 xl:mt-8 p-4 lg:p-6 border rounded-custom-br border-slate-300">
             <div className="flex justify-center">
-              <div className="grid grid-cols-2 gap-4 p-6 w-[400px] h-auto ">
-                {methods.map((method, index) => (
-                  <a
-                    key={index}
-                    href="/metode"
-                    className="bg-slate-50 rounded-custom-br overflow-hidden aspect-square p-4 h-auto shadow-md hover:border-custom-yellow hover:border-2 hover:shadow-none duration-500 transition ease-in-out"
-                  >
-                    <img
-                      src={method.picture}
-                      alt={method.name}
-                      className="w-full h-full object-contain cursor-pointer"
-                    />
-                  </a>
-                ))}
-              </div>
+              <p className="text-slate-600 border-y-2 border-slate-300 text-center py-2 px-4 tracking-wider text-sm md:text-2xl lg:text-3xl xl:text-4xl font-extrabold mb-6">
+                KEMITRAAN KAMI
+              </p>
             </div>
+
+            <div className="flex flex-row gap-6 justify-center items-center">
+              <img
+                src="https://res.cloudinary.com/dwaopoeya/image/upload/v1736190488/assets/n2jrykja50vssz463s5o.png"
+                alt="Logo OSI"
+                className="w-[80px] md:w-[150px] lg:w-[200px] xl:w-[250px] h-auto mx-auto"
+              />
+              <img
+                src="https://res.cloudinary.com/dwaopoeya/image/upload/v1736193440/assets/elbj6oojznoybz0hon9n.png"
+                alt="Logo ASDOKI"
+                className="w-[120px] md:w-[250px] lg:w-[300px] xl:w-[400px] h-auto mx-auto"
+              />
+            </div>
+          </div>
+
+          <div className="mt-2 sm:mt-5 md:mt-10 lg:mt-15">
+            <h1 className=" text-xl sm:text-2xl md:text-3xl lg:text-5xl text-center font-black tracking-wide flex flex-col items-center justify-center text-custom-black rounded-custom-br">
+              METODE SUNAT KAMI
+            </h1>
+            <p className="text-center font-semibold text-gray-400 text-xs md:text-lg lg:text-xl mb-5">
+                lihat metode yang kami gunakan
+              </p>
+            <div className="flex justify-center">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-2 md:p-3 lg:p-6 xl:px-24">
+                  {methods.map((method, index) => (
+                    <a
+                      key={index}
+                      href="/metode"
+                      className="bg-slate-50 rounded-custom-br overflow-hidden p-3 aspect-square shadow-md hover:border-custom-yellow hover:border-2 hover:shadow-none duration-500 transition ease-in-out"
+                    >
+                      <img
+                        src={method.picture}
+                        alt={method.name}
+                        className="w-full h-full object-contain cursor-pointer"
+                      />
+                    </a>
+                  ))}
+                </div>
+              </div>
           </div>
         </div>
       </div>
