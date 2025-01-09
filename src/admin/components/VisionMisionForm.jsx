@@ -196,7 +196,7 @@ const VisionMisionForm = () => {
 						</div>
 					</Upload>
 					<Modal
-						visible={previewOpen}
+						open={previewOpen}
 						footer={null}
 						onCancel={() => setPreviewOpen( false )}
 					>
