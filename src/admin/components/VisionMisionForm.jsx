@@ -151,9 +151,9 @@ const VisionMisionForm = () => {
 					<p className="font-bold mt-2">Nama</p>
 					<input
 						type="text"
-						id="name"  // Add unique ID
-						name="name"  // Add name attribute
-						autoComplete="off"  // Added autocomplete attribute
+						id="name"
+						name="name"
+						autoComplete="off"
 						placeholder="Silahkan input nama"
 						value={newData.name}
 						onChange={( e ) => setNewData( { ...newData, name: e.target.value } )}
@@ -162,9 +162,9 @@ const VisionMisionForm = () => {
 
 					<p className="font-bold mt-2">Deskripsi</p>
 					<textarea
-						id="description"  // Add unique ID
-						name="description"  // Add name attribute
-						autoComplete="off"  // Added autocomplete attribute
+						id="description"
+						name="description"
+						autoComplete="off"
 						placeholder="Silahkan input deskripsi"
 						value={newData.description}
 						onChange={( e ) => setNewData( { ...newData, description: e.target.value } )}
