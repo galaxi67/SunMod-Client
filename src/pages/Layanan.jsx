@@ -3,6 +3,8 @@ import { fetchData } from "../admin/api/apiService";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import LoadingIndicator from "../components/LoadingIndicator";
 
+import Merchandise from "../components/Merchandise";
+
 const Layanan = () => {
   const [services, setServices] = useState([]);
   const [methods, setMethods] = useState([]);
@@ -148,6 +150,17 @@ const Layanan = () => {
                   />
                 </div>
               ))}
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-gray-100 p-4 rounded-custom-br">
+            <div className="flex items-center ml-0 md:ml-5 lg:ml-8 xl:ml-10">
+              <div className="md:text-start text-center text-xl sm:text-2xl md:text-3xl lg:text-5xl font-black leading-5 tracking-wide text-sumod-bl rounded-custom-br">
+                DAPATKAN HADIAH MENARIK DIHARI SPESIAL ANDA!
+              </div>
+            </div>
+            <div className="p-0 lg:p-2 xl:p-4">
+              <Merchandise />
+            </div>
           </div>
 
           <div className="mt-5 md:mt-10 lg:mt-15 mb-5 md:mb-10 lg:mb-15 shadow-md rounded-custom-br border-t-2 p-2 md:p-3 xl:p-4">
