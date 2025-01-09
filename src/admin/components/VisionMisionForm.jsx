@@ -128,9 +128,9 @@ const VisionMisionForm = () => {
 				<div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-lg shadow-lg w-full">
 					<p className="font-bold mt-2">Visi</p>
 					<textarea
-						id="vision"  // Add unique ID
-						name="vision"  // Add name attribute
-						autoComplete="off"  // Added autocomplete attribute
+						id="vision"
+						name="vision"
+						autoComplete="off"
 						placeholder="Silahkan input visi"
 						value={newData.vision}
 						onChange={( e ) => setNewData( { ...newData, vision: e.target.value } )}
@@ -139,9 +139,9 @@ const VisionMisionForm = () => {
 
 					<p className="font-bold mt-2">Misi</p>
 					<textarea
-						id="mission"  // Add unique ID
-						name="mission"  // Add name attribute
-						autoComplete="off"  // Added autocomplete attribute
+						id="mission"
+						name="mission"
+						autoComplete="off"
 						placeholder="Silahkan input misi"
 						value={newData.mission}
 						onChange={( e ) => setNewData( { ...newData, mission: e.target.value } )}
