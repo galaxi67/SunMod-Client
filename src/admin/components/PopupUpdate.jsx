@@ -1,8 +1,8 @@
-import React from "react";
+import React from "react"
 import { ListBulletIcon, PencilIcon } from "@heroicons/react/24/outline"
 import { BallTriangle } from 'react-loading-icons'
-  
-export default function TabProfile({
+
+export default function TabProfile( {
   selectedProduct,
   newData,
   setNewData,
@@ -18,7 +18,7 @@ export default function TabProfile({
   btnLoading,
   resetForm,
   renderFormattedDescription,
-}){
+} ) {
   return (
     selectedProduct && (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 m-2 md:m-0">
@@ -32,9 +32,9 @@ export default function TabProfile({
               type="text"
               placeholder="Judul Baru"
               value={newData.name}
-              onChange={(e) => {
-                setNewData({ ...newData, name: e.target.value });
-                if (nameError) setNameError("");
+              onChange={( e ) => {
+                setNewData( { ...newData, name: e.target.value } )
+                if ( nameError ) setNameError( "" )
               }}
               className="border p-2 w-full"
             />
@@ -48,9 +48,9 @@ export default function TabProfile({
               id="description"
               placeholder="Deskripsi Baru (tambahkan keunggulan di sini)"
               value={newData.description}
-              onChange={(e) => {
-                setNewData({ ...newData, description: e.target.value });
-                if (descError) setDescError("");
+              onChange={( e ) => {
+                setNewData( { ...newData, description: e.target.value } )
+                if ( descError ) setDescError( "" )
               }}
               className="border p-2 w-full h-40"
             ></textarea>
@@ -79,6 +79,18 @@ export default function TabProfile({
               onChange={handleFileChange}
               className="border p-2 w-full mt-2"
             />
+
+
+            <div className="mt-4">
+              <p className="text-custom-black/40 font-bold">Preview Gambar:</p>
+              <img
+                src={newData.picture ? ( URL.createObjectURL( newData.picture ) ) : selectedProduct.picture}
+                alt="Preview"
+                className="border mt-2 max-h-20 object-contain"
+              />
+            </div>
+
+
             {pictError && (
               <div className="text-red-500 font-semibold text-sm mb-4">
                 {pictError}
@@ -87,7 +99,7 @@ export default function TabProfile({
             <div className="flex justify-end space-x-2 mt-4">
               <button
                 className="bg-sidebar text-white px-4 py-2 rounded"
-                onClick={() => handleUpdate(selectedProduct.id)}
+                onClick={() => handleUpdate( selectedProduct.id )}
                 disabled={btnLoading}
               >
                 {btnLoading ? (
@@ -109,12 +121,11 @@ export default function TabProfile({
             <h3 className="font-semibold">Preview Deskripsi:</h3>
             <div
               className="border p-2 w-full mt-2 h-auto bg-slate-50 max-h-[100px] md:max-h-[450px] overflow-y-auto"
-              dangerouslySetInnerHTML={renderFormattedDescription(newData.description)}
+              dangerouslySetInnerHTML={renderFormattedDescription( newData.description )}
             ></div>
           </div>
         </div>
       </div>
     )
-  );
-};
-
+  )
+}

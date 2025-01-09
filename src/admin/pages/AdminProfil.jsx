@@ -72,17 +72,39 @@ const AdminProfil = () => {
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file && file.size > 5 * 1024 * 1024) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  // Validasi ukuran file
+  if (file.size > 5 * 1024 * 1024) {
+    e.target.value = "";
+    setPictError("Ukuran file maksimal 5MB.");
+    return;
+  }
+
+  // Validasi rasio gambar
+  const img = new Image();
+  img.onload = () => {
+    const ratio = img.width / img.height;
+    const isValidRatio = Math.abs(ratio - 3 / 4) < 0.01; // Toleransi kecil untuk validasi rasio
+    if (!isValidRatio) {
       e.target.value = "";
-      setPictError("Ukuran file maksimal 5MB.");
+      setPictError("Rasio gambar harus 3:4.");
       return;
     }
-    if (file) {
-      setPictError("");
-      setNewData({ ...newData, picture: file });
-    }
+
+    // Jika validasi berhasil
+    setPictError("");
+    setNewData({ ...newData, picture: file });
   };
+
+  img.onerror = () => {
+    e.target.value = "";
+    setPictError("Gagal membaca file gambar.");
+  };
+
+  img.src = URL.createObjectURL(file); // Membaca file gambar untuk validasi dimensi
+};
 
   const handleBulletPoint = () => {
     const selectedText = window.getSelection().toString();
