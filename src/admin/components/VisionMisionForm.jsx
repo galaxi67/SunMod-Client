@@ -128,6 +128,9 @@ const VisionMisionForm = () => {
 				<div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-lg shadow-lg w-full">
 					<p className="font-bold mt-2">Visi</p>
 					<textarea
+						id="vision"  // Add unique ID
+						name="vision"  // Add name attribute
+						autoComplete="off"  // Added autocomplete attribute
 						placeholder="Silahkan input visi"
 						value={newData.vision}
 						onChange={( e ) => setNewData( { ...newData, vision: e.target.value } )}
@@ -136,6 +139,9 @@ const VisionMisionForm = () => {
 
 					<p className="font-bold mt-2">Misi</p>
 					<textarea
+						id="mission"  // Add unique ID
+						name="mission"  // Add name attribute
+						autoComplete="off"  // Added autocomplete attribute
 						placeholder="Silahkan input misi"
 						value={newData.mission}
 						onChange={( e ) => setNewData( { ...newData, mission: e.target.value } )}
@@ -145,6 +151,9 @@ const VisionMisionForm = () => {
 					<p className="font-bold mt-2">Nama</p>
 					<input
 						type="text"
+						id="name"  // Add unique ID
+						name="name"  // Add name attribute
+						autoComplete="off"  // Added autocomplete attribute
 						placeholder="Silahkan input nama"
 						value={newData.name}
 						onChange={( e ) => setNewData( { ...newData, name: e.target.value } )}
@@ -153,6 +162,9 @@ const VisionMisionForm = () => {
 
 					<p className="font-bold mt-2">Deskripsi</p>
 					<textarea
+						id="description"  // Add unique ID
+						name="description"  // Add name attribute
+						autoComplete="off"  // Added autocomplete attribute
 						placeholder="Silahkan input deskripsi"
 						value={newData.description}
 						onChange={( e ) => setNewData( { ...newData, description: e.target.value } )}
@@ -181,7 +193,7 @@ const VisionMisionForm = () => {
 										}}
 									/>
 									<div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center text-white text-sm font-medium transition-opacity duration-300 group-hover:bg-opacity-70">
-										<AreaChartOutlined  />
+										<AreaChartOutlined />
 										Edit
 									</div>
 								</>
