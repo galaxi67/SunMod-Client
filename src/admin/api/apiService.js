@@ -59,3 +59,16 @@ export const updateData = async (tableName, id, formData) => {
     throw error;
   }
 };
+
+export const createData = async (tableName, formData) => {
+  try {
+    const response = await axiosInstance.post(`${tableName}`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return response.data.data;
+  } catch (error) {
+    console.error(`Error creating data in ${tableName}:`, error.response || error.message);
+    throw error;
+  }
+};
+

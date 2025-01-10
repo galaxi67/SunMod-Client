@@ -29,7 +29,7 @@ export default function TabProfile( { products, renderFormattedDescription, setS
 
   return (
     <div className='py-5 mb-10'>
-      <Tabs defaultActiveKey="1" items={items} />
+      <Tabs defaultActiveKey="1" items={items} centered/>
     </div>
   )
 }
