@@ -1,75 +1,36 @@
-import React, { useState } from "react"
-import BlogList from "../components/Blog"
-import { useEffect } from "react"
-import LoadingIndicator from "../components/LoadingIndicator"
+import { useEffect, useState } from "react";
+import LoadingIndicator from "../components/LoadingIndicator";
+import { fetchData } from "../admin/api/apiService";
 
 const Artikel = () => {
-  const [ loading , setLoading ] = useState( true )
-  const [posts, setPosts] = useState( [] )
-  const postsContent = [
-    {
-      id: 1,
-      title: "Getting Started with Next.js",
-      excerpt: "Learn how to set up your Next.js project.",
-      image: "/images/blog1.jpg",
-      date: "2024-12-01",
-    },
-    {
-      id: 2,
-      title: "Understanding Tailwind CSS",
-      excerpt: "A beginner's guide to Tailwind CSS.",
-      image: "/images/blog2.jpg",
-      date: "2024-11-28",
-    },
-    {
-      id: 3,
-      title: "React vs Angular",
-      excerpt: "Comparing two popular frontend frameworks.",
-      image: "/images/blog2.jpg",
-      date: "2024-11-25",
-    },
-    {
-      id: 3,
-      title: "React vs Angular",
-      excerpt: "Comparing two popular frontend frameworks.",
-      image: "/images/blog2.jpg",
-      date: "2024-11-25",
-    },
-    {
-      id: 3,
-      title: "React vs Angular",
-      excerpt: "Comparing two popular frontend frameworks.",
-      image: "/images/blog2.jpg",
-      date: "2024-11-25",
-    },
-    {
-      id: 3,
-      title: "React vs Angular",
-      excerpt: "Comparing two popular frontend frameworks.",
-      image: "/images/blog2.jpg",
-      date: "2024-11-25",
-    },
-  ]
+  const [loading, setLoading] = useState(true);
+  const [articles, setArticles] = useState([]);
+  const [error, setError] = useState(null);
 
-  useEffect( () => {
-    const fetchPosts = async () => {
-      setLoading( true );
-        try
-        {
-          setPosts( postsContent )
-          setLoading( false )
-        } catch ( error )
-        {
-          console.error( "Error fetching posts:", error )
-          setLoading( false )
-        }
-    }
+  useEffect(() => {
+    const loadArticles = async () => {
+      setLoading(true);
+      try {
+        const response = await fetchData("article");
+        setArticles(response.reverse());
+        setArticles(response);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    fetchPosts()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [] )
+    loadArticles();
+  }, []);
 
-  if (loading) return <LoadingIndicator/>
+  if (loading) {
+    return <LoadingIndicator />;
+  }
+
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
 
   return (
     <div className="container mx-auto">
@@ -93,12 +54,38 @@ const Artikel = () => {
             </div>
           </div>
         </div>
-        <div className="mt-2 sm:mt-3 md:mt-4 lg:mt-6 px-4 sm:px-6 lg:px-8 py-8">
-          <BlogList posts={posts} />
+        <div className="mt-5 px-4 sm:px-6 lg:px-8 max-w-screen-xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {articles.map((article) => (
+              <div
+                key={article.id}
+                className="bg-white shadow-custom rounded-custom-br overflow-hidden"
+              >
+                <img
+                  src={article.picture}
+                  alt={article.name}
+                  className="w-full h-56 sm:h-64 lg:h-72 object-cover object-center"
+                />
+                <div className="p-6">
+                  <h2 className="text-2xl font-semibold text-gray-800 leading-tight">{article.name}</h2>
+                  <p className="text-sm text-gray-600 mt-2 line-clamp-3">{article.description}</p>
+                  <p className="text-xs text-gray-500 mt-3">{new Date(article.created_at).toLocaleDateString()}</p>
+                  <div className="mt-4">
+                    <a
+                      href={`/blog/${article.id}`}
+                      className="text-blue-600 font-medium hover:underline transition-all duration-200"
+                    >
+                      Baca Selengkapnya →
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Artikel
+export default Artikel;

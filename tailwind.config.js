@@ -5,7 +5,7 @@ module.exports = {
     extend: {
       fontFamily: {
         title: ["Manrope", "sans-serif"],
-        custom: ["Nunito Sans", "serif"]
+        custom: ["Nunito Sans", "serif"],
       },
       colors: {
         "custom-slate": "#898995",
