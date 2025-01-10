@@ -67,7 +67,7 @@ export const createData = async (tableName, formData) => {
 };
 export const deleteArticle = async (id, email, password) => {
   try {
-    const response = await axiosInstance.delete(`/api/article/${id}`, {
+    const response = await axiosInstance.delete(`/article/${id}`, {
       data: { email, password },
     });
     console.log("Respons dari server:", response.data.data);
