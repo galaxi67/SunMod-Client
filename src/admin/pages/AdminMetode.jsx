@@ -177,7 +177,7 @@ const AdminMetode = () => {
       </div>
 
       {selectedAsset && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 m-2 md:m-0">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 m-0">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-screen overflow-y-auto rounded-custom-br">
             <div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-lg shadow-lg w-full max-w-md overflow-y-auto">
               <h2 className="font-semibold mb-4">Update Profil: "{selectedAsset.name}"</h2>

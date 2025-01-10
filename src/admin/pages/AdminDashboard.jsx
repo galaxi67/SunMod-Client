@@ -136,7 +136,7 @@ const Dashboard = () => {
       </div>
 
       {selectedBoard && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 m-2 md:m-0">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 m-0">
           <div className="bg-white border p-4 md:p-6 rounded-lg shadow-lg w-full max-w-md">
             <h2 className="font-semibold mb-4 text-center">Update Banner: "{selectedBoard.name}"</h2>
 
