@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs } from "antd";
-import AdminArtikel from "../components/ArticleContent"; // Kode AdminArtikel dipindahkan ke file terpisah
-import CreateArtikel from "../components/CreateArticle"; // Halaman Buat Artikel
+import AdminArtikel from "../components/ArticleContent";
+import CreateArtikel from "../components/CreateArticle";
 
 const ArtikelTabs = () => {
 

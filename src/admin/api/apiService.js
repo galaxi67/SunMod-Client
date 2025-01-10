@@ -1,42 +1,36 @@
-import axiosInstance from './axiosInstance'
+import axiosInstance from "./axiosInstance";
 
 export const fetchVisionMission = async () => {
-  try
-  {
-    const response = await axiosInstance.get( '/vision-mission' )
-    return response.data.data
-  } catch ( error )
-  {
-    console.error( 'Error fetching vision and mission:', error )
-    throw error
+  try {
+    const response = await axiosInstance.get("/vision-mission");
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching vision and mission:", error);
+    throw error;
   }
-}
+};
 
-export const updateVisionMission = async ( formData  ) => {
-  try
-  {
-    const response = await axiosInstance.put( '/vision-mission', formData, {
+export const updateVisionMission = async (formData) => {
+  try {
+    const response = await axiosInstance.put("/vision-mission", formData, {
       headers: { "Content-Type": "multipart/form-data" },
     });
-    return response.data
-  } catch ( error )
-  {
-    console.error( 'Error updating vision and mission:', error )
-    throw error
+    return response.data;
+  } catch (error) {
+    console.error("Error updating vision and mission:", error);
+    throw error;
   }
-}
+};
 
 export const getUserProfile = async () => {
-  try
-  {
-    const response = await axiosInstance.get( '/auth/profile' )
-    return response.data.data
-  } catch ( error )
-  {
-    console.error( 'Error fetching user profile:', error )
-    throw error
+  try {
+    const response = await axiosInstance.get("/auth/profile");
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching user profile:", error);
+    throw error;
   }
-}
+};
 
 export const fetchData = async (tableName) => {
   try {
@@ -69,6 +63,17 @@ export const createData = async (tableName, formData) => {
   } catch (error) {
     console.error(`Error creating data in ${tableName}:`, error.response || error.message);
     throw error;
+  }
+};
+export const deleteArticle = async (id, email, password) => {
+  try {
+    const response = await axiosInstance.delete(`/api/article/${id}`, {
+      data: { email, password },
+    });
+    console.log("Respons dari server:", response.data.data);
+    return response.data.data;
+  } catch (error) {
+    throw new Error("Gagal menghapus artikel: " + error.message);
   }
 };
 

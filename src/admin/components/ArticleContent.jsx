@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fetchData, updateData } from "../api/apiService";
+import { fetchData, updateData, deleteArticle } from "../api/apiService";
 import { ListBulletIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { BallTriangle } from "react-loading-icons";
@@ -16,6 +16,11 @@ const AdminArtikel = () => {
   const [pictError, setPictError] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(4);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [showModal, setShowModal] = useState(false);
 
   const loadAssets = async () => {
     setLoading(true);
@@ -63,6 +68,42 @@ const AdminArtikel = () => {
     } catch (err) {
       toast.dismiss();
       toast.error("Gagal mengupdate artikel: " + (err.response?.data?.message || err.message));
+      setBtnLoading(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    let isValid = true;
+    setEmailError("");
+    setPasswordError("");
+
+    if (!email.trim()) {
+      setEmailError("Email tidak boleh kosong.");
+      isValid = false;
+    }
+
+    if (!password.trim()) {
+      setPasswordError("Password tidak boleh kosong.");
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
+    try {
+      setBtnLoading(true);
+
+      await deleteArticle(id, email, password);
+
+      toast.dismiss();
+      toast.success(`Artikel berhasil dihapus!`);
+
+      setSelectedAsset(null);
+      loadAssets();
+
+      setBtnLoading(false);
+    } catch (err) {
+      toast.dismiss();
+      toast.error("Gagal menghapus artikel: " + (err.response?.data?.message || err.message));
       setBtnLoading(false);
     }
   };
@@ -153,6 +194,12 @@ const AdminArtikel = () => {
                     >
                       Update
                     </button>
+                    <button
+                      className="bg-red-500 text-white px-6 py-3 rounded-lg tracking-wider hover:bg-red-600 transition-colors"
+                      onClick={() => setShowModal(true)}
+                    >
+                      Delete
+                    </button>
                   </div>
                 </div>
               </div>
@@ -197,6 +244,46 @@ const AdminArtikel = () => {
           </button>
         )}
       </div>
+
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-md w-96 space-y-4">
+            <h3 className="text-xl font-semibold">Delete Artikel</h3>
+            <p>Apakah Anda yakin ingin menghapus artikel ini?</p>
+            <input
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (emailError) setEmailError("");
+              }}
+              className="border p-2 w-full"
+            />
+            {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
+            <input
+              type="text"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                if (passwordError) setPasswordError("");
+              }}
+              className="border p-2 w-full"
+            />
+            {passwordError && <p className="text-red-500 text-sm">{passwordError}</p>}
+
+            <div className="flex justify-end space-x-4">
+              <button className="bg-gray-200 px-4 py-2 rounded-md" onClick={() => setShowModal(false)}>
+                Batal
+              </button>
+              <button className="bg-sidebar text-white px-4 py-2 rounded" onClick={handleDelete} disabled={btnLoading}>
+                {btnLoading ? <BallTriangle className="h-7 w-7" /> : "Hapus Artikel"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {selectedAsset && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 m-0">
