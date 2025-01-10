@@ -3,6 +3,7 @@ import { fetchData, updateData, deleteArticle } from "../api/apiService";
 import { ListBulletIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { BallTriangle } from "react-loading-icons";
+import useAuth from "../hooks/useAuth";
 
 const AdminArtikel = () => {
   const [assets, setAssets] = useState([]);
@@ -14,8 +15,11 @@ const AdminArtikel = () => {
   const [nameError, setNameError] = useState("");
   const [descError, setDescError] = useState("");
   const [pictError, setPictError] = useState("");
+
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(4);
+
+  const { login } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -91,13 +95,18 @@ const AdminArtikel = () => {
 
     try {
       setBtnLoading(true);
+      console.log("Deleting article with ID:", id);
+
+      await login(email, password);
 
       await deleteArticle(id, email, password);
 
       toast.dismiss();
       toast.success(`Artikel berhasil dihapus!`);
 
-      setSelectedAsset(null);
+      setShowModal(false);
+      setEmail("");
+      setPassword("");
       loadAssets();
 
       setBtnLoading(false);
@@ -277,9 +286,13 @@ const AdminArtikel = () => {
               <button className="bg-gray-200 px-4 py-2 rounded-md" onClick={() => setShowModal(false)}>
                 Batal
               </button>
-              <button className="bg-sidebar text-white px-4 py-2 rounded" onClick={handleDelete} disabled={btnLoading}>
-                {btnLoading ? <BallTriangle className="h-7 w-7" /> : "Hapus Artikel"}
-              </button>
+              {assets.map((article) => (
+                <div key={article.id}>
+                  <button className="bg-sidebar text-white px-4 py-2 rounded" onClick={() => handleDelete(article.id)}>
+                    Delete
+                  </button>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -314,6 +327,7 @@ const AdminArtikel = () => {
                 className="border p-2 w-full h-40"
               ></textarea>
               {descError && <div className="text-red-500 font-semibold text-sm mb-4">{descError}</div>}
+
               <div className="mb-3 flex justify-center">
                 <button onClick={handleBulletPoint} className="border border-gray-300 p-2 rounded mr-2">
                   <ListBulletIcon className="h-5 w-5 text-custom-black" />
@@ -321,6 +335,7 @@ const AdminArtikel = () => {
               </div>
               <input type="file" accept="image/*" onChange={handleFileChange} className="border p-2 w-full mt-2" />
               {pictError && <div className="text-red-500 font-semibold text-sm mb-4">{pictError}</div>}
+
               <div className="flex justify-end space-x-2 mt-4">
                 <button
                   className="bg-sidebar text-white px-4 py-2 rounded"
