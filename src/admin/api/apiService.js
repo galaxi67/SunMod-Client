@@ -65,15 +65,17 @@ export const createData = async (tableName, formData) => {
     throw error;
   }
 };
+
 export const deleteArticle = async (id, email, password) => {
   try {
     const response = await axiosInstance.delete(`/article/${id}`, {
       data: { email, password },
     });
-    console.log("Respons dari server:", response.data.data);
+
+    // console.log("Respons dari server:", response.data);
     return response.data.data;
   } catch (error) {
+    // console.error("Gagal menghapus artikel:", error.response?.data || error.message);
     throw new Error("Gagal menghapus artikel: " + error.message);
   }
 };
-
