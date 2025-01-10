@@ -68,12 +68,6 @@ export const createData = async (tableName, formData) => {
 
 export const deleteArticle = async (id, email, password) => {
   try {
-    // console.log("ID yang diterima:", id, "dengan tipe:", typeof id);
-
-    if (typeof id !== "string" && typeof id !== "number") {
-      throw new Error("Invalid article ID");
-    }
-
     const response = await axiosInstance.delete(`/article/${id}`, {
       data: { email, password },
     });

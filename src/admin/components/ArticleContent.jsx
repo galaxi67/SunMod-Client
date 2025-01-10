@@ -11,6 +11,7 @@ const AdminArtikel = () => {
   const [btnLoading, setBtnLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedAsset, setSelectedAsset] = useState(null);
+  const [selectedAssetDel, setSelectedAssetDel] = useState(null);
   const [newData, setNewData] = useState({ name: "", description: "", picture: null });
   const [nameError, setNameError] = useState("");
   const [descError, setDescError] = useState("");
@@ -108,12 +109,15 @@ const AdminArtikel = () => {
       setEmail("");
       setPassword("");
       loadAssets();
-
+      setShowModal( false )
       setBtnLoading(false);
+      resetFormDel()
     } catch (err) {
       toast.dismiss();
       toast.error("Gagal menghapus artikel: " + (err.response?.data?.message || err.message));
       setBtnLoading(false);
+      setShowModal( false )
+      resetFormDel()
     }
   };
 
@@ -151,6 +155,14 @@ const AdminArtikel = () => {
     setDescError("");
     setPictError("");
     setSelectedAsset(null);
+  };
+
+  const resetFormDel = () => {
+    setEmail("");
+    setPassword("");
+    setEmailError("");
+    setPasswordError("");
+    setSelectedAssetDel(null);
   };
 
   const currentPageData = assets.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -205,7 +217,10 @@ const AdminArtikel = () => {
                     </button>
                     <button
                       className="bg-red-500 text-white px-6 py-3 rounded-lg tracking-wider hover:bg-red-600 transition-colors"
-                      onClick={() => setShowModal(true)}
+                      onClick={() => { 
+                        setSelectedAssetDel( asset )
+                        setShowModal( true )
+                      }}
                     >
                       Delete
                     </button>
@@ -258,7 +273,7 @@ const AdminArtikel = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-md w-96 space-y-4">
             <h3 className="text-xl font-semibold">Delete Artikel</h3>
-            <p>Apakah Anda yakin ingin menghapus artikel ini?</p>
+            <p>Apakah Anda yakin ingin menghapus artikel ini? { selectedAssetDel.id }</p>
             <input
               type="text"
               placeholder="Email"
@@ -283,16 +298,15 @@ const AdminArtikel = () => {
             {passwordError && <p className="text-red-500 text-sm">{passwordError}</p>}
 
             <div className="flex justify-end space-x-4">
-              <button className="bg-gray-200 px-4 py-2 rounded-md" onClick={() => setShowModal(false)}>
+              <button className="bg-gray-200 px-4 py-2 rounded-md" onClick={() => {
+                setShowModal( false )
+                resetFormDel()
+              }}>
                 Batal
               </button>
-              {assets.map((article) => (
-                <div key={article.id}>
-                  <button className="bg-sidebar text-white px-4 py-2 rounded" onClick={() => handleDelete(article.id)}>
-                    Delete
-                  </button>
-                </div>
-              ))}
+              <button className="bg-sidebar text-white px-4 py-2 rounded" onClick={() => handleDelete(selectedAssetDel?.id)} disabled={btnLoading}>
+                {btnLoading ? <BallTriangle className="h-7 w-7" /> : "Hapus Artikel"}
+              </button>
             </div>
           </div>
         </div>
