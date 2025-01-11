@@ -4,6 +4,7 @@ import { ListBulletIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { BallTriangle } from "react-loading-icons";
 import useAuth from "../hooks/useAuth";
+import ReadMoreLess from "react-read-more-less";
 
 const AdminArtikel = () => {
   const [assets, setAssets] = useState([]);
@@ -18,7 +19,7 @@ const AdminArtikel = () => {
   const [pictError, setPictError] = useState("");
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(4);
+  const [itemsPerPage] = useState(3);
 
   const { login } = useAuth();
   const [email, setEmail] = useState("");
@@ -26,6 +27,8 @@ const AdminArtikel = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [showModal, setShowModal] = useState(false);
+
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const loadAssets = async () => {
     setLoading(true);
@@ -109,15 +112,15 @@ const AdminArtikel = () => {
       setEmail("");
       setPassword("");
       loadAssets();
-      setShowModal( false )
+      setShowModal(false);
       setBtnLoading(false);
-      resetFormDel()
+      resetFormDel();
     } catch (err) {
       toast.dismiss();
       toast.error("Gagal menghapus artikel: " + (err.response?.data?.message || err.message));
       setBtnLoading(false);
-      setShowModal( false )
-      resetFormDel()
+      setShowModal(false);
+      resetFormDel();
     }
   };
 
@@ -166,11 +169,23 @@ const AdminArtikel = () => {
   };
 
   const currentPageData = assets.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
-
   const totalPages = Math.ceil(assets.length / itemsPerPage);
 
   useEffect(() => {
+    const handleResize = () => {
+      const isSmallScreen = window.matchMedia("(max-width: 640px)").matches;
+      setIsSmallScreen(isSmallScreen);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize);
+
     loadAssets();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
+    };
   }, []);
 
   if (loading) return <p className="flex justify-center items-center ">Loading...</p>;
@@ -178,16 +193,16 @@ const AdminArtikel = () => {
 
   return (
     <div className="mx-auto p-4">
-      <h2 className="text-xl font-bold mb-4">Artikel Sumod</h2>
+      <h2 className="text-xl text-center font-bold mb-4">Artikel Sumod</h2>
       <div className="flex justify-center w-full">
         <div className="mb-8 space-y-4 w-full max-w-6xl px-4">
           {Array.isArray(currentPageData) &&
             currentPageData.map((asset) => (
               <div
                 key={asset.id}
-                className="flex flex-col md:flex-row items-start p-6 rounded-lg overflow-hidden bg-slate-50 border border-sumod-bl3 shadow-md"
+                className="flex flex-col md:flex-row lg:flex-col xl:flex-row justify-center items-start p-6 rounded-lg overflow-hidden bg-slate-50 border border-sumod-bl3 shadow-md"
               >
-                <div className="flex-shrink-0 mb-4 md:mb-0 md:mr-6">
+                <div className="flex-shrink-0 mb-4 md:mb-0 lg:mb-5 xl:mb-0 mr-0 md:mr-6 mt-0 md:mt-10 lg:mt-0 xl:mt-8">
                   <img
                     src={asset.picture}
                     alt={asset.name}
@@ -195,15 +210,24 @@ const AdminArtikel = () => {
                   />
                 </div>
 
-                <div className="flex flex-col justify-between text-left md:w-[calc(100%-250px)]">
+                <div className="flex flex-col justify-between text-left">
                   <div className="flex flex-col flex-grow">
+                    <p className="text-base text-gray-500">{new Date(asset.createdAt).toLocaleDateString()}</p>
                     <h2 className="text-2xl font-semibold mb-4">{asset.name}</h2>
-                    <p className="font-light mb-6 whitespace-pre-wrap text-gray-700">{asset.description}</p>
+                    <div className="whitespace-pre-wrap">
+                      <ReadMoreLess
+                        charLimit={isSmallScreen ? 100 : 700}
+                        readMoreText=" Selengkapnya"
+                        readLessText=" Lebih Sedikit"
+                      >
+                        {asset.description}
+                      </ReadMoreLess>
+                    </div>
                   </div>
 
-                  <div className="mt-4">
+                  <div className="mt-4 space-x-5 justify-start md:justify-start lg:justify-center xl:justify-start flex">
                     <button
-                      className="bg-orange-500 text-white px-6 py-3 rounded-lg tracking-wider hover:bg-orange-600 transition-colors"
+                      className="bg-sumod-bl3 text-white px-6 py-3 rounded-lg tracking-wider hover:bg-sumod-bl transition-colors"
                       onClick={() => {
                         setSelectedAsset(asset);
                         setNewData({
@@ -217,9 +241,9 @@ const AdminArtikel = () => {
                     </button>
                     <button
                       className="bg-red-500 text-white px-6 py-3 rounded-lg tracking-wider hover:bg-red-600 transition-colors"
-                      onClick={() => { 
-                        setSelectedAssetDel( asset )
-                        setShowModal( true )
+                      onClick={() => {
+                        setSelectedAssetDel(asset);
+                        setShowModal(true);
                       }}
                     >
                       Delete
@@ -273,7 +297,7 @@ const AdminArtikel = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-md w-96 space-y-4">
             <h3 className="text-xl font-semibold">Delete Artikel</h3>
-            <p>Apakah Anda yakin ingin menghapus artikel ini? { selectedAssetDel.id }</p>
+            <p>Apakah Anda yakin ingin menghapus artikel ini? {selectedAssetDel.id}</p>
             <input
               type="text"
               placeholder="Email"
@@ -298,13 +322,20 @@ const AdminArtikel = () => {
             {passwordError && <p className="text-red-500 text-sm">{passwordError}</p>}
 
             <div className="flex justify-end space-x-4">
-              <button className="bg-gray-200 px-4 py-2 rounded-md" onClick={() => {
-                setShowModal( false )
-                resetFormDel()
-              }}>
+              <button
+                className="bg-gray-200 px-4 py-2 rounded-md"
+                onClick={() => {
+                  setShowModal(false);
+                  resetFormDel();
+                }}
+              >
                 Batal
               </button>
-              <button className="bg-sidebar text-white px-4 py-2 rounded" onClick={() => handleDelete(selectedAssetDel?.id)} disabled={btnLoading}>
+              <button
+                className="bg-sidebar text-white px-4 py-2 rounded"
+                onClick={() => handleDelete(selectedAssetDel?.id)}
+                disabled={btnLoading}
+              >
                 {btnLoading ? <BallTriangle className="h-7 w-7" /> : "Hapus Artikel"}
               </button>
             </div>

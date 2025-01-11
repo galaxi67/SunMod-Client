@@ -69,7 +69,7 @@ const Artikel = () => {
                 <div className="p-6">
                   <h2 className="text-2xl font-semibold text-gray-800 leading-tight">{article.name}</h2>
                   <p className="text-sm text-gray-600 mt-2 line-clamp-3">{article.description}</p>
-                  <p className="text-xs text-gray-500 mt-3">{new Date(article.created_at).toLocaleDateString()}</p>
+                  <p className="text-xs text-gray-500 mt-3">{new Date(article.createdAt).toLocaleDateString()}</p>
                   <div className="mt-4">
                     <a
                       href={`/blog/${article.id}`}
