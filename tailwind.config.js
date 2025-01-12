@@ -31,6 +31,19 @@ module.exports = {
       lineHeight: {
         sumodleading: "5px",
       },
+      animation: {
+        "move-x": "moveX 2s ease-in-out infinite",
+      },
+      keyframes: {
+        moveX: {
+          "0%, 100%": {
+            transform: "translateX(0)",
+          },
+          "50%": {
+            transform: "translateX(20px)",
+          },
+        },
+      },
     },
   },
   plugins: [],
