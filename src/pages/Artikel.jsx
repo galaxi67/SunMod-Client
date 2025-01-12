@@ -72,7 +72,7 @@ const Artikel = () => {
                   <p className="text-xs text-gray-500 mt-3">{new Date(article.createdAt).toLocaleDateString()}</p>
                   <div className="mt-4">
                     <a
-                      href={`/blog/${article.id}`}
+                      href={`artikel/detail/${article.id}`}
                       className="text-blue-600 font-medium hover:underline transition-all duration-200"
                     >
                       Baca Selengkapnya →

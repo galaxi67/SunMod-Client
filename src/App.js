@@ -8,6 +8,7 @@ import Homepage from "./pages/Homepage"
 import Layanan from "./pages/Layanan"
 import Metode from "./pages/Metode"
 import Artikel from "./pages/Artikel"
+import ArtikelDetail from './components/BlogDetail'
 import Profil from "./pages/Profil"
 import Galeri from "./pages/Galeri"
 import Kontak from "./pages/Kontak"
@@ -39,6 +40,7 @@ const AppWrapper = () => {
                     <Route path="layanan" element={<Layanan />} />
                     <Route path="metode" element={<Metode />} />
                     <Route path="artikel" element={<Artikel />} />
+                    <Route path="artikel/detail/:id" element={<ArtikelDetail/>} />
                     <Route path="profil" element={<Profil />} />
                     <Route path="galeri" element={<Galeri />} />
                     <Route path="kontak" element={<Kontak />} />
