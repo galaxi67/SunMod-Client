@@ -6,6 +6,8 @@ const Artikel = () => {
   const [loading, setLoading] = useState(true);
   const [articles, setArticles] = useState([]);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(6);
 
   useEffect(() => {
     const loadArticles = async () => {
@@ -23,6 +25,9 @@ const Artikel = () => {
 
     loadArticles();
   }, []);
+
+  const currentPageData = articles.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
+  const totalPages = Math.ceil(articles.length / itemsPerPage);
 
   if (loading) {
     return <LoadingIndicator />;
@@ -56,11 +61,8 @@ const Artikel = () => {
         </div>
         <div className="mt-5 px-4 sm:px-6 lg:px-8 max-w-screen-xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article) => (
-              <div
-                key={article.id}
-                className="bg-white shadow-custom rounded-custom-br overflow-hidden"
-              >
+            {currentPageData.map((article) => (
+              <div key={article.id} className="bg-white shadow-custom rounded-custom-br overflow-hidden">
                 <img
                   src={article.picture}
                   alt={article.name}
@@ -81,6 +83,46 @@ const Artikel = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+
+        <div className="mt-6">
+          <div className="flex justify-center space-x-2">
+            {currentPage > 3 && (
+              <button
+                onClick={() => setCurrentPage(currentPage - 1)}
+                className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300"
+              >
+                &lt;
+              </button>
+            )}
+
+            {Array.from({ length: 5 }, (_, index) => {
+              const pageNumber = Math.max(1, currentPage - 2) + index;
+              if (pageNumber <= totalPages) {
+                return (
+                  <button
+                    key={pageNumber}
+                    onClick={() => setCurrentPage(pageNumber)}
+                    className={`px-3 py-1 rounded ${
+                      currentPage === pageNumber ? "bg-sumod-bl3 text-white" : "bg-gray-200"
+                    }`}
+                  >
+                    {pageNumber}
+                  </button>
+                );
+              }
+              return null;
+            })}
+
+            {currentPage < totalPages - 2 && (
+              <button
+                onClick={() => setCurrentPage(currentPage + 1)}
+                className="px-3 py-1 rounded bg-gray-200 hover:bg-gray-300"
+              >
+                &gt;
+              </button>
+            )}
           </div>
         </div>
       </div>
