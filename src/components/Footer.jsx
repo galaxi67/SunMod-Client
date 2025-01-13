@@ -7,10 +7,10 @@ const Footer = () => {
     <footer>
       <div className="mt-16 flex flex-col items-center">
         <div className="footer-top flex justify-center items-center space-x-4 h-28 -mb-6">
-          <a href="tel:+628123456789" className="footer-icon">
+          <a href="tel:+6281313138870" className="footer-icon">
             <img src={Wa} alt="Phone Icon" className="h-8 w-8 opacity-50" />
           </a>
-          <a href="https://instagram.com/username" className="footer-icon">
+          <a href="https://instagram.com/sumod.sunatmodern" className="footer-icon">
             <img src={Ig} alt="Instagram Icon" className="h-8 w-8 opacity-50" />
           </a>
         </div>

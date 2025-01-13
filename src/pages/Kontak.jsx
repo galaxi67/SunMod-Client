@@ -1,6 +1,19 @@
-import React from "react";
+import { useState } from "react";
 
 const Kontak = () => {
+  const [name, setName] = useState("");
+  const [complaint, setComplaint] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const waLink = `https://wa.me/6281313138870?text=Nama%3A%20${encodeURIComponent(
+      name
+    )}%0AKeluhan%3A%20${encodeURIComponent(complaint)}`;
+
+    window.open(waLink, "_blank");
+  };
+
   return (
     <div className="container mx-auto">
       <div className="max-w-full">
@@ -38,32 +51,30 @@ const Kontak = () => {
           <div className="flex flex-col items-center justify-center">
             <div className="bg-gradient-to-t from-blue-100 via-blue-300 to-blue-500 text-white  rounded-lg shadow-lg p-6 w-full sm:w-[350px] h-[350px] mx-auto xl:ml-32">
               <h1 className="text-xl sm:text-2xl font-bold flex tracking-widest">Tanyakan Pada Kami</h1>
-              <form className="w-full mt-4 space-y-4">
+              <form className="w-full mt-4 space-y-4" onSubmit={handleSubmit}>
                 <div className="flex flex-col space-y-2">
                   <input
                     type="text"
                     placeholder="Nama"
-                    className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="w-full p-2 border rounded-md text-black focus:outline-none focus:ring-2 focus:ring-blue-500"
                     required
                   />
                   <textarea
                     placeholder="Keluhan"
-                    className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 max-h-[150px] resize-y"
+                    value={complaint}
+                    onChange={(e) => setComplaint(e.target.value)}
+                    className="w-full p-2 border rounded-md text-black focus:outline-none focus:ring-2 focus:ring-blue-500 max-h-[150px] resize-y"
                     required
                   />
                 </div>
-                <a
-                  href="https://wa.me/YOUR_WHATSAPP_NUMBER?text=Nama: {name}&Tujuan: {goal}"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="submit"
+                  className="w-full mt-4 p-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
                 >
-                  <button
-                    type="submit"
-                    className="w-full mt-4 p-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
-                  >
-                    Kirim ke WhatsApp
-                  </button>
-                </a>
+                  Kirim ke WhatsApp
+                </button>
               </form>
             </div>
           </div>
