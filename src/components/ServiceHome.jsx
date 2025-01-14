@@ -5,7 +5,9 @@ import {
   ChatBubbleLeftRightIcon,
   HeartIcon,
   ArrowRightIcon,
+  ArrowLeftIcon,
 } from "@heroicons/react/24/solid";
+import { useRef } from "react";
 
 const services = [
   {
@@ -41,31 +43,63 @@ const services = [
 ];
 
 const ServiceCard = () => {
+  const scrollRef = useRef(null);
+
+  const scrollLeft = () => {
+    scrollRef.current.scrollBy({ left: -200, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    scrollRef.current.scrollBy({ left: 200, behavior: "smooth" });
+  };
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4 sm:px-6 md:px-14 py-10">
-      <div className="p-2 space-y-2">
-        <h1 className="text-2xl font-bold text-sumod-bl3">Sunat Modern</h1>
-        <p className="text-start text-base font-medium text-gray-600">
-          Kami menawarkan berbagai layanan sunat yang disesuaikan dengan kebutuhan dan kenyamanan pasien dengan metode
-          modern dan peralatan medis terkini
-        </p>
-        <div>
-          <a href="/layanan" className="text-sumod-bl3 text-base font-medium flex items-center">
-            Lihat Layanan Kami
-            <ArrowRightIcon className="w-5 h-5 ml-2 text-custom-orange animate-move-x" />
-          </a>
+    <div className="px-0 md:px-4 py-10">
+      <div className="grid grid-cols-1 xl:grid-cols-2">
+        <div className="p-0 md:p-2 space-y-2 lg:space-y-4 w-3/4">
+          <h1 className="text-2xl font-bold text-sumod-bl3">Sunat Modern</h1>
+          <p className="text-start text-base font-medium text-gray-600">
+            Kami menawarkan berbagai layanan sunat yang disesuaikan dengan kebutuhan dan kenyamanan pasien dengan metode
+            modern dan peralatan medis terkini.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 ">
+            <a href="/layanan" className="text-sumod-bl3 text-base font-medium flex items-center">
+              Lihat Layanan Kami
+              <ArrowRightIcon className="w-5 h-5 ml-2 text-custom-orange animate-move-x" />
+            </a>
+            <div className="relative flex gap-4 justify-end py-4 px-4 items-center">
+              <button
+                onClick={scrollLeft}
+                className="border border-sumod-bl3 p-2 rounded-full text-gray-800 hover:bg-sumod-bl3 hover:text-white hidden sm:flex"
+              >
+                <ArrowLeftIcon className="w-5 h-5" />
+              </button>
+              <button
+                onClick={scrollRight}
+                className=" border border-sumod-bl3 p-2 rounded-full text-gray-800 hover:bg-sumod-bl3 hover:text-white hidden sm:flex"
+              >
+                <ArrowRightIcon className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div ref={scrollRef} className="flex gap-6 overflow-x-auto no-scrollbar">
+          {services.map((service) => (
+            <div
+              key={service.id}
+              className="flex-shrink-0 mx-auto rounded-lg p-6 flex flex-col text-start bg-sumod-bl2 text-gray-800"
+            >
+              <div className="w-48 sm:w-56 md:w-60 lg:w-64 xl:w-72">
+                <div className="flex items-center gap-4">
+                  <div className=" rounded-full">{service.icon}</div>
+                  <h3 className="text-lg sm:text-xl font-semibold text-gray-800">{service.title}</h3>
+                </div>
+                <p className="text-sm sm:text-base text-gray-600 mt-2">{service.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-
-      {services.map((service) => (
-        <div key={service.id} className="rounded-lg p-6 flex flex-col text-start bg-sumod-bl2 text-gray-800">
-          <div className="flex items-center">
-            <div className="p-4">{service.icon}</div>
-            <h3 className="text-xl font-semibold text-gray-800">{service.title}</h3>
-          </div>
-          <p className="text-base text-gray-600">{service.description}</p>
-        </div>
-      ))}
     </div>
   );
 };
