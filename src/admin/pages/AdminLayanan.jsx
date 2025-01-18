@@ -162,7 +162,7 @@ const AdminLayanan = () => {
             services.map((service) => (
               <div
                 key={service.id}
-                className="p-4 rounded-custom-br overflow-hidden bg-slate-50 shadow-lg w-auto sm:w-[350px] lg:w-[325px] xl:w-[300px] 2xl:w-[380] h-auto"
+                className="p-4 rounded-custom-br overflow-hidden bg-slate-50 shadow-lg w-auto sm:w-[350px] lg:w-[325px] xl:w-[350px] 2xl:w-[380] h-auto"
               >
                 <img src={service.picture} alt={service.name} className="rounded-custom-br object-cover mb-2 mx-auto" />
                 <div>
@@ -176,9 +176,9 @@ const AdminLayanan = () => {
                     <p className="font-bold text-justify whitespace-pre-wrap">Fasilitas</p>
                     <p className="font-bold text-justify whitespace-pre-wrap">Keunggulan</p>
                   </div>
-                  <div className="gap-4 flex justify-between p-2 whitespace-pre-wrap">
-                    <p className="font-light text-justify mb-4 whitespace-pre-wrap">{service.fasilitas}</p>
-                    <p className="font-light text-justify mb-4 whitespace-pre-wrap">{service.keunggulan}</p>
+                  <div className="gap-2 flex justify-between p-1 whitespace-pre-wrap">
+                    <p className="font-light text-balance mb-4 whitespace-pre-wrap">{service.fasilitas}</p>
+                    <p className="font-light text-balance mb-4 whitespace-pre-wrap">{service.keunggulan}</p>
                   </div>
 
                   <div className="text-center mt-4">
