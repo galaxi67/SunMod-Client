@@ -3,6 +3,10 @@ import { fetchData, updateData } from "../api/apiService";
 import { ListBulletIcon, PencilIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { BallTriangle } from "react-loading-icons";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'
+
+
 
 const AdminMetode = () => {
   const [assets, setAssets] = useState([]);
@@ -151,10 +155,10 @@ const AdminMetode = () => {
                 <img src={asset.picture} alt={asset.name} className="rounded-custom-br object-cover mb-2 mx-auto" />
                 <div>
                   <h2 className="text-xl font-semibold text-center my-3">{asset.name}</h2>
-                  <p
-                    className="font-light text-justify mb-4 whitespace-pre-wrap"
+                  <div
+                    className="rich-text mb-4 whitespace-pre-wrap"
                     dangerouslySetInnerHTML={renderFormattedDescription(asset.description)}
-                  ></p>
+                  ></div>
                   <div className="text-center mt-4">
                     <button
                       className="bg-orange-500 text-white px-4 py-2 rounded-custom-br tracking-wider"
@@ -164,7 +168,7 @@ const AdminMetode = () => {
                           name: asset.name,
                           description: asset.description,
                           picture: null,
-                        });
+                        } );
                       }}
                     >
                       Update
@@ -177,69 +181,96 @@ const AdminMetode = () => {
       </div>
 
       {selectedAsset && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 m-0">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-screen overflow-y-auto rounded-custom-br">
-            <div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-lg shadow-lg w-full max-w-md overflow-y-auto">
-              <h2 className="font-semibold mb-4">Update Profil: "{selectedAsset.name}"</h2>
-              <p className="text-custom-black/40 font-bold">Judul</p>
-              <input
-                type="text"
-                placeholder="Judul Baru"
-                value={newData.name}
-                onChange={(e) => {
-                  setNewData({ ...newData, name: e.target.value });
-                  if (nameError) setNameError("");
-                }}
-                className="border p-2 w-full"
-              />
-              {nameError && <div className="text-red-500 font-semibold text-sm mb-4">{nameError}</div>}
-              <p className="text-custom-black/40 font-bold mt-2">Deskripsi</p>
-              <textarea
-                id="description"
-                placeholder="Deskripsi Baru (tambahkan keunggulan di sini)"
-                value={newData.description}
-                onChange={(e) => {
-                  setNewData({ ...newData, description: e.target.value });
-                  if (descError) setDescError("");
-                }}
-                className="border p-2 w-full h-40"
-              ></textarea>
-              {descError && <div className="text-red-500 font-semibold text-sm mb-4">{descError}</div>}
-              <div className="mb-3 flex justify-center">
-                <button onClick={handleBulletPoint} className="border border-gray-300 p-2 rounded mr-2">
-                  <ListBulletIcon className="h-5 w-5 text-custom-black" />
-                </button>
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 m-0">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-screen overflow-y-auto rounded-custom-br">
+          <div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-lg shadow-lg w-full max-w-md overflow-y-auto">
+            <h2 className="font-semibold mb-4">Update Profil: "{selectedAsset.name}"</h2>
+            <p className="text-custom-black/40 font-bold">Judul</p>
+            <input
+              type="text"
+              placeholder="Judul Baru"
+              value={newData.name}
+              onChange={(e) => {
+                setNewData({ ...newData, name: e.target.value });
+                if (nameError) setNameError("");
+              }}
+              className="border p-2 w-full"
+            />
+            {nameError && <div className="text-red-500 font-semibold text-sm mb-4">{nameError}</div>}
 
-                <button onClick={handleHighlight} className="border border-gray-300 p-2 rounded ">
-                  <PencilIcon className="h-5 w-5 text-emerald-600" />
-                </button>
-              </div>
-              <input type="file" accept="image/*" onChange={handleFileChange} className="border p-2 w-full mt-2" />
-              {pictError && <div className="text-red-500 font-semibold text-sm mb-4">{pictError}</div>}
-              <div className="flex justify-end space-x-2 mt-4">
-                <button
-                  className="bg-sidebar text-white px-4 py-2 rounded"
-                  onClick={() => handleUpdate(selectedAsset.id)}
-                  disabled={btnLoading}
-                >
-                  {btnLoading ? <BallTriangle className="h-7 w-7" /> : "Simpan Perubahan"}
-                </button>
+            <p className="text-custom-black/40 font-bold mt-2">Deskripsi</p>
 
-                <button className="bg-red-400 text-white px-4 py-2 rounded" onClick={resetForm}>
-                  Batal
-                </button>
-              </div>
-            </div>
-            <div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-lg shadow-lg w-full max-w-md">
-              <h3 className="font-semibold">Preview Deskripsi:</h3>
-              <div
-                className="border p-2 w-full mt-2 h-auto bg-slate-50 max-h-[100px] md:max-h-[450px] overflow-y-auto"
-                dangerouslySetInnerHTML={renderFormattedDescription(newData.description)}
-              ></div>
+            {/* <textarea
+              id="description"
+              placeholder="Deskripsi Baru (tambahkan keunggulan di sini)"
+              value={newData.description}
+              onChange={(e) => {
+                setNewData({ ...newData, description: e.target.value });
+                if (descError) setDescError("");
+              }}
+              className="border p-2 w-full h-40"
+            ></textarea> */}
+
+            <ReactQuill
+              value={newData.description || ""}
+              placeholder="Deskripsi Baru (tambahkan keunggulan di sini)"
+              onChange={(value) => {
+                setNewData({ ...newData, description: value });
+                if (nameError) setDescError("");
+              }}
+              modules={{
+                toolbar: [
+                  [{ header: '1' }, { header: '2' }],
+                  [{ size: [] }],
+                  [{ list: 'ordered' }, { list: 'bullet' }],
+                  ['bold', 'italic', 'underline'],
+                  [{ align: [] }],
+                  ['link', 'image']
+                ],
+              }}
+            />
+
+
+
+            {descError && <div className="text-red-500 font-semibold text-sm mb-4">{descError}</div>}
+
+            {/* <div className="mb-3 flex justify-center">
+              <button onClick={handleBulletPoint} className="border border-gray-300 p-2 rounded mr-2">
+                <ListBulletIcon className="h-5 w-5 text-custom-black" />
+              </button>
+
+              <button onClick={handleHighlight} className="border border-gray-300 p-2 rounded ">
+                <PencilIcon className="h-5 w-5 text-emerald-600" />
+              </button>
+            </div> */}
+            <input type="file" accept="image/*" onChange={handleFileChange} className="border p-2 w-full mt-2" />
+            {pictError && <div className="text-red-500 font-semibold text-sm mb-4">{pictError}</div>}
+            <div className="flex justify-end space-x-2 mt-4">
+              <button
+                className="bg-sidebar text-white px-4 py-2 rounded"
+                onClick={() => handleUpdate(selectedAsset.id)}
+                disabled={btnLoading}
+              >
+                {btnLoading ? <BallTriangle className="h-7 w-7" /> : "Simpan Perubahan"}
+              </button>
+
+              <button className="bg-red-400 text-white px-4 py-2 rounded" onClick={resetForm}>
+                Batal
+              </button>
             </div>
           </div>
+          <div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 className="font-semibold">Preview Deskripsi:</h3>
+            <div
+              className="rich-text border p-4 w-full mt-2 h-auto bg-slate-50 max-h-[450px] overflow-y-auto"
+              dangerouslySetInnerHTML={renderFormattedDescription(newData.description)}
+            ></div>
+          </div>
         </div>
-      )}
+      </div>
+    )}
+
+
     </div>
   );
 };

@@ -21,3 +21,55 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.rich-text ul {
+  @apply list-disc pl-4;
+}
+
+.rich-text ol {
+  @apply list-decimal pl-4;
+}
+
+.rich-text li {
+  @apply mb-2;
+}
+
+.rich-text a {
+  @apply text-blue-600 underline;
+}
+
+.rich-text a:hover {
+  @apply text-blue-700;
+}
+
+.rich-text h1 {
+  @apply text-3xl font-bold my-4;
+}
+
+.rich-text h2 {
+  @apply text-2xl font-semibold my-3;
+}
+
+.ql-align-right {
+  text-align: right;
+}
+
+.ql-align-center {
+  text-align: center;
+}
+
+.ql-align-left {
+  text-align: left;
+}
+
+.ql-size-small {
+  @apply text-sm
+}
+
+.ql-size-large {
+  @apply text-2xl
+}
+
+.ql-size-huge {
+  @apply text-4xl
+}

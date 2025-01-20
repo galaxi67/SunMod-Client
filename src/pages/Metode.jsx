@@ -109,7 +109,7 @@ const Metode = () => {
                     {method.name.toUpperCase()}
                   </h1>
                   <div
-                    className="text-sm sm:text-xl xl:text-2xl font-light text-start xl:text-justify mb-4 whitespace-pre-wrap"
+                    className="rich-text mb-4 whitespace-pre-wrap"
                     dangerouslySetInnerHTML={renderFormattedDescription(method.description)}
                   ></div>
                 </div>
