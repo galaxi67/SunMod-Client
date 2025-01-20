@@ -220,13 +220,12 @@ const AdminMetode = () => {
               }}
               modules={{
                 toolbar: [
-                  [{ header: '1' }, { header: '2' }, { font: [] }],
+                  [{ header: '1' }, { header: '2' }],
                   [{ size: [] }],
                   [{ list: 'ordered' }, { list: 'bullet' }],
                   ['bold', 'italic', 'underline'],
                   [{ align: [] }],
-                  ['link', 'image'],
-                  ['code-block'],
+                  ['link', 'image']
                 ],
               }}
             />
