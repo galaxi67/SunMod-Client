@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const InstagramFeed = () => {
+const InstagramFeed = ({ maxPosts = 3 }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const accessToken =
     "IGAAN5xqYgGi5BZAE5Gd2s2OHRqN0daVGRJbGFxZAU5uRHhQVkNsVC1sM3lYVGt2OXJhb01HR2sxWEdnUUFKZAmEybUtCY2puSW10UUNrb2thYVNqN19SajE5SlpuZAmpzUndfSjRPak9uOEczOEg3Q2hfU210bW1mTG1HdTEyQmxnQQZDZD";
@@ -18,6 +19,7 @@ const InstagramFeed = () => {
         setLoading(false);
       } catch (error) {
         console.error("Error fetching Instagram posts:", error);
+        setError("There was an issue loading the Instagram posts.");
         setLoading(false);
       }
     };
@@ -26,30 +28,41 @@ const InstagramFeed = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading Instagram posts...</p>;
+    return (
+      <div className="flex justify-center items-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+      </div>
+    );
   }
+
+  if (error) {
+    return <p className="text-red-500">{error}</p>;
+  }
+
+  const postsToDisplay = posts.slice(0, maxPosts);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      {posts.map((post) => (
+      {postsToDisplay.map((post) => (
         <a
           key={post.id}
           href={post.permalink}
           target="_blank"
           rel="noopener noreferrer"
           className="group block rounded-lg overflow-hidden shadow-md"
+          title={post.caption || "sumod.sunatmodern"}
         >
           {post.media_type === "VIDEO" ? (
-            <video src={post.media_url} controls className="w-full h-96 object-cover group-hover:opacity-75" />
+            <video src={post.media_url} controls className="w-full h-48 md:h-56 lg:h-80 object-cover group-hover:opacity-75" />
           ) : (
             <img
               src={post.media_url}
               alt={post.caption || "Instagram post"}
-              className="w-full h-80 object-cover group-hover:opacity-75"
+              className="w-full h-48 md:h-56 lg:h-80 object-cover group-hover:opacity-75"
             />
           )}
           <p className="mt-2 p-3 text-sm text-gray-600 font-normal">
-            {post.caption ? post.caption.slice(0, 100) + "..." : "No caption"}
+            {post.caption ? post.caption.slice(0, 200) + "..." : "No caption"}
           </p>
         </a>
       ))}
