@@ -92,6 +92,7 @@ const ServiceCard = () => {
             spaceBetween={10}
             slidesPerView={1}
             loop={true}
+            loopedSlides={5}
             pagination={{ clickable: true }}
             breakpoints={{
               640: {
