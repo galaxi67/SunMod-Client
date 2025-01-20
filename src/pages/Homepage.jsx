@@ -3,7 +3,7 @@ import { fetchData } from "../admin/api/apiService";
 import LoadingIndicator from "../components/LoadingIndicator";
 import ServiceCard from "../components/ServiceHome";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
-import { FaInstagram } from 'react-icons/fa';
+import { FaInstagram } from "react-icons/fa";
 import Galeri from "../components/InstagramFeed";
 
 const Homepage = () => {
@@ -269,18 +269,26 @@ const Homepage = () => {
           </div>
         </div>
 
-        <div className="mt-4 md:mt-6 lg:mt-10 xl:mt-12 hidden sm:block">
+        <div className="mt-4 md:mt-6 lg:mt-10 xl:mt-12 p-0 md:p-4 rounded-custom-br border-0 md:border-2 border-sumod-bl3">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4 px-0 md:px-8">
             <h1 className="text-4xl lg:text-6xl font-serif text-custom-black">
               Galeri <br />
               Sunat Modern
             </h1>
-            <a href="https://instagram.com/sumod.sunatmodern" className="flex items-center justify-start md:justify-center space-x-2">
-            <FaInstagram className="h-8 w-8 text-red-500" />
+            <a
+              href="https://instagram.com/sumod.sunatmodern"
+              className="flex items-center justify-start md:justify-center space-x-2 border-0 md:border border-sumod-bl3 rounded-custom-br"
+            >
+              <FaInstagram className="h-8 w-8 text-red-500" />
               <h1 className="text-2xl font-serif text-custom-black text-end">sumod.sunatmodern</h1>
             </a>
           </div>
-          <Galeri maxPosts={3} />
+          <div className="hidden sm:block">
+            <Galeri maxPosts={3} />
+          </div>
+          <div className="block sm:hidden">
+            <Galeri maxPosts={1} />
+          </div>
         </div>
 
         <div className="grid grid-row-2 p-4 lg:p-6 mt-4">
