@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { fetchData, updateData } from "../api/apiService";
-import { ListBulletIcon, PencilIcon } from "@heroicons/react/24/outline";
+// import { ListBulletIcon, PencilIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { BallTriangle } from "react-loading-icons";
 import ReactQuill from 'react-quill';
@@ -82,32 +82,32 @@ const AdminMetode = () => {
     }
   };
 
-  const handleBulletPoint = () => {
-    const selectedText = window.getSelection().toString();
+  // const handleBulletPoint = () => {
+  //   const selectedText = window.getSelection().toString();
 
-    if (selectedText.trim()) {
-      const bulletText = `<span class='bg-emerald-100 font-semibold text-custom-black'>• ${selectedText}</span>`;
-      document.execCommand("insertHTML", false, bulletText);
-    } else {
-      document.execCommand(
-        "insertHTML",
-        false,
-        `<span class='bg-emerald-100 font-semibold text-custom-black'>• </span>`
-      );
-    }
-  };
+  //   if (selectedText.trim()) {
+  //     const bulletText = `<span class='bg-emerald-100 font-semibold text-custom-black'>• ${selectedText}</span>`;
+  //     document.execCommand("insertHTML", false, bulletText);
+  //   } else {
+  //     document.execCommand(
+  //       "insertHTML",
+  //       false,
+  //       `<span class='bg-emerald-100 font-semibold text-custom-black'>• </span>`
+  //     );
+  //   }
+  // };
 
-  const handleHighlight = () => {
-    const selectedText = window.getSelection().toString();
-    if (!selectedText) {
-      alert("Pilih teks yang ingin di-highlight.");
-      return;
-    }
+  // const handleHighlight = () => {
+  //   const selectedText = window.getSelection().toString();
+  //   if (!selectedText) {
+  //     alert("Pilih teks yang ingin di-highlight.");
+  //     return;
+  //   }
 
-    const highlightedText = `[[highlight]]${selectedText}[[/highlight]]`;
-    const updatedDescription = newData.description.replace(selectedText, highlightedText);
-    setNewData({ ...newData, description: updatedDescription });
-  };
+  //   const highlightedText = `[[highlight]]${selectedText}[[/highlight]]`;
+  //   const updatedDescription = newData.description.replace(selectedText, highlightedText);
+  //   setNewData({ ...newData, description: updatedDescription });
+  // };
 
   const renderFormattedDescription = (description) => {
     let formattedText = description.replace(/\n/g, "<span class='block mb-2'></span>");
