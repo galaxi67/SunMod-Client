@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const InstagramFeed = ({ maxPosts = 3 }) => {
+const InstagramFeed = ({ maxPosts = 3, maxPosts1 = 1 }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
