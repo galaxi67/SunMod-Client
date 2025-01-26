@@ -5,32 +5,29 @@ import ServiceCard from "../components/ServiceHome";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { FaInstagram } from "react-icons/fa";
 import Galeri from "../components/InstagramFeed";
+import Layanan from "../components/LayananHome";
 
 const Homepage = () => {
   const [images, setImages] = useState([]);
   const [currentImage, setCurrentImage] = useState(0);
   const [methods, setMethods] = useState([]);
-  const [services, setServices] = useState([]);
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const fetchImages = async () => {
       setLoading(true);
       try {
-        const [response1, response2, response3, response4] = await Promise.all([
+        const [response1, response2, response3] = await Promise.all([
           fetchData("banner"),
           fetchData("method"),
-          fetchData("service"),
           fetchData("article"),
         ]);
         const filteredImages = response1.slice(2, 7);
         setMethods(response2);
-        setServices(response3);
-        setArticles(response4);
+        setArticles(response3);
         setImages(filteredImages);
         setLoading(false);
       } catch (err) {
@@ -88,9 +85,9 @@ const Homepage = () => {
               Solusi tepat dengan metode handal
             </h1>
             <div className="flex flex-wrap gap-1 md:gap-2 xl:gap-3 mt-1 md:mt-2 xl:mt-3">
-              <span className="border md:border-2 border-sumod-bl3 rounded-full px-3 text-custom-black">metode</span>
-              <span className="border md:border-2 border-custom-yellow rounded-full px-3 text-custom-black">sumod</span>
-              <span className="border md:border-2 border-custom-orange rounded-full px-3 text-custom-black">
+              <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">metode</span>
+              <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">sumod</span>
+              <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">
                 sunat modern
               </span>
             </div>
@@ -118,102 +115,26 @@ const Homepage = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 mt-4">
-          <div className="flex justify-center items-start flex-col gap-1 xl:gap-3">
-            <p className="font-bold text-gray-400 text-base md:text-xl xl:text-2xl">Layanan sumod</p>
-            <h1 className="font-semibold text-2xl md:text-3xl lg:text-5xl xl:text-6xl text-custom-black">
-              Solusi sunat yang menyeluruh
-            </h1>
-            <div className="flex flex-wrap gap-1 md:gap-2 xl:gap-3 mt-1 md:mt-2 xl:mt-3">
-              <span className=" border md:border-2 border-sumod-bl3 rounded-full px-3 text-custom-black">layanan</span>
-              <span className="border md:border-2 border-custom-yellow rounded-full px-3 text-custom-black">
-                sunat modern
-              </span>
-              <span className="border md:border-2 border-sumod-bl4 rounded-full px-3 text-custom-black">
-                professional
-              </span>
-              <span className="hidden sm:block border md:border-2 border-sumod-bl rounded-full px-3 text-custom-black">
-                nyaman
-              </span>
-              <span className="hidden sm:block border md:border-2 border-custom-orange rounded-full px-3 text-custom-black">
-                terpercaya
-              </span>
-              <span className="hidden lg:block border md:border-2 border-sidebar rounded-full px-3 text-custom-black">
-                terbaik
-              </span>
-              <span className="hidden lg:block border md:border-2 border-custom-pink rounded-full px-3 text-custom-black">
-                tidak sakit
-              </span>
-            </div>
-            <a
-              href="/layanan"
-              className="text-sumod-bl3 text-base md:text-xl lg:text-2xl font-medium flex items-center mt-1 md:mt-2 xl:mt-3"
-            >
-              Lihat semua paket sunat
-              <ArrowRightIcon className="w-5 lg:w-8 h-5 lg:h-8 ml-2 text-sumod-bl4 animate-move-x" />
-            </a>
-          </div>
-          <div className="relative py-4">
-            <div className="flex gap-4 overflow-x-auto">
-              {Array.isArray(services) &&
-                services.map((service, index) => (
-                  <div
-                    key={index}
-                    className="flex-shrink-0 w-[200px] sm:w-[300px] lg:w-[350px] p-3 lg:p-3 xl:p-5 bg-white border-2 shadow-custom hover:shadow-none hover:border-sumod-bl3 duration-500 rounded-xl overflow-hidden"
-                  >
-                    {service.picture && (
-                      <div className="flex flex-col gap-2 w-full">
-                        <img
-                          src={service.picture}
-                          alt={service.name}
-                          className="w-full h-full object-contain max-w-[120px] mx-auto hidden sm:block"
-                        />
-                      </div>
-                    )}
+        <Layanan />
 
-                    <div className="flex flex-col justify-center text-gray-800">
-                      <h1 className="text-base md:text-lg lg:text-2xl font-extrabold text-custom-black tracking-wide mb-2 text-center md:text-start">
-                        {service.name}
-                      </h1>
-                      <h2 className="text-sm md:text-base text-gray-500 font-semibold leading-relaxed mb-4 text-balance lg:text-start">
-                        {service.description}
-                      </h2>
-
-                      <div className="mt-2 md:mt-3 lg:mt-6">
-                        <a href="/layanan" rel="noopener noreferrer">
-                          <button
-                            type="button"
-                            className="w-full py-3 bg-sumod-bl3 text-white font-bold rounded-lg shadow-md hover:bg-custom-blue duration-500 transition-all"
-                          >
-                            Lihat Paket Layanan
-                          </button>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 mt-4 md:mt-6 lg:mt-10 xl:mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 mt-4 md:mt-10 lg:mt-14 xl:mt-16">
           <div className="flex justify-center ml-0 md:ml-4 lg:ml-10 xl:ml-12 items-start md:order-2 flex-col gap-1 xl:gap-3">
             <p className="font-bold text-gray-400 text-base md:text-xl xl:text-2xl">Artikel sumod</p>
             <h1 className="font-semibold text-2xl md:text-3xl lg:text-5xl xl:text-6xl text-custom-black">
               Kesehatan adalah segalanya
             </h1>
             <div className="flex flex-wrap gap-1 md:gap-2 xl:gap-3 mt-1 md:mt-2 xl:mt-3">
-              <span className="border md:border-2 border-sumod-bl3 rounded-full px-3 text-custom-black">kesehatan</span>
-              <span className="border md:border-2 border-custom-yellow rounded-full px-3 text-custom-black">
+              <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">kesehatan</span>
+              <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">
                 berita
               </span>
-              <span className="border md:border-2 border-custom-pink rounded-full px-3 text-custom-black">
+              <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">
                 hidup sehat
               </span>
-              <span className="hidden sm:block border md:border-2 border-custom-orange rounded-full px-3 text-custom-black">
+              <span className="hidden sm:block border border-sumod-bl3 rounded-full px-3 text-custom-black">
                 artikel
               </span>
-              <span className="hidden sm:block border md:border-2 border-sumod-bl4 rounded-full px-3 text-custom-black">
+              <span className="hidden sm:block border border-sumod-bl3 rounded-full px-3 text-custom-black">
                 sunat modern
               </span>
             </div>
@@ -269,7 +190,7 @@ const Homepage = () => {
           </div>
         </div>
 
-        <div className="mt-4 md:mt-6 lg:mt-10 xl:mt-12 p-0 md:p-4 rounded-custom-br border-0 md:border-2 border-sumod-bl3">
+        <div className="mt-4 md:mt-10 lg:mt-14 xl:mt-16 border-sumod-bl3">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4 px-0 md:px-8">
             <h1 className="text-4xl lg:text-6xl font-serif text-custom-black">
               Galeri <br />
@@ -280,7 +201,7 @@ const Homepage = () => {
               className="flex items-center justify-start md:justify-center space-x-2 border-0 md:border border-sumod-bl3 rounded-custom-br"
             >
               <FaInstagram className="h-8 w-8 text-red-500" />
-              <h1 className="text-2xl font-serif text-custom-black text-end">sumod.sunatmodern</h1>
+              <h1 className="text-4xl font-serif text-custom-black text-end">sumod.sunatmodern</h1>
             </a>
           </div>
           <div className="hidden sm:block">
