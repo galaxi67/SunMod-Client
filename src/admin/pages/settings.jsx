@@ -16,11 +16,11 @@ function Settings() {
     const loadProfileData = async () => {
       try
       {
-          const userData = await getUserProfile()
-          setUser( userData )
-        } catch ( error )
+        const userData = await getUserProfile()
+        setUser( userData )
+      } catch ( error )
       {
-        console.error( "Error loading user data:", error )
+        setIsLoading( false )
       } finally
       {
         setIsLoading( false )

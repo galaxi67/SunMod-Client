@@ -40,7 +40,7 @@ const AdminArtikel = () => {
       setTotalPages(response.totalPages);
       setLoading(false);
     } catch (err) {
-      setError(err.message);
+      setError(err?.message);
       setLoading(false);
     }
   }, [currentPage, itemsPerPage]);

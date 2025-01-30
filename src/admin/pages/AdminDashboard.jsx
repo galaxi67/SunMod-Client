@@ -20,7 +20,7 @@ const Dashboard = () => {
       setBoards(response);
       setLoading(false);
     } catch (err) {
-      setError(err.message);
+      setError(err?.message);
       setLoading(false);
     }
   };
