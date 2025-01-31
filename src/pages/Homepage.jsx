@@ -66,7 +66,7 @@ const Homepage = () => {
   return (
     <div className="container mx-auto">
       <div className="max-w-full">
-        <section className="mt-3 sm:mt-5 lg:mt-15 hero-section relative w-full h-[15rem] sm:h-[15rem] md:h-[25rem] lg:h-[35rem] xl:h-[35rem]">
+        <section className="mt-3 sm:mt-5 lg:mt-15 hero-section relative w-full h-[15rem] sm:h-[15rem] md:h-[25rem] lg:h-[35rem] xl:h-[38rem]">
           {images.length > 0 && (
             <img
               src={images[currentImage].picture}
@@ -198,7 +198,7 @@ const Homepage = () => {
             </h1>
             <a
               href="https://instagram.com/sumod.sunatmodern"
-              className="flex items-center justify-start md:justify-center space-x-2 border-0 md:border border-sumod-bl3 rounded-custom-br"
+              className="hidden sm:block flex items-center justify-start md:justify-center space-x-2 border-0 md:border border-sumod-bl3 rounded-custom-br"
             >
               <FaInstagram className="h-8 w-8 text-red-500" />
               <h1 className="text-4xl font-serif text-custom-black text-end">sumod.sunatmodern</h1>
