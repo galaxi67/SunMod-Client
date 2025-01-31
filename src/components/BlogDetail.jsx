@@ -57,8 +57,16 @@ export default function BlogDetail() {
                 </div>
               </div>
 
-              <p className="text-base text-gray-500 mt-3">{new Date(post.createdAt).toLocaleDateString()}</p>
-              <h1 className="text-3xl font-bold text-gray-800 ">{post.name}</h1>
+              <h1 className="text-3xl font-bold text-gray-800 mt-3">{post.name}</h1>
+              <p className="text-base text-gray-500">
+                {new Date(post.createdAt)
+                  .toLocaleDateString("id-ID", {
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
+                  })
+                  .replace(/\s/g, " ")}
+              </p>
               <p className="text-gray-600 mt-6 whitespace-pre-wrap font-medium text-justify leading-7">
                 {post.description}
               </p>
@@ -85,7 +93,15 @@ export default function BlogDetail() {
                           className="rounded-lg object-cover w-0 md:w-52 lg:w-64 xl:w-72 md:h-36 lg:h-40 xl:h-44"
                         />
                         <div className="mt-2">
-                          <p className="text-xs text-gray-500">{new Date(art.createdAt).toLocaleDateString()}</p>
+                          <p className="text-xs text-gray-500">
+                            {new Date(post.createdAt)
+                              .toLocaleDateString("id-ID", {
+                                day: "2-digit",
+                                month: "long",
+                                year: "numeric",
+                              })
+                              .replace(/\s/g, " ")}
+                          </p>
                           <h3 className="md:text-sm lg:text-base xl:text-lg font-bold text-gray-800">{art.name}</h3>
                         </div>
                       </button>

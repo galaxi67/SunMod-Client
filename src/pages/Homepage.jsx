@@ -87,9 +87,7 @@ const Homepage = () => {
             <div className="flex flex-wrap gap-1 md:gap-2 xl:gap-3 mt-1 md:mt-2 xl:mt-3">
               <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">metode</span>
               <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">sumod</span>
-              <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">
-                sunat modern
-              </span>
+              <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">sunat modern</span>
             </div>
             <a
               href="/layanan"
@@ -125,12 +123,8 @@ const Homepage = () => {
             </h1>
             <div className="flex flex-wrap gap-1 md:gap-2 xl:gap-3 mt-1 md:mt-2 xl:mt-3">
               <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">kesehatan</span>
-              <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">
-                berita
-              </span>
-              <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">
-                hidup sehat
-              </span>
+              <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">berita</span>
+              <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">hidup sehat</span>
               <span className="hidden sm:block border border-sumod-bl3 rounded-full px-3 text-custom-black">
                 artikel
               </span>
@@ -171,8 +165,7 @@ const Homepage = () => {
                   </div>
 
                   <div className="p-1 md:p-2 lg:p-3">
-                    <p className="text-xs text-gray-500 mt-3">{new Date(article.createdAt).toLocaleDateString()}</p>
-                    <h2 className="text-sm md:text-xl lg:text-xl font-medium text-gray-800 leading-tight line-clamp-1">
+                    <h2 className="text-sm md:text-xl lg:text-xl font-medium text-gray-800 leading-tight line-clamp-2">
                       {article.name}
                     </h2>
                     <div className="mt-1 md:mt-2">
@@ -201,7 +194,9 @@ const Homepage = () => {
               className="hidden sm:flex items-center justify-start md:justify-center space-x-2 border-0 md:border border-sumod-bl3 rounded-custom-br"
             >
               <FaInstagram className="h-8 w-8 text-red-500" />
-              <h1 className="text-xl lg:text-2xl xl:text-4xl font-serif text-custom-black text-end">sumod.sunatmodern</h1>
+              <h1 className="text-xl lg:text-2xl xl:text-4xl font-serif text-custom-black text-end">
+                sumod.sunatmodern
+              </h1>
             </a>
           </div>
           <div className="hidden sm:block">

@@ -15,17 +15,16 @@ const Artikel = () => {
     try {
       const response = await fetchDataPagination("article", currentPage, itemsPerPage);
       setArticles(response.data.reverse());
-      setCurrentPage( response.currentPage )
-      setTotalPages( response.totalPages )
+      setCurrentPage(response.currentPage);
+      setTotalPages(response.totalPages);
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
-  }, [currentPage, itemsPerPage] );
-  
-  useEffect(() => {
+  }, [currentPage, itemsPerPage]);
 
+  useEffect(() => {
     loadArticles();
   }, [loadArticles]);
 
@@ -69,9 +68,17 @@ const Artikel = () => {
                   className="w-full h-56 sm:h-64 lg:h-72 object-cover object-center"
                 />
                 <div className="p-6">
+                  <p className="text-sm text-gray-400 mb-1 md:mb-2 lg:mb-3">
+                    {new Date(article.createdAt)
+                      .toLocaleDateString("id-ID", {
+                        day: "2-digit",
+                        month: "long",
+                        year: "numeric",
+                      })
+                      .replace(/\s/g, " ")}
+                  </p>
                   <h2 className="text-2xl font-semibold text-gray-800 leading-tight">{article.name}</h2>
                   <p className="text-sm text-gray-600 mt-2 line-clamp-3">{article.description}</p>
-                  <p className="text-xs text-gray-500 mt-3">{new Date(article.createdAt).toLocaleDateString()}</p>
                   <div className="mt-4">
                     <a
                       href={`artikel/detail/${article.id}`}
@@ -102,12 +109,12 @@ const Artikel = () => {
               if (pageNumber <= totalPages) {
                 return (
                   <button
-                  key={pageNumber}
-                  onClick={() => setCurrentPage(pageNumber)}
-                  className={`px-3 py-1 rounded ${
-                    currentPage === pageNumber ? "bg-sumod-bl3 text-white" : "bg-gray-200"
+                    key={pageNumber}
+                    onClick={() => setCurrentPage(pageNumber)}
+                    className={`px-3 py-1 rounded ${
+                      currentPage === pageNumber ? "bg-sumod-bl3 text-white" : "bg-gray-200"
                     }`}
-                    >
+                  >
                     {pageNumber}
                   </button>
                 );
