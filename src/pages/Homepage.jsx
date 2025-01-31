@@ -198,10 +198,10 @@ const Homepage = () => {
             </h1>
             <a
               href="https://instagram.com/sumod.sunatmodern"
-              className="hidden sm:block flex items-center justify-start md:justify-center space-x-2 border-0 md:border border-sumod-bl3 rounded-custom-br"
+              className="hidden sm:flex items-center justify-start md:justify-center space-x-2 border-0 md:border border-sumod-bl3 rounded-custom-br"
             >
               <FaInstagram className="h-8 w-8 text-red-500" />
-              <h1 className="text-4xl font-serif text-custom-black text-end">sumod.sunatmodern</h1>
+              <h1 className="text-xl lg:text-2xl xl:text-4xl font-serif text-custom-black text-end">sumod.sunatmodern</h1>
             </a>
           </div>
           <div className="hidden sm:block">
