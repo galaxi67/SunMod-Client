@@ -3,6 +3,7 @@ import { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon } from "@heroicons/
 import { useNavigate } from "react-router-dom"
 import useAuth from "../hooks/useAuth"
 import { z } from "zod"
+import { toast } from "react-toastify"
 
 const SignIn = () => {
   const { login } = useAuth()
@@ -49,6 +50,7 @@ const SignIn = () => {
 
     try {
       await login(email, password)
+      toast.dismiss()
       navigate("/admin")
     } catch (err) {
       setErrors({ form: "Email atau password salah." })

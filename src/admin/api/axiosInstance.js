@@ -67,7 +67,6 @@ export const setupAxiosInterceptors = ( navigate ) => {
 		( error ) => {
 			if ( error.response?.status === 401 )
 			{
-				console.log( "Unauthorized. Please log in again." )
 				localStorage.clear()
 				navigate( "/signin" )
 			}
@@ -75,5 +74,7 @@ export const setupAxiosInterceptors = ( navigate ) => {
 		}
 	)
 }
+
+setupAxiosInterceptors()
 
 export default axiosInstance
