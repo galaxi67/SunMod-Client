@@ -1,6 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import {
   UserIcon,
   ShieldCheckIcon,
@@ -48,14 +50,21 @@ const ServiceCard = () => {
   const [swiperInstance, setSwiperInstance] = useState(null);
   const swiperRef = useRef(null);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
+
   const handleSwiper = (swiper) => {
     setSwiperInstance(swiper);
   };
 
   return (
-    <div className="px-0 md:px-4 py-10">
+    <div className="px-0 md:px-4 mt-2 md:mt-3 lg:mt-4 xl:mt-6">
       <div className="grid grid-cols-1 xl:grid-cols-2">
-        <div className="p-0 md:p-2 space-y-2 lg:space-y-4 xl:w-3/4">
+
+        <div data-aos="fade-right" className="p-0 md:p-2 space-y-2 lg:space-y-4 xl:w-3/4">
           <h1 className="text-2xl font-bold text-sumod-bl3">Sunat Modern</h1>
           <p className="text-start text-base font-medium text-gray-600">
             Kami menawarkan berbagai layanan sunat yang disesuaikan dengan kebutuhan dan kenyamanan pasien dengan metode
@@ -69,23 +78,23 @@ const ServiceCard = () => {
             {swiperInstance && (
               <div className="relative flex gap-4 justify-end py-4 px-4 items-center">
                 <button
-                  onClick={() => swiperInstance.slidePrev()} 
+                  onClick={() => swiperInstance.slidePrev()}
                   className="border border-sumod-bl3 p-2 rounded-full text-gray-800 hover:bg-sumod-bl3 hover:text-white hidden sm:flex"
                 >
                   <ArrowLeftIcon className="w-5 h-5" />
                 </button>
                 <button
-                  onClick={() => swiperInstance.slideNext()} 
+                  onClick={() => swiperInstance.slideNext()}
                   className=" border border-sumod-bl3 p-2 rounded-full text-gray-800 hover:bg-sumod-bl3 hover:text-white hidden sm:flex"
-                  >
+                >
                   <ArrowRightIcon className="w-5 h-5" />
                 </button>
               </div>
-              )}
-            </div>
+            )}
           </div>
+        </div>
 
-        <div className="relative flex gap-6 overflow-x-auto no-scrollbar">
+        <div data-aos="fade-up" className="relative flex gap-6 overflow-x-auto no-scrollbar">
           <Swiper
             ref={swiperRef}
             onSwiper={handleSwiper}

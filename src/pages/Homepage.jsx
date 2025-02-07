@@ -6,6 +6,8 @@ import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { FaInstagram } from "react-icons/fa";
 import Galeri from "../components/InstagramFeed";
 import Layanan from "../components/LayananHome";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Homepage = () => {
   const [images, setImages] = useState([]);
@@ -17,6 +19,10 @@ const Homepage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
     const fetchImages = async () => {
       setLoading(true);
       try {
@@ -78,8 +84,8 @@ const Homepage = () => {
 
         <ServiceCard />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="flex justify-center items-start md:order-2 flex-col gap-1 xl:gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 md:mt-3 lg:mt-4 xl:mt-6">
+          <div data-aos="zoom-out-left" className="flex justify-center items-start md:order-2 flex-col gap-1 xl:gap-3 ml-0 md:ml-2 lg:ml-4 xl:ml-6">
             <p className="font-bold text-gray-400 text-base md:text-xl xl:text-2xl">Metode sumod</p>
             <h1 className="font-semibold text-2xl md:text-3xl lg:text-5xl xl:text-6xl text-custom-black">
               Solusi tepat dengan metode handal
@@ -98,8 +104,8 @@ const Homepage = () => {
             </a>
           </div>
 
-          <div className="flex justify-center md:order-1">
-            <div className="grid grid-cols-2 md:grid-cols-2 gap-4 p-2 md:p-3 lg:p-6 xl:px-24">
+          <div data-aos="zoom-out-up" className="flex justify-center md:order-1 ">
+            <div className="grid grid-cols-2 md:grid-cols-2 gap-4 p-2 md:p-3 lg:p-6 xl:p-14 xl:px-24">
               {methods.slice(0, 4).map((method, index) => (
                 <a
                   key={index}
@@ -115,7 +121,11 @@ const Homepage = () => {
 
         <Layanan />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 mt-4 md:mt-10 lg:mt-14 xl:mt-16">
+        <div
+          data-aos="fade-up"
+          data-aos-anchor-placement="center-bottom"
+          className="grid grid-cols-1 md:grid-cols-2 "
+        >
           <div className="flex justify-center ml-0 md:ml-4 lg:ml-10 xl:ml-12 items-start md:order-2 flex-col gap-1 xl:gap-3">
             <p className="font-bold text-gray-400 text-base md:text-xl xl:text-2xl">Artikel sumod</p>
             <h1 className="font-semibold text-2xl md:text-3xl lg:text-5xl xl:text-6xl text-custom-black">
@@ -184,7 +194,7 @@ const Homepage = () => {
         </div>
 
         <div className="mt-4 md:mt-10 lg:mt-14 xl:mt-16 border-sumod-bl3">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4 px-0 md:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4 lg:mb-6 px-0 md:px-8">
             <h1 className="text-4xl lg:text-6xl font-serif text-custom-black">
               Galeri <br />
               Sunat Modern

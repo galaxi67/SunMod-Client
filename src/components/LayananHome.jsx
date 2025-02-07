@@ -4,6 +4,8 @@ import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { fetchData } from "../admin/api/apiService";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const LayananHome = () => {
   const [swiperInstance, setSwiperInstance] = useState(null);
@@ -12,6 +14,9 @@ const LayananHome = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
     const loadLayanan = async () => {
       setLoading(true);
       try {
@@ -40,30 +45,27 @@ const LayananHome = () => {
   }
 
   return (
-    <div className="">
-      <div className="grid grid-cols-1 md:grid-cols-2 mt-4 md:mt-10 lg:mt-14 xl:mt-16">
-        <div className="flex justify-center items-start flex-col gap-1 xl:gap-3 ">
+    <div className="px-0 md:px-2 xl:px-7">
+      <div className="grid grid-cols-1 md:grid-cols-2 mt-2 md:mt-3 lg:mt-4 xl:mt-6 mb-4 md:mb-4 xl:mb-16">
+        <div
+          data-aos="fade-right"
+          data-aos-offset="300"
+          data-aos-easing="ease-in-sine"
+          className="flex justify-center items-start flex-col gap-1 xl:gap-3 "
+        >
           <p className="font-bold text-gray-400 text-base md:text-xl xl:text-2xl">Layanan sumod</p>
           <h1 className="font-semibold text-2xl md:text-3xl lg:text-5xl xl:text-6xl text-custom-black">
             Solusi sunat yang menyeluruh
           </h1>
           <div className="flex flex-wrap gap-1 md:gap-2 xl:gap-3 mt-1 md:mt-2 xl:mt-3">
             <span className=" border border-sumod-bl3 rounded-full px-3 text-custom-black">layanan</span>
-            <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">
-              sunat modern
-            </span>
-            <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">
-              professional
-            </span>
-            <span className="hidden sm:block border border-sumod-bl3 rounded-full px-3 text-custom-black">
-              nyaman
-            </span>
+            <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">sunat modern</span>
+            <span className="border border-sumod-bl3 rounded-full px-3 text-custom-black">professional</span>
+            <span className="hidden sm:block border border-sumod-bl3 rounded-full px-3 text-custom-black">nyaman</span>
             <span className="hidden sm:block border border-sumod-bl3 rounded-full px-3 text-custom-black">
               terpercaya
             </span>
-            <span className="hidden lg:block border border-sumod-bl3 rounded-full px-3 text-custom-black">
-              terbaik
-            </span>
+            <span className="hidden lg:block border border-sumod-bl3 rounded-full px-3 text-custom-black">terbaik</span>
             <span className="hidden lg:block border border-sumod-bl3 rounded-full px-3 text-custom-black">
               tidak sakit
             </span>
@@ -94,7 +96,13 @@ const LayananHome = () => {
             )}
           </div>
         </div>
-        <div className="relative flex gap-6 overflow-x-auto no-scrollbar">
+        <div
+          data-aos="fade-zoom-in"
+          data-aos-easing="ease-in-back"
+          data-aos-delay="200"
+          data-aos-offset="0"
+          className="relative flex gap-6 overflow-x-auto no-scrollbar"
+        >
           <Swiper
             onSwiper={handleSwiper}
             spaceBetween={10}

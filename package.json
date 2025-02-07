@@ -10,6 +10,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "antd": "^5.22.7",
+    "aos": "^2.3.4",
     "axios": "^1.7.9",
     "dompurify": "^3.2.3",
     "dotenv": "^16.4.7",

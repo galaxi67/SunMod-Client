@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from "../admin/api/apiService";
 import LoadingIndicator from "../components/LoadingIndicator";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const Layanan = () => {
   const [services, setServices] = useState([]);
@@ -10,6 +12,9 @@ const Layanan = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
     const loadServices = async () => {
       setLoading(true);
       try {
@@ -70,7 +75,13 @@ const Layanan = () => {
             pilih layanan sesuai kebutuhan anda
           </p>
 
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-2 mb-5">
+          <div
+            data-aos="fade-zoom-in"
+            data-aos-easing="ease-in-back"
+            data-aos-delay="300"
+            data-aos-offset="0"
+            className="grid grid-cols-1 xl:grid-cols-2 gap-6 mt-2 mb-5"
+          >
             {Array.isArray(services) &&
               services.map((service, index) => (
                 <div
@@ -211,25 +222,25 @@ const Layanan = () => {
               METODE SUNAT KAMI
             </h1>
             <p className="text-center font-semibold text-gray-400 text-xs md:text-lg lg:text-xl mb-5">
-                lihat metode yang kami gunakan
-              </p>
+              lihat metode yang kami gunakan
+            </p>
             <div className="flex justify-center">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-2 md:p-3 lg:p-6 xl:px-24">
-                  {methods.map((method, index) => (
-                    <a
-                      key={index}
-                      href="/metode"
-                      className="bg-slate-50 rounded-custom-br overflow-hidden p-3 aspect-square shadow-md hover:border-custom-yellow hover:border-2 hover:shadow-none duration-500 transition ease-in-out"
-                    >
-                      <img
-                        src={method.picture}
-                        alt={method.name}
-                        className="w-full h-full object-contain cursor-pointer"
-                      />
-                    </a>
-                  ))}
-                </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-2 md:p-3 lg:p-6 xl:px-24">
+                {methods.map((method, index) => (
+                  <a
+                    key={index}
+                    href="/metode"
+                    className="bg-slate-50 rounded-custom-br overflow-hidden p-3 aspect-square shadow-md hover:border-custom-yellow hover:border-2 hover:shadow-none duration-500 transition ease-in-out"
+                  >
+                    <img
+                      src={method.picture}
+                      alt={method.name}
+                      className="w-full h-full object-contain cursor-pointer"
+                    />
+                  </a>
+                ))}
               </div>
+            </div>
           </div>
         </div>
       </div>
