@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { updateData, deleteArticle, fetchDataPagination } from "../api/apiService";
+import { updateData, deleteArticle, fetchDataPagination } from "../../api/apiService";
 import { ListBulletIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { BallTriangle } from "react-loading-icons";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import ReadMoreLess from "react-read-more-less";
 
 const AdminArtikel = () => {

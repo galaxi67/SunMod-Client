@@ -50,26 +50,44 @@ body {
   @apply text-2xl font-semibold my-3;
 }
 
-.ql-align-right {
-  text-align: right;
+.ql-editor {
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-.ql-align-center {
-  text-align: center;
+.ql-editor p {
+  margin-bottom: 0rem !important;
 }
 
-.ql-align-left {
-  text-align: left;
+.ql-editor h1 {
+  font-size: 1.875rem !important;
+  font-weight: bold !important;
+  color: #0000 !important;
 }
 
-.ql-size-small {
-  @apply text-sm
+.ql-editor h2 {
+  font-size: 1.5rem !important;
+  font-weight: bold !important;
+  color: #0000 !important;
 }
 
-.ql-size-large {
-  @apply text-2xl
+.ql-editor h3 {
+  font-size: 1.25rem !important;
+  font-weight: bold !important;
+  color: #0000 !important;
 }
 
-.ql-size-huge {
-  @apply text-4xl
+.ql-editor ul,
+.ql-editor ol {
+  list-style-position: inside !important;
+  padding-left: 0rem !important;
+}
+
+.ql-container {
+  padding: 1rem !important;
+  min-height: 150px;
+}
+
+.ql-toolbar {
+  padding: 0.5rem !important;
 }

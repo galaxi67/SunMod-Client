@@ -105,18 +105,25 @@ const Layanan = () => {
                     <h1 className="text-2xl font-extrabold text-custom-black tracking-wide mb-2 text-center md:text-start">
                       {service.name}
                     </h1>
-                    <h2 className="text-base text-gray-500 font-semibold leading-relaxed mb-4 text-justify lg:text-start">
-                      {service.description}
-                    </h2>
+                    <h2
+                      className="ql-editor text-base text-gray-500 font-semibold leading-relaxed mb-4 text-justify lg:text-start "
+                      dangerouslySetInnerHTML={{ __html: service.description }}
+                    ></h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <p className="text-lg font-bold text-sumod-bl3">Keunggulan</p>
-                        <p className="text-base text-gray-600 mt-2 whitespace-pre-wrap">{service.keunggulan}</p>
+                        <p
+                          className="ql-editor text-base text-gray-600 mt-2 whitespace-pre-wrap"
+                          dangerouslySetInnerHTML={{ __html: service.keunggulan }}
+                        ></p>
                       </div>
                       <div>
                         <p className="text-lg font-bold text-sumod-bl3">Fasilitas</p>
-                        <p className="text-base text-gray-600 mt-2 whitespace-pre-wrap">{service.fasilitas}</p>
+                        <p
+                          className="ql-editor text-base text-gray-600 mt-2 whitespace-pre-wrap"
+                          dangerouslySetInnerHTML={{ __html: service.fasilitas }}
+                        ></p>
                       </div>
                     </div>
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { createData } from "../api/apiService";
+import { createData } from "../../api/apiService";
 
 const CreateArtikel = () => {
   const [formData, setFormData] = useState({

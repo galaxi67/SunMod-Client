@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { fetchData, updateData } from "../api/apiService";
-import { ListBulletIcon, PencilIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { BallTriangle } from "react-loading-icons";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const AdminLayanan = () => {
   const [services, setServices] = useState([]);
@@ -42,15 +43,24 @@ const AdminLayanan = () => {
     setFacError("");
     setExcError("");
     setPictError("");
-    if (
-      !newData.name.trim() ||
-      !newData.description.trim() ||
-      !newData.fasilitas.trim() ||
-      !newData.keunggulan.trim()
-    ) {
-      alert("Semua kolom wajib diisi.");
-      return;
+
+    if (!newData.name.trim()) {
+      setNameError("Judul wajib diisi.");
+      isValid = false;
     }
+    if (!newData.description.trim()) {
+      setDescError("Deskripsi wajib diisi.");
+      isValid = false;
+    }
+    if (!newData.fasilitas.trim()) {
+      setFacError("Fasilitas wajib diisi.");
+      isValid = false;
+    }
+    if (!newData.keunggulan.trim()) {
+      setExcError("Keunggulan wajib diisi.");
+      isValid = false;
+    }
+
     if (!isValid) return;
 
     try {
@@ -90,46 +100,6 @@ const AdminLayanan = () => {
     }
   };
 
-  const handleBulletPoint = () => {
-    const selectedText = window.getSelection().toString();
-
-    if (selectedText.trim()) {
-      const bulletText = `<span class='bg-emerald-100 font-semibold text-custom-black'>• ${selectedText}</span>`;
-      document.execCommand("insertHTML", false, bulletText);
-    } else {
-      document.execCommand(
-        "insertHTML",
-        false,
-        `<span class='bg-emerald-100 font-semibold text-custom-black'>• </span>`
-      );
-    }
-  };
-
-  const handleHighlight = () => {
-    const selectedText = window.getSelection().toString();
-    if (!selectedText) {
-      alert("Pilih teks yang ingin di-highlight.");
-      return;
-    }
-
-    const highlightedText = `[[highlight]]${selectedText}[[/highlight]]`;
-    const updatedDescription = newData.description.replace(selectedText, highlightedText);
-    setNewData({ ...newData, description: updatedDescription });
-  };
-
-  const renderFormattedDescription = (description) => {
-    let formattedText = description.replace(/\n/g, "<span class='block mb-2'></span>");
-
-    formattedText = formattedText.replace(
-      /\[\[highlight\]\](.*?)\[\[\/highlight\]\]/g,
-      '<span class="bg-emerald-100 font-semibold text-custom-black p-2 inline-block rounded-custom-br">$1</span>'
-    );
-
-    formattedText = formattedText.replace(/•/g, '<span class="font-bold">•</span>');
-
-    return { __html: formattedText };
-  };
-
   const resetForm = () => {
     setNewData({
       name: "",
@@ -167,18 +137,24 @@ const AdminLayanan = () => {
                 <img src={service.picture} alt={service.name} className="rounded-custom-br object-cover mb-2 mx-auto" />
                 <div>
                   <h2 className="text-xl font-semibold text-center my-3">{service.name}</h2>
-                  <p
-                    className="font-light text-justify mb-4 whitespace-pre-wrap"
-                    dangerouslySetInnerHTML={renderFormattedDescription(service.description)}
-                  ></p>
+                  <div
+                    className="ql-editor font-light text-justify mb-4 whitespace-pre-wrap"
+                    dangerouslySetInnerHTML={{ __html: service.description }}
+                  ></div>
 
                   <div className="gap-16 flex justify-center p-2 whitespace-pre-wrap">
                     <p className="font-bold text-justify whitespace-pre-wrap">Fasilitas</p>
                     <p className="font-bold text-justify whitespace-pre-wrap">Keunggulan</p>
                   </div>
                   <div className="gap-2 flex justify-between p-1 whitespace-pre-wrap">
-                    <p className="font-light text-balance mb-4 whitespace-pre-wrap">{service.fasilitas}</p>
-                    <p className="font-light text-balance mb-4 whitespace-pre-wrap">{service.keunggulan}</p>
+                    <p
+                      className="ql-editor font-light text-start mb-4 whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{ __html: service.fasilitas }}
+                    ></p>
+                    <p
+                      className="ql-editor font-light text-balance mb-4 whitespace-pre-wrap"
+                      dangerouslySetInnerHTML={{ __html: service.keunggulan }}
+                    ></p>
                   </div>
 
                   <div className="text-center mt-4">
@@ -205,98 +181,92 @@ const AdminLayanan = () => {
       </div>
 
       {selectedService && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 m-0">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-screen overflow-y-auto rounded-custom-br">
-            <div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-custom-br shadow-lg w-full max-w-md overflow-y-auto">
-              <h2 className="font-semibold mb-4">Update Layanan: "{selectedService.name}"</h2>
-              <p className="text-custom-black/40 font-bold">Judul</p>
-              <input
-                type="text"
-                placeholder="Judul Baru"
-                value={newData.name}
-                onChange={(e) => {
-                  setNewData({ ...newData, name: e.target.value });
-                  if (nameError) setNameError("");
-                }}
-                className="border p-2 w-full"
-              />
-              {nameError && <div className="text-red-500 font-semibold text-sm mb-4">{nameError}</div>}
-              <p className="text-custom-black/40 font-bold mt-2">Deskripsi</p>
-              <textarea
-                id="description"
-                placeholder="Deskripsi Baru (tambahkan deskripsi di sini)"
-                value={newData.description}
-                onChange={(e) => {
-                  setNewData({ ...newData, description: e.target.value });
-                  if (descError) setDescError("");
-                }}
-                className="border p-2 w-full h-40"
-              ></textarea>
-              <div className="mb-3 flex justify-center">
-                <button onClick={handleBulletPoint} className="border border-gray-300 p-2 rounded mr-2">
-                  <ListBulletIcon className="h-5 w-5 text-custom-black" />
-                </button>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-lg w-full max-w-4xl mx-4 overflow-hidden">
+            <div className="p-6 max-h-[80vh] overflow-y-auto">
+              <h2 className="font-semibold text-xl mb-4">Update Layanan: "{selectedService.name}"</h2>
 
-                <button onClick={handleHighlight} className="border border-gray-300 p-2 rounded">
-                  <PencilIcon className="h-5 w-5 text-emerald-600" />
-                </button>
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                <div>
-                  <p className="text-custom-black/40 font-bold mt-2">Fasilitas</p>
-                  <textarea
-                    id="fasilitas"
-                    placeholder="Deskripsi Baru (tambahkan fasilitas di sini)"
-                    value={newData.fasilitas}
-                    onChange={(e) => {
-                      setNewData({ ...newData, fasilitas: e.target.value });
-                      if (facError) setFacError("");
-                    }}
-                    className="border p-2 w-full h-40"
-                  ></textarea>
-                </div>
-                <div>
-                  <p className="text-custom-black/40 font-bold mt-2">Keunggulan</p>
-                  <textarea
-                    id="keunggulan"
-                    placeholder="Deskripsi Baru (tambahkan keunggulan di sini)"
-                    value={newData.keunggulan}
-                    onChange={(e) => {
-                      setNewData({ ...newData, keunggulan: e.target.value });
-                      if (excError) setExcError("");
-                    }}
-                    className="border p-2 w-full h-40"
-                  ></textarea>
-                </div>
-              </div>
-              <div className="flex justify-center mb-3">
-                <button onClick={handleBulletPoint} className="border border-gray-300 p-2 text-center rounded mr-2">
-                  <ListBulletIcon className="h-5 w-5 text-custom-black" />
-                </button>
+              {/* Judul Input */}
+              <div className="mb-4">
+                <p className="text-custom-black/40 font-bold mb-1">Judul</p>
+                <input
+                  type="text"
+                  placeholder="Judul Baru"
+                  value={newData.name}
+                  onChange={(e) => {
+                    setNewData({ ...newData, name: e.target.value });
+                    if (nameError) setNameError("");
+                  }}
+                  className="border p-2 w-full rounded focus:ring-2 focus:ring-blue-300"
+                />
+                {nameError && <div className="text-red-500 font-semibold text-sm mt-1">{nameError}</div>}
               </div>
 
-              <input type="file" accept="image/*" onChange={handleFileChange} className="border p-2 w-full mt-2" />
-              {pictError && <div className="text-red-500 font-semibold text-sm mb-4">{pictError}</div>}
-              <div className="flex justify-end space-x-2 mt-4">
+              {/* Deskripsi Input */}
+              <div className="mb-4">
+                <p className="text-custom-black/40 font-bold mb-1">Deskripsi</p>
+                <div className="bg-white p-2 min-h-[150px]">
+                  <ReactQuill
+                    value={newData.description}
+                    onChange={(value) => setNewData((prev) => ({ ...prev, description: value }))}
+                  />
+                </div>
+                {descError && <p className="text-red-500 text-sm mt-1">{descError}</p>}
+              </div>
+
+              {/* Fasilitas & Keunggulan Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <p className="text-custom-black/40 font-bold mb-1">Fasilitas</p>
+                  <div className=" bg-white p-2 min-h-[150px]">
+                    <ReactQuill
+                      value={newData.fasilitas}
+                      onChange={(value) => setNewData((prev) => ({ ...prev, fasilitas: value }))}
+                    />
+                  </div>
+                  {facError && <p className="text-red-500 text-sm mt-1">{facError}</p>}
+                </div>
+
+                <div>
+                  <p className="text-custom-black/40 font-bold mb-1">Keunggulan</p>
+                  <div className="bg-white p-2 min-h-[150px]">
+                    <ReactQuill
+                      value={newData.keunggulan}
+                      onChange={(value) => setNewData((prev) => ({ ...prev, keunggulan: value }))}
+                    />
+                  </div>
+                  {excError && <p className="text-red-500 text-sm mt-1">{excError}</p>}
+                </div>
+              </div>
+
+              {/* File Input */}
+              <div className="mb-4">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                  className="border p-2 w-full rounded focus:ring-2 focus:ring-blue-300"
+                />
+                {pictError && <div className="text-red-500 font-semibold text-sm mt-1">{pictError}</div>}
+              </div>
+
+              {/* Buttons */}
+              <div className="flex justify-end space-x-2">
                 <button
-                  className="bg-sidebar text-white px-4 py-2 rounded"
+                  className="bg-sidebar text-white px-4 py-2 rounded hover:bg-sidebar-dark transition-colors"
                   onClick={() => handleUpdate(selectedService.id)}
                   disabled={btnLoading}
                 >
-                  {btnLoading ? <BallTriangle className="h-7 w-7" /> : "Simpan Perubahan"}
+                  {btnLoading ? <BallTriangle stroke="#fff" className="h-7 w-7" /> : "Simpan Perubahan"}
                 </button>
 
-                <button className="bg-red-400 text-white px-4 py-2 rounded" onClick={resetForm}>
+                <button
+                  className="bg-red-400 text-white px-4 py-2 rounded hover:bg-red-500 transition-colors"
+                  onClick={resetForm}
+                >
                   Batal
                 </button>
               </div>
-            </div>
-            <div className="bg-white border p-2 md:p-3 lg:p-5 xl:p-6 rounded-lg shadow-lg max-w-md w-full">
-              <h3 className="font-semibold">Preview Deskripsi:</h3>
-              <div
-                className="border p-2 w-full mt-2 h-auto bg-slate-50 max-h-[100px] md:max-h-[450px] overflow-y-auto"
-                dangerouslySetInnerHTML={renderFormattedDescription(newData.description)}
-              ></div>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchData, updateData } from "../api/apiService";
 import { toast } from "react-toastify";
-import TabProfile from "../components/TabProfile";
+import TabProfile from "../components/profile/TabProfile";
 import PopupUpdate from "../components/PopupUpdate";
 
 const AdminProfil = () => {

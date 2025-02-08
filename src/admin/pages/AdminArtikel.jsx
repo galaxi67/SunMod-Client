@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs } from "antd";
-import AdminArtikel from "../components/ArticleContent";
-import CreateArtikel from "../components/CreateArticle";
+import AdminArtikel from "../components/article/ArticleContent";
+import CreateArtikel from "../components/article/CreateArticle";
 
 const ArtikelTabs = () => {
 
