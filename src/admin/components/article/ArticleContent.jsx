@@ -102,8 +102,7 @@ const AdminArtikel = () => {
 
     try {
       setBtnLoading(true);
-      console.log("Deleting article with ID:", id);
-
+      
       await login(email, password);
 
       await deleteArticle(id, email, password);

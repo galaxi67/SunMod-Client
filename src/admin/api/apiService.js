@@ -97,3 +97,15 @@ export const deleteArticle = async (id, email, password) => {
     throw new Error("Gagal menghapus artikel: " + error.message);
   }
 };
+
+export const deleteMethod = async (id, email, password) => {
+  try {
+    const response = await axiosInstance.delete(`/method/${id}`, {
+      data: { email, password },
+    });
+
+    return response.data.data;
+  } catch (error) {
+    throw new Error("Gagal menghapus metode: " + error.message);
+  }
+};
