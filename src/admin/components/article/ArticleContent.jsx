@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { updateData, deleteArticle, fetchDataPagination } from "../../api/apiService";
-import { ListBulletIcon } from "@heroicons/react/24/outline";
 import { toast } from "react-toastify";
 import { BallTriangle } from "react-loading-icons";
 import useAuth from "../../hooks/useAuth";
+import ReactQuill from "react-quill";
 import ReadMoreLess from "react-read-more-less";
 
 const AdminArtikel = () => {
@@ -102,7 +102,7 @@ const AdminArtikel = () => {
 
     try {
       setBtnLoading(true);
-      
+
       await login(email, password);
 
       await deleteArticle(id, email, password);
@@ -136,17 +136,6 @@ const AdminArtikel = () => {
     if (file) {
       setPictError("");
       setNewData({ ...newData, picture: file });
-    }
-  };
-
-  const handleBulletPoint = () => {
-    const selectedText = window.getSelection().toString().trim();
-
-    if (selectedText) {
-      const bulletText = `• ${selectedText}`;
-      document.execCommand("insertText", false, bulletText);
-    } else {
-      document.execCommand("insertText", false, "• ");
     }
   };
 
@@ -215,12 +204,10 @@ const AdminArtikel = () => {
                     <h2 className="text-2xl font-semibold mb-4">{asset.name}</h2>
                     <div className="whitespace-pre-wrap">
                       <ReadMoreLess
-                        charLimit={isSmallScreen ? 100 : 700}
+                        charLimit={isSmallScreen ? 500 : 700}
                         readMoreText=" Selengkapnya"
                         readLessText=" Lebih Sedikit"
-                      >
-                        {asset.description}
-                      </ReadMoreLess>
+                      >{asset.description}</ReadMoreLess>
                     </div>
                   </div>
 
@@ -255,7 +242,6 @@ const AdminArtikel = () => {
       </div>
 
       <div className="flex justify-center space-x-2 mb-4">
-        
         <div className="space-x-2">
           {currentPage > 3 && (
             <button
@@ -271,12 +257,12 @@ const AdminArtikel = () => {
             if (pageNumber <= totalPages) {
               return (
                 <button
-                key={pageNumber}
-                onClick={() => setCurrentPage(pageNumber)}
-                className={`px-3 py-1 rounded ${
-                  currentPage === pageNumber ? "bg-sumod-bl3 text-white" : "bg-gray-200"
+                  key={pageNumber}
+                  onClick={() => setCurrentPage(pageNumber)}
+                  className={`px-3 py-1 rounded ${
+                    currentPage === pageNumber ? "bg-sumod-bl3 text-white" : "bg-gray-200"
                   }`}
-                  >
+                >
                   {pageNumber}
                 </button>
               );
@@ -303,7 +289,7 @@ const AdminArtikel = () => {
               value={itemsPerPage}
               onChange={(e) => {
                 setItemsPerPage(Number(e.target.value));
-                setCurrentPage(1); // Reset ke halaman pertama
+                setCurrentPage(1);
               }}
               className="px-2 py-1 border rounded"
             >
@@ -384,24 +370,14 @@ const AdminArtikel = () => {
                 className="border p-2 w-full"
               />
               {nameError && <div className="text-red-500 font-semibold text-sm mb-4">{nameError}</div>}
+
               <p className="text-custom-black/40 font-bold mt-2">Deskripsi</p>
-              <textarea
-                id="description"
-                placeholder="Deskripsi Baru (tambahkan keunggulan di sini)"
+              <ReactQuill
                 value={newData.description}
-                onChange={(e) => {
-                  setNewData({ ...newData, description: e.target.value });
-                  if (descError) setDescError("");
-                }}
-                className="border p-2 w-full h-40"
-              ></textarea>
+                onChange={(value) => setNewData((prev) => ({ ...prev, description: value }))}
+              />
               {descError && <div className="text-red-500 font-semibold text-sm mb-4">{descError}</div>}
 
-              <div className="mb-3 flex justify-center">
-                <button onClick={handleBulletPoint} className="border border-gray-300 p-2 rounded mr-2">
-                  <ListBulletIcon className="h-5 w-5 text-custom-black" />
-                </button>
-              </div>
               <input type="file" accept="image/*" onChange={handleFileChange} className="border p-2 w-full mt-2" />
               {pictError && <div className="text-red-500 font-semibold text-sm mb-4">{pictError}</div>}
 

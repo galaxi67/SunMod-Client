@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { BallTriangle } from "react-loading-icons";
 import useAuth from "../../hooks/useAuth";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 
 const AdminLayanan = () => {
   const [services, setServices] = useState([]);

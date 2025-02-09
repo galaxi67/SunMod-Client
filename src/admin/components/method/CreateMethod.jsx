@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { createData } from "../../api/apiService";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
 
 const CreateMethod = () => {
   const [formData, setFormData] = useState({

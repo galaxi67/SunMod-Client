@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { createData } from "../../api/apiService";
+import ReactQuill from "react-quill";
 
 const CreateArtikel = () => {
   const [formData, setFormData] = useState({
@@ -74,13 +75,16 @@ const CreateArtikel = () => {
         className="border p-2 w-full mb-2"
       />
       {nameError && <div className="text-red-500 mb-2">{nameError}</div>}
-      <textarea
+
+      <label className="font-semibold">Deskripsi</label>
+      <ReactQuill
         placeholder="Deskripsi Artikel"
         value={formData.description}
-        onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-        className="border p-2 w-full h-32 mb-2"
-      ></textarea>
+        onChange={(value) => setFormData({ ...formData, description: value })}
+        className="py-3"
+      />
       {descError && <div className="text-red-500 mb-2">{descError}</div>}
+
       <input type="file" accept="image/*" onChange={handleFileChange} className="border p-2 w-full mb-2" />
       {pictError && <div className="text-red-500 mb-2">{pictError}</div>}
       <button
