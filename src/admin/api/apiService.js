@@ -74,6 +74,18 @@ export const createData = async (tableName, formData) => {
   }
 };
 
+export const deleteService = async (id, email, password) => {
+  try {
+    const response = await axiosInstance.delete(`/service/${id}`, {
+      data: { email, password },
+    });
+
+    return response.data.data;
+  } catch (error) {
+    throw new Error("Gagal menghapus layanan: " + error.message);
+  }
+};
+
 export const deleteArticle = async (id, email, password) => {
   try {
     const response = await axiosInstance.delete(`/article/${id}`, {

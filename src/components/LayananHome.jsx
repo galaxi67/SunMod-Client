@@ -142,9 +142,10 @@ const LayananHome = () => {
                   <h1 className="text-base md:text-lg lg:text-2xl font-extrabold text-custom-black tracking-wide mb-2 text-center">
                     {service.name}
                   </h1>
-                  <h2 className="text-sm md:text-base text-gray-500 font-semibold leading-relaxed mb-4 text-center">
-                    {service.description}
-                  </h2>
+                  <h2
+                    className="ql-editor text-sm md:text-base text-gray-500 font-semibold leading-relaxed mb-4 text-center"
+                    dangerouslySetInnerHTML={{ __html: service.description }}
+                  ></h2>
 
                   <div className="mt-2 md:mt-3 lg:mt-6">
                     <a href="/layanan" rel="noopener noreferrer">

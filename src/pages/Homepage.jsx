@@ -216,7 +216,6 @@ const Homepage = () => {
             <Galeri maxPosts={1} />
           </div>
         </div>
-
         <div className="grid grid-row-2 p-4 lg:p-6 mt-4">
           <div className="flex justify-center">
             <p className="text-slate-600 border-y-2 border-slate-300 text-center py-2 px-4 tracking-wider text-sm md:text-2xl lg:text-3xl xl:text-4xl font-extrabold mb-6">
