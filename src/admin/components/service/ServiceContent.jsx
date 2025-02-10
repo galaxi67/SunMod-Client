@@ -194,12 +194,13 @@ const AdminLayanan = () => {
                 className="p-4 rounded-custom-br overflow-hidden bg-slate-50 shadow-lg w-auto sm:w-[350px] lg:w-[325px] xl:w-[350px] 2xl:w-[380] h-auto"
               >
                 <img src={service.picture} alt={service.name} className="rounded-custom-br object-cover mb-2 mx-auto" />
-                <div>
+                <div className="">
+                  <div></div>
                   <h2 className="text-xl font-semibold text-center my-3">{service.name}</h2>
                   <div
-                    className="ql-editor font-light text-justify mb-4 whitespace-pre-wrap"
+                    className="ql-editor font-medium text-justify mb-4 whitespace-pre-wrap"
                     dangerouslySetInnerHTML={{ __html: service.description }}
-                  ></div>
+                  />
 
                   <div className="gap-16 flex justify-center p-2 whitespace-pre-wrap">
                     <p className="font-bold text-justify whitespace-pre-wrap">Fasilitas</p>

@@ -202,12 +202,15 @@ const AdminArtikel = () => {
                   <div className="flex flex-col flex-grow">
                     <p className="text-base text-gray-500">{new Date(asset.createdAt).toLocaleDateString()}</p>
                     <h2 className="text-2xl font-semibold mb-4">{asset.name}</h2>
+
                     <div className="whitespace-pre-wrap">
+
                       <ReadMoreLess
                         charLimit={isSmallScreen ? 500 : 700}
                         readMoreText=" Selengkapnya"
                         readLessText=" Lebih Sedikit"
                       >{asset.description}</ReadMoreLess>
+                      
                     </div>
                   </div>
 

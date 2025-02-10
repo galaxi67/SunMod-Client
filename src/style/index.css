@@ -17,6 +17,7 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -51,8 +52,11 @@ body {
 }
 
 .ql-editor {
-  padding: 0 !important;
-  margin: 0 !important;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 .ql-editor p {
@@ -81,10 +85,10 @@ body {
 }
 
 .ql-container {
-  padding: 1rem !important;
+  padding: 1rem;
   min-height: 150px;
 }
 
 .ql-toolbar {
-  padding: 0.5rem !important;
+  padding: 0.5rem;
 }
