@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { BallTriangle } from "react-loading-icons";
 import useAuth from "../../hooks/useAuth";
 import ReactQuill from "react-quill";
-import ReadMoreLess from "react-read-more-less";
 
 const AdminArtikel = () => {
   const [assets, setAssets] = useState([]);
@@ -30,6 +29,7 @@ const AdminArtikel = () => {
   const [showModal, setShowModal] = useState(false);
 
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [expandedArticle, setExpandedArticle] = useState(null);
 
   const loadAssets = useCallback(async () => {
     setLoading(true);
@@ -159,6 +159,10 @@ const AdminArtikel = () => {
     setSelectedAssetDel(null);
   };
 
+  const toggleReadMore = (id) => {
+    setExpandedArticle(expandedArticle === id ? null : id);
+  };
+
   useEffect(() => {
     const handleResize = () => {
       const isSmallScreen = window.matchMedia("(max-width: 640px)").matches;
@@ -204,13 +208,19 @@ const AdminArtikel = () => {
                     <h2 className="text-2xl font-semibold mb-4">{asset.name}</h2>
 
                     <div className="whitespace-pre-wrap">
-
-                      <ReadMoreLess
-                        charLimit={isSmallScreen ? 500 : 700}
-                        readMoreText=" Selengkapnya"
-                        readLessText=" Lebih Sedikit"
-                      >{asset.description}</ReadMoreLess>
-                      
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            expandedArticle === asset.id
+                              ? asset.description
+                              : asset.description.slice(0, isSmallScreen ? 500 : 700) + "...",
+                        }}
+                      />
+                      {asset.description.length > (isSmallScreen ? 500 : 700) && (
+                        <button onClick={() => toggleReadMore(asset.id)} className="text-blue-500 cursor-pointer">
+                          {expandedArticle === asset.id ? " Lebih Sedikit" : " Selengkapnya"}
+                        </button>
+                      )}
                     </div>
                   </div>
 

@@ -7,7 +7,7 @@ const InstagramFeed = ({ maxPosts = 3, maxPosts1 = 1 }) => {
   const [error, setError] = useState(null);
 
   const accessToken =
-    "IGAAN5xqYgGi5BZAE5Gd2s2OHRqN0daVGRJbGFxZAU5uRHhQVkNsVC1sM3lYVGt2OXJhb01HR2sxWEdnUUFKZAmEybUtCY2puSW10UUNrb2thYVNqN19SajE5SlpuZAmpzUndfSjRPak9uOEczOEg3Q2hfU210bW1mTG1HdTEyQmxnQQZDZD";
+    "";
 
   useEffect(() => {
     const fetchInstagramPosts = async () => {

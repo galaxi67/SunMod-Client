@@ -92,3 +92,21 @@ body {
 .ql-toolbar {
   padding: 0.5rem;
 }
+
+.limited-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 10;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  position: relative;
+}
+
+.limited-text::after {
+  content: " Selengkapnya";
+  color: blue;
+  cursor: pointer;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: white;
+}

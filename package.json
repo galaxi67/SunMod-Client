@@ -21,6 +21,7 @@
     "react-loading-icons": "^1.1.0",
     "react-quill": "^2.0.0",
     "react-read-more-less": "^0.1.6",
+    "react-read-more-read-less": "^1.0.7",
     "react-router-dom": "^6.27.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^11.0.2",

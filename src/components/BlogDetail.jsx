@@ -67,9 +67,10 @@ export default function BlogDetail() {
                   })
                   .replace(/\s/g, " ")}
               </p>
-              <p className="text-gray-600 mt-6 whitespace-pre-wrap font-medium text-justify leading-7">
-                {post.description}
-              </p>
+              <p
+                className="text-gray-600 mt-6 whitespace-pre-wrap font-medium text-justify leading-7"
+                dangerouslySetInnerHTML={{ __html: post.description }}
+              ></p>
             </div>
 
             <div className="flex-initial w-0 md:w-52 lg:w-64 xl:w-72 hidden sm:block">

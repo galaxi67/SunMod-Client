@@ -78,7 +78,10 @@ const Artikel = () => {
                       .replace(/\s/g, " ")}
                   </p>
                   <h2 className="text-2xl font-semibold text-gray-800 leading-tight">{article.name}</h2>
-                  <p className="text-sm text-gray-600 mt-2 line-clamp-3">{article.description}</p>
+                  <p
+                    className="text-sm text-gray-600 mt-2 line-clamp-3"
+                    dangerouslySetInnerHTML={{ __html: article.description }}
+                  ></p>
                   <div className="mt-4">
                     <a
                       href={`artikel/detail/${article.id}`}
