@@ -95,7 +95,7 @@ const Layanan = () => {
                         alt={service.name}
                         className="w-full h-full object-contain max-w-[200px] mx-auto hidden sm:block"
                       />
-                      <h1 className="text-black/50 font-bold italic p-3 mt-0 md:-mt-14 lg:-mt-10 xl:-mt-16 mb-0 lg:mb-8 text-xs hidden sm:block">
+                      <h1 className="text-black/50 font-bold italic p-3 mt-0 md:-mt-4 lg:-mt-6 xl:-mt-8 mb-0 lg:mb-8 text-xs hidden sm:block">
                         *dapatkan merchandise spesial sebagai apresiasi!
                       </h1>
                     </div>
