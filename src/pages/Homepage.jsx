@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { fetchData } from "../admin/api/apiService";
-import LoadingIndicator from "../components/LoadingIndicator";
-import ServiceCard from "../components/ServiceHome";
 import { ArrowRightIcon } from "@heroicons/react/24/solid";
 import { FaInstagram } from "react-icons/fa";
-import Galeri from "../components/InstagramFeed";
+import LoadingIndicator from "../components/LoadingIndicator";
+import ServiceCard from "../components/ServiceHome";
 import Layanan from "../components/LayananHome";
+import InstagramFeed from "../components/InstagramFeed";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -31,10 +31,12 @@ const Homepage = () => {
           fetchData("method"),
           fetchData("article"),
         ]);
+
         const filteredImages = response1.slice(2, 7);
+        setImages(filteredImages);
+
         setMethods(response2);
         setArticles(response3);
-        setImages(filteredImages);
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -85,7 +87,10 @@ const Homepage = () => {
         <ServiceCard />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 md:mt-3 lg:mt-4 xl:mt-6">
-          <div data-aos="zoom-out-left" className="flex justify-center items-start md:order-2 flex-col gap-1 xl:gap-3 ml-0 md:ml-2 lg:ml-4 xl:ml-6">
+          <div
+            data-aos="zoom-out-left"
+            className="flex justify-center items-start md:order-2 flex-col gap-1 xl:gap-3 ml-0 md:ml-2 lg:ml-4 xl:ml-6"
+          >
             <p className="font-bold text-gray-400 text-base md:text-xl xl:text-2xl">Metode sumod</p>
             <h1 className="font-semibold text-2xl md:text-3xl lg:text-5xl xl:text-6xl text-custom-black">
               Solusi tepat dengan metode handal
@@ -121,11 +126,7 @@ const Homepage = () => {
 
         <Layanan />
 
-        <div
-          data-aos="fade-up"
-          data-aos-anchor-placement="center-bottom"
-          className="grid grid-cols-1 md:grid-cols-2 "
-        >
+        <div data-aos="fade-up" data-aos-anchor-placement="center-bottom" className="grid grid-cols-1 md:grid-cols-2 ">
           <div className="flex justify-center ml-0 md:ml-4 lg:ml-10 xl:ml-12 items-start md:order-2 flex-col gap-1 xl:gap-3">
             <p className="font-bold text-gray-400 text-base md:text-xl xl:text-2xl">Artikel sumod</p>
             <h1 className="font-semibold text-2xl md:text-3xl lg:text-5xl xl:text-6xl text-custom-black">
@@ -209,13 +210,15 @@ const Homepage = () => {
               </h1>
             </a>
           </div>
-          <div className="hidden sm:block">
-            <Galeri maxPosts={3} />
+
+          <div className="hidden sm:block px-0 md:px-8">
+            <InstagramFeed limit={3} />
           </div>
           <div className="block sm:hidden">
-            <Galeri maxPosts={1} />
+            <InstagramFeed limit={2} />
           </div>
         </div>
+
         <div className="grid grid-row-2 p-4 lg:p-6 mt-4">
           <div className="flex justify-center">
             <p className="text-slate-600 border-y-2 border-slate-300 text-center py-2 px-4 tracking-wider text-sm md:text-2xl lg:text-3xl xl:text-4xl font-extrabold mb-6">

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
-const InstagramFeed = () => {
+const InstagramFeed = ({ limit }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -25,16 +25,18 @@ const InstagramFeed = () => {
     if (!accessToken) return;
 
     const fetchAllInstagramPosts = async () => {
-      let allPosts = [];
-      let nextPageUrl = `https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink,media_type&access_token=${accessToken}`;
-      
       try {
-        while (nextPageUrl) {
-          const response = await axios.get(nextPageUrl);
-          allPosts = [...allPosts, ...response.data.data];
-          nextPageUrl = response.data.paging?.next || null;
+        const response = await axios.get(
+          `https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink,media_type,timestamp&access_token=${accessToken}`
+        );
+
+        let allPosts = response.data.data || [];
+        allPosts = allPosts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+        if (limit) {
+          allPosts = allPosts.slice(0, limit);
         }
-        
+
         setPosts(allPosts);
         setLoading(false);
       } catch (error) {
@@ -45,7 +47,7 @@ const InstagramFeed = () => {
     };
 
     fetchAllInstagramPosts();
-  }, [accessToken]);
+  }, [accessToken, limit]);
 
   if (loading) {
     return (
@@ -71,7 +73,11 @@ const InstagramFeed = () => {
           title={post.caption || "Instagram Post"}
         >
           {post.media_type === "VIDEO" ? (
-            <video src={post.media_url} controls className="w-full h-48 md:h-56 lg:h-80 object-cover group-hover:opacity-75" />
+            <video
+              src={post.media_url}
+              controls
+              className="w-full h-48 md:h-56 lg:h-80 object-cover group-hover:opacity-75"
+            />
           ) : (
             <img
               src={post.media_url}
