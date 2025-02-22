@@ -58,7 +58,7 @@ jobs:
             rm package-lock.json
             PATH="/root/.nvm/versions/node/v20.18.0/bin/:$PATH"
             npm install
-            pm2 restart hris-jai
+            pm2 restart sumod-client
             exit
   move-package-lock:
     runs-on: ubuntu-latest
