@@ -26,7 +26,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           port: ${{ secrets.SERVER_SSH_PORT }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          source: "./.next/./"
+          source: "./build/./"
           target: "/home/sunatmodern.co.id/tempdir"
       - name: copy package-lock.json to server
         uses: appleboy/scp-action@v0.1.7
@@ -50,8 +50,8 @@ jobs:
           port: ${{ secrets.SERVER_SSH_PORT }}
           script: |
             cd /home/sunatmodern.co.id/SunMod-Client
-            rm -r .next
-            mv /home/sunatmodern.co.id/tempdir/.next /home/sunatmodern.co.id/SunMod-Client
+            rm -r build
+            mv /home/sunatmodern.co.id/tempdir/build /home/sunatmodern.co.id/SunMod-Client
             cd /home/sunatmodern.co.id/SunMod-Client
             git checkout master
             git pull
