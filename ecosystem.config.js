@@ -7,10 +7,13 @@ module.exports = {
   apps: [
     {
       name: "sumod-client",
-      script: `npm start -- -p ${port}`,
+      script: `npm`,
       error_file: "log/error.log",
       out_file: "log/out.log",
-      args: "",
+      args: "start",
+      env: {
+        PORT: process.env.PM2_PORT || 5002,
+      },
       node_args: "--tls-min-v1.0",
       instances: 1,
       autorestart: true,
