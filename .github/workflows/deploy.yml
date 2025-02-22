@@ -18,6 +18,7 @@ jobs:
       - name: Build app with .env
         run: |
           echo REACT_APP_API_BASE_URL=https://api.sunatmodern.co.id/ >> .env
+          echo PORT=5002 >> .env
           npm run build
       - name: copy file to server
         uses: appleboy/scp-action@v0.1.7
