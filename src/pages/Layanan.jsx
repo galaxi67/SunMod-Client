@@ -47,20 +47,20 @@ const Layanan = () => {
   return (
     <div className="container mx-auto">
       <div className="max-w-full">
-        <div className="py-10 h-[200px] md:h-[280px] lg:h-[400px] flex lg:justify-center lg:items-center bg-gradient-to-l from-blue-50 via-blue-400 to-custom-blue mt-3 sm:mt-5 lg:mt-15 rounded-custom-br lg:mx-1">
-          <div className="max-w-full mx-auto px-4 sm:px-8 md:px-10 lg:px-20 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="py-6 h-[200px] md:h-[280px] lg:h-[400px] flex lg:justify-center lg:items-center bg-gradient-to-l from-blue-50 via-blue-400 to-custom-blue mt-3 sm:mt-5 lg:mt-15 rounded-custom-br lg:mx-1">
+          <div className="max-w-full mx-auto px-4 sm:px-8 md:px-10 lg:px-20 grid grid-cols-1 md:grid-cols-2">
             <div className="title-content space-y-4 my-auto text-white">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-widest">LAYANAN SUMOD</h1>
+              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold tracking-widest">LAYANAN SUNAT MODERN</h1>
               <h2 className="font-normal text-xs sm:text-xl md:text-lg lg:text-2xl leading-3 tracking-widest">
                 Layanan Sunat yang Aman dan Ramah di Sunat Modern yang Dikerjakan Oleh Dokter Professional
               </h2>
             </div>
-            <div className="flex justify-end">
+            <div className="flex justify-center md:justify-end mt-4">
               <div className="overflow-hidden md:block hidden">
                 <img
                   src="https://res.cloudinary.com/dwaopoeya/image/upload/v1736190547/assets/dipkgjv5ltjmalqdn85v.png"
                   alt="Profile"
-                  className="w-1/2 h-auto object-cover mx-auto"
+                  className="w-3/5 h-auto object-cover mx-auto"
                 />
               </div>
             </div>
@@ -93,9 +93,9 @@ const Layanan = () => {
                       <img
                         src={service.picture}
                         alt={service.name}
-                        className="w-full h-full object-contain max-w-[200px] mx-auto hidden sm:block"
+                        className="w-full h-full object-contain max-w-[200px] mx-auto hidden sm:block px-3 lg:px-0"
                       />
-                      <h1 className="text-black/50 font-bold italic p-3 mt-0 md:-mt-4 lg:-mt-6 xl:-mt-8 mb-0 lg:mb-8 text-xs hidden sm:block">
+                      <h1 className="text-black/50 font-bold italic p-3 mt-0 md:-mt-4 lg:-mt-4 xl:-mt-8 mb-0 lg:mb-8 text-xs hidden sm:block">
                         *dapatkan merchandise spesial sebagai apresiasi!
                       </h1>
                     </div>
