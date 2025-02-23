@@ -7,7 +7,7 @@ module.exports = {
   apps: [
     {
       name: "sumod-client",
-      script: `npm serve -s build -l ${port}`,
+      script: `serve -s build -l ${port}`,
       error_file: "log/error.log",
       out_file: "log/out.log",
       args: "",
