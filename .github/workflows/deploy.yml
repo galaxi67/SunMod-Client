@@ -1,4 +1,4 @@
-name: Dev Deployment
+name: Contabo Deployment
 
 on:
   push:
@@ -51,5 +51,5 @@ jobs:
           port: ${{ secrets.SERVER_SSH_PORT }}
           script: |
             cd /home/sunatmodern.co.id/
-            rm -rf public_html
-            mv build public_html
+            PATH="/root/.nvm/versions/node/v20.18.0/bin/:$PATH"
+            
