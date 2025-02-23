@@ -50,6 +50,10 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_SSH_PORT }}
           script: |
-            cd /home/sunatmodern.co.id/
+            cd /home/sunatmodern.co.id/SunMod-Client
+            git pull
+            rm -rf build
+            mv -r ../build ./
             PATH="/root/.nvm/versions/node/v20.18.0/bin/:$PATH"
+            pm2 restart
             
