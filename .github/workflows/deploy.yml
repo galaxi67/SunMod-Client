@@ -55,5 +55,5 @@ jobs:
             rm -rf build
             mv -r ../build ./
             PATH="/root/.nvm/versions/node/v20.18.0/bin/:$PATH"
-            pm2 restart
+            pm2 restart sumod-client
             
