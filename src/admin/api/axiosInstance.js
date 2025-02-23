@@ -2,7 +2,7 @@ import axios from "axios"
 import { jwtDecode } from "jwt-decode"
 import { toast } from "react-toastify"
 
-const baseURL_api = process.env.REACT_APP_API_BASE_URL || "https://api.sunatmodern.co.id"
+const baseURL_api = process.env.REACT_APP_API_BASE_URL || "https://api.sunatmodern.co.id/api"
 
 const axiosInstance = axios.create( {
 	baseURL: baseURL_api,
