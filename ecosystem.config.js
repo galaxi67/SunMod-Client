@@ -7,10 +7,10 @@ module.exports = {
   apps: [
     {
       name: "sumod-client",
-      script: `npm`,
+      script: `npm serve -s build -l ${port}`,
       error_file: "log/error.log",
       out_file: "log/out.log",
-      args: "start",
+      args: "",
       env: {
         PORT: process.env.PM2_PORT || 5002,
       },
