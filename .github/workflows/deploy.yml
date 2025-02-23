@@ -18,7 +18,7 @@ jobs:
       - name: Build app with .env
         run: |
           echo REACT_APP_API_BASE_URL=https://api.sunatmodern.co.id/ >> .env
-          echo PORT=5002 >> .env
+          echo APP_API_BASE_URL=https://api.sunatmodern.co.id/ >> .env
           npm run build
       - name: copy file to server
         uses: appleboy/scp-action@v0.1.7
@@ -28,7 +28,7 @@ jobs:
           port: ${{ secrets.SERVER_SSH_PORT }}
           password: ${{ secrets.SERVER_PASSWORD }}
           source: "./build/./"
-          target: "/home/sunatmodern.co.id/tempdir"
+          target: "/home/sunatmodern.co.id/build"
       - name: copy package-lock.json to server
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -50,30 +50,6 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_SSH_PORT }}
           script: |
-            cd /home/sunatmodern.co.id/SunMod-Client
-            rm -r build
-            mv /home/sunatmodern.co.id/tempdir/build /home/sunatmodern.co.id/SunMod-Client
-            cd /home/sunatmodern.co.id/SunMod-Client
-            git checkout master
-            git pull
-            rm package-lock.json
-            PATH="/root/.nvm/versions/node/v20.18.0/bin/:$PATH"
-            npm install
-            pm2 restart sumod-client
-            exit
-  move-package-lock:
-    runs-on: ubuntu-latest
-    needs: rebase-install
-    steps:
-      - name: setup ssh
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          port: ${{ secrets.SERVER_SSH_PORT }}
-          script: |
-            cd /home/sunatmodern.co.id/SunMod-Client
-            rm package-lock.json
-            cd /home/sunatmodern.co.id
-            mv package-lock.json /home/sunatmodern.co.id/SunMod-Client
+            cd /home/sunatmodern.co.id/
+            rm -rf public_html
+            mv build public_html
