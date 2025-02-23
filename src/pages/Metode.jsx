@@ -62,7 +62,7 @@ const Metode = () => {
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return <p className="text-center">Error: {error}</p>;
   }
 
   return (
