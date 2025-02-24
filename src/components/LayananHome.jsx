@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import LoadingIndicator from "../components/LoadingIndicator";
 import { ArrowRightIcon, ArrowLeftIcon } from "@heroicons/react/24/solid";
 import { fetchData } from "../admin/api/apiService";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -37,7 +36,11 @@ const LayananHome = () => {
   };
 
   if (loading) {
-    return <LoadingIndicator />;
+    return (
+      <div className="flex justify-center items-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+      </div>
+    );
   }
 
   if (error) {

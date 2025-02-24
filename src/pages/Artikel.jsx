@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import LoadingIndicator from "../components/LoadingIndicator";
 import { fetchDataPagination } from "../admin/api/apiService";
+import ErrorIndicator from "../components/ErrorIndicator"
 
 const Artikel = () => {
   const [loading, setLoading] = useState(true);
@@ -33,7 +34,7 @@ const Artikel = () => {
   }
 
   if (error) {
-    return <p className="text-center">Error: {error}</p>;
+    return <ErrorIndicator error={ error } />
   }
 
   return (

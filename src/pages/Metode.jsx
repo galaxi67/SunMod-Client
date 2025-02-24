@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { fetchData } from "../admin/api/apiService";
 import LoadingIndicator from "../components/LoadingIndicator";
+import ErrorIndicator from "../components/ErrorIndicator"
 
 const ImageCard = ({ src, alt, onClick }) => (
   <div
@@ -62,7 +63,7 @@ const Metode = () => {
   }
 
   if (error) {
-    return <p className="text-center">Error: {error}</p>;
+    return <ErrorIndicator error={ error } />
   }
 
   return (

@@ -1,11 +1,11 @@
 import React from "react";
-import Wa from "../assets/social.png"
-import Ig from "../assets/instagram.png"
+import Wa from "../assets/social.png";
+import Ig from "../assets/instagram.png";
 
 const Footer = () => {
   return (
-    <footer>
-      <div className="mt-16 flex flex-col items-center">
+    <footer className="mt-auto w-full bg-white">
+      <div className="flex flex-col items-center">
         <div className="footer-top flex justify-center items-center space-x-4 h-28 -mb-6">
           <a href="tel:+6281313138870" className="footer-icon">
             <img src={Wa} alt="Phone Icon" className="h-8 w-8 opacity-50" />

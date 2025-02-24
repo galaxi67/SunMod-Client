@@ -7,9 +7,9 @@ import ScrollTop from '../components/ScrollTop'
 
 const PublicLayout = () => {
   return (
-    <div className='public-layout'>
+    <div className='public-layout flex flex-col min-h-screen'>
       <Navbar />
-      <main>
+      <main className="flex-grow">
         <Outlet />
       </main>
       <Whatsapp />

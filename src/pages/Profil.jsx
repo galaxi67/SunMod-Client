@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { fetchData } from "../admin/api/apiService";
 import { fetchVisionMission } from "../admin/api/apiService";
 import LoadingIndicator from "../components/LoadingIndicator";
+import ErrorIndicator from "../components/ErrorIndicator"
 
 const Profil = () => {
   const [ListContent, setListContent] = useState([]);
@@ -28,7 +29,7 @@ const Profil = () => {
   }, []);
 
   if (loading) return <LoadingIndicator />;
-  if (error) return <p className="text-center">Error: {error}</p>;
+  if (error) return <ErrorIndicator error={ error } />
 
   return (
     <div className="container mx-auto">

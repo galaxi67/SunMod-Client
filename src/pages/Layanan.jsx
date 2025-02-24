@@ -3,6 +3,7 @@ import { fetchData } from "../admin/api/apiService";
 import LoadingIndicator from "../components/LoadingIndicator";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import ErrorIndicator from "../components/ErrorIndicator"
 
 const Layanan = () => {
   const [services, setServices] = useState([]);
@@ -41,7 +42,7 @@ const Layanan = () => {
   }
 
   if (error) {
-    return <p className="text-center">Error: {error}</p>;
+    return <ErrorIndicator error={ error } />
   }
 
   return (
