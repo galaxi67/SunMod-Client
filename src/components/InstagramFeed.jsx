@@ -10,7 +10,7 @@ const InstagramFeed = ({ limit }) => {
   useEffect(() => {
     const fetchAccessToken = async () => {
       try {
-        const response = await axios.get("http://localhost:5001/api/instagram-token");
+        const response = await axios.get("https://api.sunatmodern.co.id/api/instagram-token");
         setAccessToken(response.data.accessToken);
       } catch (error) {
         console.error("Error fetching Instagram token:", error);
