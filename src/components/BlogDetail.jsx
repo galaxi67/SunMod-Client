@@ -1,6 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchData } from "../admin/api/apiService";
+import LoadingIndicator from "./LoadingIndicator"
+import ErrorIndicator from "./ErrorIndicator"
 
 export default function BlogDetail() {
   const { id } = useParams();
@@ -30,15 +32,11 @@ export default function BlogDetail() {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-blue-500"></div>
-      </div>
-    );
+    return <LoadingIndicator />;
   }
 
   if (error) {
-    return <p className="text-red-500">{error}</p>;
+    return <ErrorIndicator error={ error } />
   }
 
   return (

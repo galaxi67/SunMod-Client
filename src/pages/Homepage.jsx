@@ -8,6 +8,7 @@ import Layanan from "../components/LayananHome";
 import InstagramFeed from "../components/InstagramFeed";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import ErrorIndicator from "../components/ErrorIndicator"
 
 const Homepage = () => {
   const [images, setImages] = useState([]);
@@ -68,7 +69,7 @@ const Homepage = () => {
   }
 
   if (error) {
-    return <p className="text-center">Error: {error}</p>;
+    return <ErrorIndicator error={ error } />
   }
 
   return (
