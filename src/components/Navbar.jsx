@@ -18,9 +18,9 @@ const Navbar = () => {
           </a>
         </div>
 
-        <div className="bg-red-800 rounded-2xl h-10 md:h-12 lg:h-14 xl:h-16 flex items-center">
+        <div className="rounded-2xl h-10 md:h-12 lg:h-14 xl:h-16 flex items-center">
           <div
-            className={`z-50 navbar-menu absolute md:relative top-16 md:top-auto right-0 bg-white md:bg-transparent w-full md:w-auto shadow-md md:shadow-none md:px-8 lg:px-10 rounded-sm shadow-transparent md:space-x-4 lg:space-x-6 xl:space-x-9 ${
+            className={`z-50 navbar-menu absolute md:relative top-24 sm:top-28 text-center md:top-auto right-0 bg-white md:bg-transparent w-full md:w-auto shadow-md md:shadow-none md:px-8 lg:px-10 rounded-2xl shadow-transparent md:space-x-4 lg:space-x-6 xl:space-x-9 ${
               isOpen ? "block" : "hidden"
             } md:flex`}
           >
